@@ -8,7 +8,7 @@ menu_order: 102
 level3_menu_node: level3child
 level3_subgroup: tls
 redirect_from:
-  - guides/v2.0/install-gde/system-requirements-tls-parent.html
+  - guides/v2.1/install-gde/system-requirements-tls-parent.html
 functional_areas:
   - Install
   - System

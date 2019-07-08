@@ -1,10 +1,6 @@
 ---
 group: configuration-guide
-subgroup: 04_CLI
 title: Run the support utilities
-menu_title: Run the support utilities (Magento Commerce only)
-menu_node:
-menu_order: 900
 ee_only: True
 functional_areas:
   - Configuration
@@ -16,7 +12,7 @@ functional_areas:
 
 ## Overview of the support utilities {#config-cli-spt-utils-over}
 
-The Magento support utilities (also referred to as the [*Data Collector*](http://docs.magento.com/m2/ee/user_guide/system/support-data-collector.html){:target="_blank"}) enable {{site.data.var.ee}} users to gather troubleshooting information about your system that can be used by our Support team.
+The Magento support utilities (also referred to as the [*Data Collector*](http://docs.magento.com/m2/ee/user_guide/system/support-data-collector.html)) enable {{site.data.var.ee}} users to gather troubleshooting information about your system that can be used by our Support team.
 
 Magento Support uses these backups (also referred to as *dumps*) to analyze issues that require access to your code. A typical scenario follows:
 
@@ -41,7 +37,9 @@ This command backs up code and compresses it in `tar.gz` format.
 
 Command options:
 
-	bin/magento support:backup:code [--name=<file name>] [-o|--output=<path>] [-l|--logs]
+```bash
+bin/magento support:backup:code [--name=<file name>] [-o|--output=<path>] [-l|--logs]
+```
 
 Where:
 
@@ -51,7 +49,9 @@ Where:
 
 For example, to create a code backup named `/var/www/html/magento2/var/log/mycodebackup.tar.gz`:
 
-	bin/magento support:backup:code --name mycodebackup -o /var/www/html/magento2/var/log
+```bash
+bin/magento support:backup:code --name mycodebackup -o /var/www/html/magento2/var/log
+```
 
 After the command completes, provide the code backup to Magento Support.
 
@@ -63,12 +63,14 @@ This command backs up the Magento database and compresses it in `tar.gz` format.
 
 Command options:
 
-	bin/magento support:backup:db [--name=<name>] [-o|--output=<path>] [-l|--logs] [-i|--ignore-sanitize]
+```bash
+bin/magento support:backup:db [--name=<name>] [-o|--output=<path>] [-l|--logs] [-i|--ignore-sanitize]
+```
 
 Where:
 
 -   **`--name`** specifies the dump file name (optional). If you omit this parameter, the dump file is time and date-stamped.
--   **`-o|--output=<path>`** is the absolute file system path to store the backup (required).
+-   **`-o|--output=<path>` is the absolute file system path to store the backup (required).
 -   **`-l|--logs`** includes log files (optional).
 -   **`-i|--ignore-sanitize`** means that data is preserved; omit the flag to hash [sensitive data](#sens-data) stored in the database when creating the backup (optional).
 
@@ -78,24 +80,27 @@ After the command completes, provide the database backup to Magento Support.
 
 ## Troubleshooting: display utilities and paths {#config-cli-spt-utils-trouble}
 
-We provide commands that display paths to utilities required by the Data Collector and the command line. You can use these commands, for example, if errors like the following display in the {% glossarytooltip 29ddb393-ca22-4df9-a8d4-0024d75739b1 %}Admin{% endglossarytooltip %} or on the command line:
+We provide commands that display paths to utilities required by the Data Collector and the command line. You can use these commands, for example, if errors like the following display in the [Admin](https://glossary.magento.com/admin) or on the command line:
 
-	Utility lsof not found
+```terminal
+Utility lsof not found
+```
 
 Run the following commands in the order shown to display the paths to the applications used by the support utilities and Data Collector:
 
 1.  Change to your Magento installation directory.
 
-	For example, `cd /var/www/magento2`
+  For example, `cd /var/www/magento2`
 
-	<div class="bs-callout bs-callout-info" id="info" markdown="1">
+	{:.bs-callout .bs-callout-info}
   The commands run properly _only_ from your Magento installation directory.
-	</div>
-2.  `php bin/magento support:utility:paths` creates `<your Magento install dir>/var/support/Paths.php`, which lists the paths to all application used by the utility.
-3.  `php bin/magento support:utility:check -u` displays the file system paths.
+
+2.  `bin/magento support:utility:paths` creates `<magento_root>/var/support/Paths.php`, which lists the paths to all application used by the utility.
+3.  `bin/magento support:utility:check` displays the file system paths.
 
 A sample follows:
 
+```terminal
 	gzip => /bin/gzip
 	lsof => /usr/sbin/lsof
 	mysqldump => /usr/bin/mysqldump
@@ -105,20 +110,6 @@ A sample follows:
 	sed => /bin/sed
 	bash => /bin/bash
 	mysql => /usr/bin/mysql
+```
 
 To resolve issues with running the tools, make sure these applications are installed and are in the web server user's `$PATH` environment variable.
-
-#### Related topics
-
--   [Manage the cache]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-cache.html)
--   [Manage the indexers]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-index.html)
--   [Configure and run cron]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-cron.html)
--   [Code compiler]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-compiler.html)
--   [URN highlighter]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-urn.html)
--   [Dependency reports]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-depen.html)
--   [Translation dictionaries and language packages]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-i18n.html)
--   [Deploy static view files]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-static-view.html)
--   [Create symlinks to LESS files]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-less-sass.html)
--   [Run unit tests]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-test.html)
--   [Convert layout XML files]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-layout-xml.html)
--   [Generate data for performance testing]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-perf-data.html)

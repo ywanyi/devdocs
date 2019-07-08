@@ -13,9 +13,9 @@ functional_areas:
   - Setup
 ---
 
-To determine if the Magento software is installed already, you can access the {% glossarytooltip 18b930cf-09cc-47c9-a5e5-905f86c43f81 %}Magento Admin{% endglossarytooltip %} (administration console) or {% glossarytooltip 1a70d3ac-6bd9-475a-8937-5f80ca785c14 %}storefront{% endglossarytooltip %} using a web browser.
+To determine if the Magento software is installed already, you can access the [Magento Admin](https://glossary.magento.com/magento-admin) (administration console) or [storefront](https://glossary.magento.com/storefront) using a web browser.
 
-**Prerequisite**: You must know the Magento server's hostname or IP address, and the {% glossarytooltip a05c59d3-77b9-47d0-92a1-2cbffe3f8622 %}URL{% endglossarytooltip %} to access the Magento installation. If you're not sure, find the information from your system administrator or hosting provider.
+**Prerequisite**: You must know the Magento server's hostname or IP address, and the [URL](https://glossary.magento.com/url) to access the Magento installation. If you're not sure, find the information from your system administrator or hosting provider.
 
 Then open a web browser and go to the URL you were provided. Some examples follow:
 
@@ -29,12 +29,12 @@ If Magento is installed, you should see something like the following after you l
 
 Magento Admin:
 
-<p><img src="{{ site.baseurl }}/common/images/install_success_admin.png" alt="Magento Admin which verifies a successful installation"></p>
+![Magento Admin which verifies a successful installation]({{ site.baseurl }}/common/images/install_success_admin.png)
 
 
 Magento storefront:
 
-<p><img src="{{ site.baseurl }}/common/images/install-success_store.png" alt="Magento storefront which verifies a successful installation"></p>
+![Magento storefront which verifies a successful installation]({{ site.baseurl }}/common/images/install-success_store.png)
 
 ## What if Magento is installed?
 

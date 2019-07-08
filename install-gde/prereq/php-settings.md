@@ -12,7 +12,7 @@ functional_areas:
   - Setup
 ---
 
-This topic discusses how to set required {% glossarytooltip bf703ab1-ca4b-48f9-b2b7-16a81fd46e02 %}PHP{% endglossarytooltip %} options.
+This topic discusses how to set required [PHP](https://glossary.magento.com/php) options.
 
 {% collapsible About required and recommended PHP options: %}
 
@@ -34,13 +34,13 @@ This topic discusses how to set required {% glossarytooltip bf703ab1-ca4b-48f9-b
 	If `asp_tags are` enabled, errors display when accessing PHTML templates.
 
 	`asp_tags` will be removed in PHP 7.
-*	Enable [`opcache.save_comments`](http://php.net/manual/en/opcache.configuration.php#ini.opcache.save_comments){:target="_blank"}, which is required for Magento 2.1 and later. 
+*	Enable [`opcache.save_comments`](http://php.net/manual/en/opcache.configuration.php#ini.opcache.save_comments){:target="_blank"}, which is required for Magento 2.1 and later.
 
 	We recommend you enable the [PHP OpCache](http://php.net/manual/en/intro.opcache.php){:target="_blank"} for performance reasons. The OPcache is enabled in many PHP distributions.
 
 	Magento 2.1 and later use PHP code comments in the `getDocComment` validation call in the [`getExtensionAttributes`]({{ site.mage2bloburl }}/{{ page.guide_version }}/lib/internal/Magento/Framework/Api/ExtensionAttributesFactory.php#L64-L73){:target="_blank"} method in `Magento\Framework\Api\ExtensionAttributesFactory.php`.
 
-{: .bs-callout .bs-callout-warning }
+{:.bs-callout .bs-callout-info}
 To avoid issues during installation and upgrade, we strongly recommend you apply the same PHP settings to both the PHP command-line configuration and to the PHP web server plug-in's configuration. For more information, see the next section.
 
 {% endcollapsible %}
@@ -52,7 +52,7 @@ This section discusses how you find the configuration files necessary to update 
 {% collapsible To find the PHP configuration file, php.ini: %}
 To find the web server configuration, run a [`phpinfo.php` file]({{ page.baseurl }}/install-gde/prereq/optional.html#install-optional-phpinfo) in your web browser and look for the Loaded Configuration File as follows:
 
-![]({{ site.baseurl }}/common/images/config_phpini-webserver.png){: width="700px"}
+![]({{ site.baseurl }}/common/images/config_phpini-webserver.png)
 
 To locate the PHP command-line configuration, enter
 
@@ -60,8 +60,8 @@ To locate the PHP command-line configuration, enter
 
 Use the value of Loaded Configuration file.
 
-{: .bs-callout .bs-callout-warning }
-If you have only one `php.ini` file, make the changes in that file. If you have two `php.ini` files, make the changes in *all* files. Failure to do so might cause unpredictable performance. 
+{:.bs-callout .bs-callout-info}
+If you have only one `php.ini` file, make the changes in that file. If you have two `php.ini` files, make the changes in <em>all</em> files. Failure to do so might cause unpredictable performance.
 
 {% endcollapsible %}
 
@@ -73,7 +73,7 @@ Use the following guidelines to find it:
 
 *	Apache web server:
 
-	For Ubuntu with Apache, OPcache settings are typically located in `php.ini`. 
+	For Ubuntu with Apache, OPcache settings are typically located in `php.ini`.
 
 	For CentOS with Apache or nginx, OPcache settings are typically located in `/etc/php.d/opcache.ini`
 
@@ -133,13 +133,3 @@ If you have more than one `opcache.ini`, modify all of them.
 	*	nginx, Ubuntu and CentOS: `service nginx restart`
 
 {% endcollapsible %}
-
-#### Related topics
-
-*	[MySQL]({{ page.baseurl }}/install-gde/prereq/mysql.html)
-*	[Apache]({{ page.baseurl }}/install-gde/prereq/apache.html)
-*	[PHP 5.5, 5.6, or 7.0—CentOS]({{ page.baseurl }}/install-gde/prereq/php-centos.html)
-*	[Configuring security options]({{ page.baseurl }}/install-gde/prereq/security.html)
-*	[Installing optional software]({{ page.baseurl }}/install-gde/prereq/optional.html)
-*	[How to get the Magento software]({{ page.baseurl }}/install-gde/bk-install-guide.html)
-

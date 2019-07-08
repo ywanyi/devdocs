@@ -14,5 +14,4 @@ functional_areas:
 {% include install/web/install-web_4-customize-store.md %}
 
 #### Next step
-
 [Step 5. Create Admin account]({{ page.baseurl }}/install-gde/install/web/install-web_5-create-admin.html)

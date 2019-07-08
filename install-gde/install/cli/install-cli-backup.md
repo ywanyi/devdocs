@@ -1,39 +1,45 @@
 ---
 group: installation-guide
-subgroup: 05_Command-line installation
 title: Back up and roll back the file system, media, and database
-menu_title: Back up and roll back the file system, media, and database
-menu_node:
-menu_order: 100
-redirect_from:
-  - /guides/v2.0/install-gde/install/install-cli-backup.html
 functional_areas:
   - Install
   - System
   - Setup
 ---
 
-## Overview of backup   {#instgde-cli-uninst-back-over}
+## Overview of backup {#instgde-cli-uninst-back-over}
 
 This command enables you to back up:
 
-*	The Magento file system (excluding <code>var</code> and <code>pub/static</code> directories)
-*	The <code>pub/media</code> directory
+*	The Magento file system (excluding `var` and `pub/static` directories)
+*	The `pub/media` directory
 *	The Magento 2 database
 
-Backups are stored in the `var/backups` directory and can be restored at any time using the <a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall-mods.html#instgde-cli-uninst-mod-roll">magento setup:rollback</a> command.
+Backups are stored in the `var/backups` directory and can be restored at any time using the [magento setup:rollback]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall-mods.html#instgde-cli-uninst-mod-roll) command.
 
-After backing up, you can <a href="#instgde-cli-uninst-roll">roll back</a> at a later time.
+After backing up, you can [roll back](#instgde-cli-uninst-roll) at a later time.
 
-## First steps   {#instgde-cli-before}
-
+## First steps {#instgde-cli-before}
 {% include install/first-steps-cli.md %}
-In addition to the command arguments discussed here, see <a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands.html#instgde-cli-subcommands-common">Common arguments</a>.
+In addition to the command arguments discussed here, see [Common arguments]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands.html#instgde-cli-subcommands-common).
+
+## Enable backups
+
+The Magento backup feature is disabled by default. To enable, enter the following CLI command:
+
+```bash
+bin/magento config:set system/backup/functionality_enabled 1
+```
+
+{:.bs-callout .bs-callout-warning}
+**Deprecation Notice**
+Magento backup functionality is deprecated as of 2.1.16, 2.2.7, and 2.3.0. We recommend investigating additional backup technologies and binary backup tools (such as Percona XtraBackup).
+
 
 ## Set ulimit for the web server user {#instgde-cli-ulimit}
 {% include install/ulimit.md %}
 
-## Backing up   {#instgde-cli-uninst-back}
+## Backing up {#instgde-cli-uninst-back}
 
 Command usage:
 
@@ -44,33 +50,12 @@ The command performs the following tasks:
 1.	Puts the store in maintenance mode.
 2.	Executes one of the following command options.
 
-<table>
-<col width="25%">
-<col width="40%">
-<col width="35%">
-<tbody>
-<tr>
-<th>Option</th>
-<th>Meaning</th>
-<th>Backup file name and location</th>
-</tr>
-<tr>
-<td><p>--code</p></td>
-<td><p>Backs up the Magento file system (excluding <code>var</code> and <code>pub/static</code> directories).</p></td>
-<td><p>var/backups/&lt;timestamp&gt;_filesystem.tgz</p></td>
-</tr>
-<tr>
-<td><p>--media</p></td>
-<td><p>Back up the <code>pub/media</code> directory.</p></td>
-<td><p>var/backups/&lt;timestamp&gt;_filesystem_media.tgz</p></td>
-</tr>
-<tr>
-<td><p>--db</p></td>
-<td><p>Back up the Magento 2 database.</p></td>
-<td><p>var/backups/&lt;timestamp&gt;_db.sql</p></td>
-</tr>
-</tbody>
-</table>
+    |Option|Meaning|Backup file name and location|
+    |--- |--- |--- |
+    |`--code`|Backs up the Magento file system (excluding var and pub/static directories).|var/backups/<timestamp>\_filesystem.tgz|
+    |`--media`|Back up the pub/media directory.|var/backups/<timestamp>\_filesystem_media.tgz|
+    |`--db`|Back up the Magento 2 database.|var/backups/<timestamp>\_db.sql|
+    
 
 3.	Takes the store out of maintenance mode.
 
@@ -91,7 +76,7 @@ Messages similar to the following display:
 	[SUCCESS]: DB backup completed successfully.
 	Disabling maintenance mode
 
-## Roll back   {#instgde-cli-uninst-roll}
+## Roll back {#instgde-cli-uninst-roll}
 
 This section discusses how to roll back to a backup you made previously. You must know the file name of the backup file to restore.
 
@@ -115,24 +100,5 @@ Messages similar to the following display:
 	Please set file permission of bin/magento to executable
 	Disabling maintenance mode
 
-{: .bs-callout .bs-callout-info }
+{:.bs-callout .bs-callout-info}
 If the command results in a `Segmentation fault` message, see [Segmentation fault during rollback]({{ page.baseurl }}/install-gde/trouble/tshoot_segfault.html).
-
-#### Related topics
-
-*	<a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-install.html">Installing the Magento software using the command line</a>
-*	[Remove sample data modules or update sample data]({{ page.baseurl }}/install-gde/install/cli/install-cli-sample-data-other.html)
-*	[Display or change the Admin URI]({{ page.baseurl }}/install-gde/install/cli/install-cli-adminurl.html)
-*	<a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-enable.html">Enable or disable modules</a>
-*	[Uninstall modules]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall-mods.html)
-*	<a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-deployment.html">Create or update the deployment configuration</a>
-*	<a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-maint.html">Enable or disable maintenance mode</a>
-*	<a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-db.html">Create the Magento database schema</a>
-*	[Update the Magento database schema and data]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-db-upgr.html)
-*	<a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-store.html">Configure the store</a>
-*	<a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-admin.html">Create a Magento administrator</a>
-*	[Uninstall themes]({{ page.baseurl }}/install-gde/install/cli/install-cli-theme-uninstall.html)
-*	[Uninstall language packages]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall-langpk.html)
-*	<a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-uninstall">Uninstall the Magento software</a>
-*	<a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-magento-update">Update the Magento software</a>
-*	<a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-magento-reinstall">Reinstall the Magento software</a>

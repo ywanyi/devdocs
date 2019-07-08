@@ -40,7 +40,7 @@ To complete this tutorial, you'll need access to a working Magento installation 
 -   PHP (5.6 or 7.0)
 -   Magento (2.0+)
 
-{: .bs-callout .bs-callout-info }
+{:.bs-callout .bs-callout-info}
 Refer to [Prerequisites]({{ page.baseurl }}/install-gde/prereq/prereq-overview.html) and the [Installation Guide]({{ page.baseurl }}/install-gde/bk-install-guide.html) for more information.
 
 ## 1. Edit your server configuration
@@ -112,13 +112,13 @@ Switching between modes is an important step in verifying that your server confi
 
 ## 4. Verify the storefront
 
-Go to the {% glossarytooltip 1a70d3ac-6bd9-475a-8937-5f80ca785c14 %}storefront{% endglossarytooltip %} in a web browser to verify that everything is working.
+Go to the [storefront](https://glossary.magento.com/storefront) in a web browser to verify that everything is working.
 
 1.  Open a web browser and enter your server's hostname or IP address in the address bar. For example, http://192.168.33.10.
 
     The following figure shows a sample storefront page. If it displays as follows, your installation was a success!
 
-    <img src="{{ site.baseurl }}/common/images/install-success_store.png" width="450px" alt="Magento storefront which verifies a successful installation">
+    ![Magento storefront which verifies a successful installation]({{ site.baseurl }}/common/images/install-success_store.png){:.width="450px"}
 
     Refer to the [troubleshooting section]({{ page.baseurl }}/install-gde/trouble/tshoot_no-styles.html) if the page displays a 404 (Not Found) or fails to load other assets like images, CSS, and JS.
 
@@ -126,7 +126,7 @@ Go to the {% glossarytooltip 1a70d3ac-6bd9-475a-8937-5f80ca785c14 %}storefront{%
 
     If you see a 404 or the "Access denied" message, you've successfully restricted access to the Magento file system.
 
-    <img src="{{ site.baseurl }}/common/images/access-denied.png" alt="Access denied">
+    ![Access denied]({{ site.baseurl }}/common/images/access-denied.png)
 
 ## Congratulations! You're finished.
 {:.no_toc}

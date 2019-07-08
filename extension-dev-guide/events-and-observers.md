@@ -8,7 +8,7 @@ menu_order: 6
 
 ### Overview
 
-Working with events and observers is one of the main ways to extend Magento functionality. The events and observers implementation in Magento 2 is based on the [publish-subscribe pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern){:target="_self"}. Using events and observers, you can run your custom code in response to a specific Magento {% glossarytooltip c57aef7c-97b4-4b2b-a999-8001accef1fe %}event{% endglossarytooltip %} or even a custom event.
+Working with events and observers is one of the main ways to extend Magento functionality. The events and observers implementation in Magento 2 is based on the [publish-subscribe pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern){:target="_self"}. Using events and observers, you can run your custom code in response to a specific Magento [event](https://glossary.magento.com/event) or even a custom event.
 
 ### Events
 
@@ -22,30 +22,35 @@ To dispatch an event, call the `dispatch` function of the event manager class an
 
 The following example shows you how to dispatch an event with and without an array of data.
 
-{% highlight php startinline=true %}
+```php
 
 namespace MyCompany\MyModule;
+
 use Magento\Framework\Event\ObserverInterface;
-class MyClass{
+
+class MyClass
+{
   /**
-  * @var EventManager
-  */
+   * @var EventManager
+   */
   private $eventManager;
 
-  public function __construct(\Magento\Framework\Event\Manager $eventManager){
+  public function __construct(\Magento\Framework\Event\Manager $eventManager)
+  {
     $this->eventManager = $eventManager;
   }
 
-  public function something(){
+  public function something()
+  {
     $eventData = null;
     // Code...
     $this->eventManager->dispatch('my_module_event_before');
     // More code that sets $eventData...
-    $this->eventManager->dispatch('my_module_event_after',['myEventData'=>$eventData]);
+    $this->eventManager->dispatch('my_module_event_after', ['myEventData' => $eventData]);
   }
 }
 
-{% endhighlight  %}
+```
 
 #### Creating new events
 
@@ -64,7 +69,7 @@ Observers are a certain type of Magento class that can influence general behavio
 To create an observer, you must place your class file under your `<module-root>/Observer` directory. Your observer class should implement [`Magento\Framework\Event\ObserverInterface`]({{ site.mage2bloburl }}/{{ page.guide_version }}/lib/internal/Magento/Framework/Event/ObserverInterface.php) and define its `execute` function.
 
 Below is an example of the basic observer class structure:
-{% highlight php startinline=true %}
+```php
 namespace MyCompany\MyModule\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
@@ -73,44 +78,45 @@ class MyObserver implements ObserverInterface
 {
   public function __construct()
   {
-    //Observer initialization code...
-    //You can use dependency injection to get any class this observer may need.
+    // Observer initialization code...
+    // You can use dependency injection to get any class this observer may need.
   }
 
   public function execute(\Magento\Framework\Event\Observer $observer)
   {
-    //Observer execution code...
+    // Observer execution code...
   }
 }
-{% endhighlight %}
+```
 
 One of the more powerful feature of observers is that they are able to use parameters passed into the event when it was dispatched. Below is an example of an observer obtaining data passed in when the event was dispatched.
 
-{% highlight php startinline=true %}
+```php
 namespace MyCompany\MyModule\Observer;
+
 use Magento\Framework\Event\ObserverInterface;
 
 class AnotherObserver implements ObserverInterface
 {
   public function __construct()
   {
-    //Observer initialization code...
-    //You can use dependency injection to get any class this observer may need.
+    // Observer initialization code...
+    // You can use dependency injection to get any class this observer may need.
   }
 
   public function execute(\Magento\Framework\Event\Observer $observer)
   {
     $myEventData = $observer->getData('myEventData');
-    //Additional observer execution code...
+    // Additional observer execution code...
   }
 }
-{% endhighlight %}
+```
 
 #### Subscribing to events
 
 Observers can be configured to watch certain events in the `events.xml` file.
 
-The `observer` {% glossarytooltip 8c0645c5-aa6b-4a52-8266-5659a8b9d079 %}xml{% endglossarytooltip %} element has the following properties:
+The `observer` [xml](https://glossary.magento.com/xml) element has the following properties:
 
 * `name` (required) - The name of the observer for the event definition.
 * `instance` (required) - The fully qualified class name of the observer.
@@ -119,7 +125,7 @@ The `observer` {% glossarytooltip 8c0645c5-aa6b-4a52-8266-5659a8b9d079 %}xml{% e
 
 
 Below is an example of how to assign observers to watch certain events:
-{% highlight xml %}
+```xml
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="my_module_event_before">
@@ -129,7 +135,7 @@ Below is an example of how to assign observers to watch certain events:
         <observer name="myObserverName" instance="MyCompany\MyModule\Observer\AnotherObserver" />
     </event>
 </config>
-{% endhighlight %}
+```
 
 In the preceding example, we assign the observer `MyObserver` to the custom event `my_module_event_before` and `AnotherObserver` to `my_module_event_after`.
 

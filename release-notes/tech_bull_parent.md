@@ -1,16 +1,25 @@
 ---
 group: release-notes
 subgroup: 05_techbull
-title: Magento 2.0 technical bulletins
-menu_title: Magento 2.0 technical bulletins
+title: Magento 2.1 technical bulletins
+menu_title: Magento 2.1 technical bulletins
 menu_node: parent
 menu_order: 1
 ---
 
-The following technical bulletins are available for the Magento 2.0 release:
+The following technical bulletins are available for the Magento 2.1 release:
 
-*	[MasterCard BIN Upgrade for 2.0.x (May 19, 2017)]({{ page.baseurl }}/release-notes/tech_bull_20x_MasterCard.html)
+*	[USPS Service Name Change (September 8, 2017)]({{ page.baseurl }}/release-notes/tech_bull_USPS-patch-Sept2017.html)
 
-*	[Magento upgrade issues (Jan. 28, 2016)]({{ page.baseurl }}/release-notes/tech_bull_201-upgrade.html)
-*	[Required patch for PHP 5.5.x and Setup Application environments (June 6, 2016)]({{ page.baseurl }}/release-notes/tech_bull_207-upgrade.html)
+
+*	[MasterCard BIN Range Update (May 19, 2017)]({{ page.baseurl }}/release-notes/tech_bull_21x_MasterCard.html)
+
+*	[Image Resize Issue with Magento version 2.1.6 (May 17, 2017)]({{ page.baseurl }}/release-notes/tech_bull_216-imageresize.html)
+
+
 *	[Upgrade to Magento version 2.1 (June 22, 2016)]({{ page.baseurl }}/release-notes/tech_bull_21-upgrade.html)
+
+	*	[Upgrade to Magento Open Source or Commerce version 2.1 *without* sample data]({{ page.baseurl }}/release-notes/tech_bull_21-upgrade.html#tb-upgr-nosamp)
+	*	[Upgrade to Magento Open Source or Commerce version 2.1 with sample data]({{ page.baseurl }}/release-notes/tech_bull_21-upgrade.html#tb-upgr-samp)
+	*	[Enterprise Edition only: Web Setup Wizard upgrade to Magento Commerce version 2.1 with sample data]({{ page.baseurl }}/release-notes/tech_bull_21-upgrade.html#tb-upgr-samp-wiz)
+*	[Transport Layer Security (TLS) 1.1+ requirement for repo.magento.com (June 30, 2016)]({{ page.baseurl }}/release-notes/tech_bull_tls-repo.html)

@@ -1,17 +1,13 @@
 ---
 group: configuration-guide
-subgroup: 12_cron
 title: Custom cron job and cron group reference
-menu_title: Custom cron job and cron group reference
-menu_order: 2
-menu_node:
 functional_areas:
   - Configuration
   - System
   - Setup
 ---
 
-This topic helps you set up crontabs and optionally cron groups for custom modules. If your custom {% glossarytooltip c1e4242b-1f1a-44c3-9d72-1d5b1435e142 %}module{% endglossarytooltip %} needs to schedule tasks periodically, you must set up a crontab for that module. A *crontab* is a cron job's configuration.
+This topic helps you set up crontabs and optionally cron groups for custom modules. If your custom [module](https://glossary.magento.com/module) needs to schedule tasks periodically, you must set up a crontab for that module. A *crontab* is a cron job's configuration.
 
 You can optionally set up a custom group, which among other things enables you to run cron jobs defined in that group independently of other cron jobs.
 
@@ -34,7 +30,7 @@ To configure a cron group for your module, create a `crontab.xml` file in your m
 
 For one group, the file should have the following contents:
 
-{%highlight xml%}
+```xml
 <config>
     <group id="<group_name>">
         <job name="<job_name>" instance="<classpath>" method="<method>">
@@ -42,7 +38,7 @@ For one group, the file should have the following contents:
         </job>
     </group>
 </config>
-{%endhighlight%}
+```
 
 where:
 
@@ -52,11 +48,12 @@ where:
 |`job_name`|Unique ID for this cron job.|
 |`classpath`|Class to be instantiated (classpath).|
 |`method`|Method in `classpath` to call.|
-|`time`|Schedule in [cron format](http://www.nncron.ru/help/EN/working/cron-format.htm){:target="_blank"}. Omit this parameter if the schedule is defined in the Magento database or other storage.|
+|`time`|Schedule in [cron format](http://www.nncron.ru/help/EN/working/cron-format.htm). Omit this parameter if the schedule is defined in the Magento database or other storage.|
+
 
 The resulting `crontab.xml` with two groups may look like this:
 
-{%highlight xml%}
+```xml
 <config>
     <group id="default">
         <job name="<job_1_name>" instance="<classpath>" method="<method_name>">
@@ -75,19 +72,19 @@ The resulting `crontab.xml` with two groups may look like this:
         </job>
     </group>
 </config>
-{%endhighlight%}
+```
 
-As an example, see [Magento\_Customer crontab.xml]({{ site.mage2bloburl }}/{{ page.guide_version }}/app/code/Magento/Customer/etc/crontab.xml){: target="_blank"}.
+As an example, see [Magento_Customer crontab.xml]({{ site.mage2bloburl }}/{{ page.guide_version }}/app/code/Magento/Customer/etc/crontab.xml).
 
 #### Specifying Cron group options {#specify-cron-group-options}
 
-You may declare a new group and specify its configuration options (all of which run in {% glossarytooltip ca5a9ff1-8182-4fc4-a34b-9b3f831dbf3f %}store view{% endglossarytooltip %} scope) via the `cron_groups.xml` file, located in:
+You may declare a new group and specify its configuration options (all of which run in [store view](https://glossary.magento.com/store-view) scope) via the `cron_groups.xml` file, located in:
 
 `<your component base dir>/<vendorname>/module-<name>/etc/cron_groups.xml`
 
 Below is an example of the `cron_groups.xml` file:
 
-{%highlight xml%}
+```xml
 <config>
     <group id="<group_name>">
         <schedule_generate_every>1</schedule_generate_every>
@@ -96,23 +93,23 @@ Below is an example of the `cron_groups.xml` file:
         <history_cleanup_every>10</history_cleanup_every>
         <history_success_lifetime>60</history_success_lifetime>
         <history_failure_lifetime>600</history_failure_lifetime>
+        <use_separate_process>1</use_separate_process>
     </group>
 </config>
-{%endhighlight%}
+```
 
 where:
 
-|Option|Description|
-|---|---|
-|`schedule_generate_every`|Frequency (in minutes) that schedules are written to the `cron_schedule` table.|
-|`schedule_ahead_for`|Time (in minutes) in advance that schedules are written to the `cron_schedule` table.|
-|`schedule_lifetime`|Window of time (in minutes) that cron job must start or will be considered missed ("too late" to run).|
-|`history_cleanup_every`|Time (in minutes) that cron history is kept in the database.|
-|`history_success_lifetime`|Time (in minutes) that the record of successfully completed cron jobs are kept in the database.|
-|`history_failure_lifetime`|Time (in minutes) that the record of failed cron jobs are kept in the database.|
+| Option                     | Description                                                                                            |
+| -------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `schedule_generate_every`  | Frequency (in minutes) that schedules are written to the `cron_schedule` table.                        |
+| `schedule_ahead_for`       | Time (in minutes) in advance that schedules are written to the `cron_schedule` table.                  |
+| `schedule_lifetime`        | Window of time (in minutes) that cron job must start or will be considered missed ("too late" to run). |
+| `history_cleanup_every`    | Time (in minutes) that cron history is kept in the database.                                           |
+| `history_success_lifetime` | Time (in minutes) that the record of successfully completed cron jobs are kept in the database.        |
+| `history_failure_lifetime` | Time (in minutes) that the record of failed cron jobs are kept in the database.                        |
+| `use_separate_process`     | Run this crongroup's jobs in a separate php process                                             |
+
 
 #### Related topic
 [Tutorial&mdash;configure custom cron jobs and cron groups]({{ page.baseurl }}/config-guide/cron/custom-cron-tut.html)
-
-
-

@@ -8,8 +8,7 @@ menu_node:
 functional_areas:
   - Cloud
   - Configuration
-redirect_from:
-  - /guides/v2.0/cloud/admin/admin-user-admin.html
+redirect_from: /guides/v2.1/cloud/admin/admin-user-admin.html
 ---
 
 {{site.data.var.ece}} enables you to administer users by assigning them one or more roles. A *role* provides access and improves security in your project. Different roles are authorized to do different things with your applications, environments, and users. You can add and manage user accounts for the entire project and permissions per available environment.
@@ -37,7 +36,7 @@ A project reader can have one of the following roles per environment:
 * Environment contributor can push code to this environment and branch the environment.
 * Environment reader can view this environment only.
 
-{: .bs-callout .bs-callout-info }
+{:.bs-callout .bs-callout-info}
 We recommend you limit the environment administrator role to as few users as possible.
 
 ## Role management best practices
@@ -46,8 +45,7 @@ When a development team works on a project, the team leader can be the project a
 
 For your users to be able to see everything but only commit to a specific branch, change their permission level on that environment to "Contributor".
 
-
-{: .bs-callout .bs-callout-warning }
+{:.bs-callout .bs-callout-warning}
 An environment contributor can push code to the environment, but that user role does not have SSH access to the environment. By default, only environment administrators have SSH access. You can change the behavior in `.magento.app.yaml` by specifying `ssh: contributor`.
 
 ## Create and manage users
@@ -96,7 +94,7 @@ Use `magento-cloud list` to get the full list of commands.
 
 To create user accounts using the Web Interface:
 
-1.  Log in to [your {{site.data.var.ece}} account](https://accounts.magento.cloud){:target="_blank"}.
+1.  Log in to [your {{site.data.var.ece}} account](https://accounts.magento.cloud).
 2.  Click the **Projects** tab as the following figure shows.
 
 	![Click the projects tab to access your Cloud project]({{ site.baseurl }}/common/images/cloud_account_project.png){:width="550px"}

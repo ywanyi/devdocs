@@ -1,18 +1,13 @@
 ---
 group: configuration-guide
-subgroup: 01_Introduction
 title: Configuration Guide
-landing-page: Configuration Guide
-menu_title: Introduction
-menu_order: 1
-menu_node: parent
 functional_areas:
   - Configuration
   - System
   - Setup
 ---
 
-## Configure the Magento application   {#configuration}
+## Configure the Magento application {#configuration}
 
 You can configure the Magento application in any of the following ways:
 
@@ -24,27 +19,24 @@ You can configure the Magento application in any of the following ways:
 *	Caching
 
 	*	[Set up Varnish]({{ page.baseurl }}/config-guide/varnish/config-varnish.html)
-	* [Set up caching]({{ page.baseurl }}/config-guide/cache.html)
+	*   [Set up caching]({{ page.baseurl }}/config-guide/cache.html)
+	*	[Use Redis for the Magento page and default cache]({{ page.baseurl }}/config-guide/redis/redis-pg-cache.html)
+	*	[Use Redis for session storage]({{ page.baseurl }}/config-guide/redis/redis-session.html)
 	*	[Set up database caching]({{ page.baseurl }}/extension-dev-guide/cache/partial-caching/database-caching.html)
-	*	[Set up Redis]({{ page.baseurl }}/config-guide/redis/config-redis.html)
-
-*	Session storage
-	*	[memcache]({{ page.baseurl }}/config-guide/memcache/memcache.html)
-	*	[Redis]({{ page.baseurl }}/config-guide/redis/redis-session.html)
-	*	[How to locate session files]({{ page.baseurl }}/config-guide/sessions.html)
-
-*	Tools and debugging
-
-	*	[Logging]({{ page.baseurl }}/config-guide/log/log-intro.html)
-	*	[Database profiler]({{ page.baseurl }}/config-guide/db-profiler/db-profiler.html)
 
 *	Magento in production
 
 	*	[Deployment steps]({{ page.baseurl }}/config-guide/prod/prod_deploy.html)
 	*	[Magento ownership and permissions in development and production]({{ page.baseurl }}/config-guide/prod/prod_file-sys-perms.html)
 
+*	Session storage
+	*	[memcache]({{ page.baseurl }}/config-guide/memcache/memcache.html)
+	*	[Redis]({{ page.baseurl }}/config-guide/redis/redis-session.html)
+	*	[How to locate session files]({{ page.baseurl }}/config-guide/sessions.html)
+
 *	{{site.data.var.ee}} only
 
+	*	[Install and configure Elasticsearch]({{ page.baseurl }}/config-guide/elasticsearch/es-overview.html)
 	*	[Install and configure Solr]({{ page.baseurl }}/config-guide/solr/solr-overview.html)
 	*	[Split databases]({{ page.baseurl }}/config-guide/multi-master/multi-master.html)
 	*	[Message queues]({{ page.baseurl }}/config-guide/mq/rabbitmq-overview.html)

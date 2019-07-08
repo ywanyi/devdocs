@@ -1,20 +1,13 @@
 ---
 group: installation-guide
-subgroup: 05_Command-line installation
 title: Configure the store
-menu_title: Configure the store
-menu_node:
-menu_order: 20
-redirect_from:
-  - /guides/v2.0/install-gde/install/install-cli-subcommands-store.html
 functional_areas:
   - Install
   - System
   - Setup
 ---
 
-## First steps   {#instgde-cli-before}
-
+## First steps {#instgde-cli-before}
 {% include install/first-steps-cli.md %}
 In addition to the command arguments discussed here, see [Common arguments]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands.html#instgde-cli-subcommands-common).
 
@@ -27,7 +20,7 @@ Before you run this command, you must do all of the following *or* you must [ins
 
 {% include install/fully-secure.md %}
 
-## Configure the store   {#instgde-cli-storeconfig}
+## Configure the store {#instgde-cli-storeconfig}
 
 Command usage:
 
@@ -35,86 +28,16 @@ Command usage:
 
 where the following table defines parameters and values.
 
-<table>
-	<col width="30%">
-	<col width="50%">
-	<col width="20%">
-	<tbody>
-		<tr>
-			<th>Name</th>
-			<th>Value</th>
-			<th>Required?</th>
-		</tr>
-		<tr>
-		<td>--base-url</td>
-		<td>Base URL to use to access your Magento Admin and storefront in any of the following formats:
-		<ul><li><code>http[s]://&lt;host or ip>/&lt;your Magento install dir>/</code>.
-		<strong>Note</strong>: The scheme (<code>http://</code> or <code>https://</code>) and a trailing slash are <em>both</em> required.
-		<code>&lt;your Magento install dir></code> is the docroot-relative path in which to install the Magento software. Depending on how you set up your web server and virtual hosts, the path might be <code>magento2</code> or it might be blank.
-		To access Magento on localhost, you can use <code>http://127.0.0.1/&lt;your Magento install dir>/</code>.</li>
-		<li><code>&#123;&#123;base_url&#125;&#125;</code> which represents a base URL defined by a virtual host setting or by a virtualization environment like Docker. For example, if you set up a virtual host for Magento with the hostname <code>magento.example.com</code>, you can install the Magento software with <code>--base-url=&#123;&#123;base_url&#125;&#125;</code> and access the Magento Admin with a URL like <code>http://magento.example.com/admin</code>.</li></ul>		</td>
-		<td>No</td>
-	</tr>
-	<tr>
-		<td>--language</td>
-		<td><p>Language code to use in the Admin and storefront.</p>
-			<p>(If you have not done so already, you can view the list of language codes by entering <code>magento info:language:list</code> from the <code>bin</code> directory.)</p></td>
-		<td>No</td>
-	</tr>
-	<tr>
-		<td>--currency</td>
-		<td><p>Default currency to use in the storefront.</p> 
-			<p>(If you have not done so already, you can view the list of currencies by entering <code>magento info:currency:list</code> from the <code>bin</code> directory.)</p></td>
-		<td>No</td>
-	</tr>
-	<tr>
-		<td>--timezone</td>
-		<td>Default time zone to use in the Admin and storefront. (If you have not done so already, you can view the list of time zones by entering <code>magento info:timezone:list</code> from the <code>bin</code> directory.)</td>
-		<td>No</td>
-	</tr>
-	<tr>
-		<td>--use-rewrites</td>
-		<td><p><code>1</code> means you use web server rewrites for generated links in the storefront and Admin.</p>
-		<p><code>0</code> disables the use of web server rewrites. This is the default.</p></td>
-		<td>No</td>
-	</tr>
-	<tr>
-		<td>--use-secure</td>
-		<td><p><code>1</code> enables the use of Secure Sockets Layer (SSL) in storefront URLs. Make sure your web server supports SSL before you select this option.</p>
-		<p><code>0</code> disables the use of SSL with Magento. In this case, all other secure URL options are assumed to also be <code>0</code>. This is the default.</p></td>
-		<td>No</td>
-	</tr>
-	<tr>
-		<td>--base-url-secure</td>
-		<td>Secure base URL to use to access your Magento Admin and storefront in the following format:
-		<code>http[s]://&lt;host or ip>/&lt;your Magento install dir>/</code></td>
-		<td>No</td>
-	</tr>
+|Name|Value|Required?|
+|--- |--- |--- |
+|`--base-url`|Base URL to use to access your Magento Admin and storefront in any of the following formats:<br><br>- `http[s]://<host or ip>/<your Magento install dir>/`.<br><br>**Note:** The scheme (`http://` or `https://`) and a trailing slash are both required. `<your Magento install dir>` is the docroot-relative path in which to install the Magento software. Depending on how you set up your web server and virtual hosts, the path might be magento2 or it might be blank.<br><br>To access Magento on localhost, you can use `http://127.0.0.1/<your Magento install dir>/`.<br><br>- `{{base_url}}` which represents a base URL defined by a virtual host setting or by a virtualization environment like Docker. For example, if you set up a virtual host for Magento with the hostname magento.example.com, you can install the Magento software with `--base-url={{base_url}}` and access the Magento Admin with a URL like http://magento.example.com/admin.|No|
+|--language|Language code to use in the Admin and storefront.<br><br>(If you have not done so already, you can view the list of language codes by entering `magento info:language:list` from the `bin` directory.)|No|
+|`--currency`|Default currency to use in the storefront. <br><br>(If you have not done so already, you can view the list of currencies by entering `magento info:currency:list` from the `bin` directory.)|No|
+|`--timezone`|Default time zone to use in the Admin and storefront. (If you have not done so already, you can view the list of time zones by entering `magento info:timezone:list` from the `bin` directory.)|No|
+|`--use-rewrites`|`1` means you use web server rewrites for generated links in the storefront and Admin.<br><br>`0` disables the use of web server rewrites. This is the default.|No|
+|`--use-secure`|`1` enables the use of Secure Sockets Layer (SSL) in storefront URLs. Make sure your web server supports SSL before you select this option.<br><br>`0` disables the use of SSL with Magento. In this case, all other secure URL options are assumed to also be 0. This is the default.|No|
+|`--base-url-secure`|Secure base URL to use to access your Magento Admin and storefront in the following format:`http[s]://<host or ip>/<your Magento install dir>/`|No|
+|`--use-secure-admin`|`1` means you use SSL to access the Magento Admin. Make sure your web server supports SSL before you select this option.<br><br>`0` means you do not use SSL with the Admin. This is the default.|No|
+|`--admin-use-security-key`|`1` causes the Magento software to use a randomly generated key value to access pages in the Magento Admin and in forms. These key values help prevent cross-site script forgery attacks. This is the default.<br/><br/>`0` disables the use of the key.|No|
+|`--magento-init-params`|Add to any command to customize Magento initialization parameters<br/><br/>For example: `MAGE_MODE=developer&MAGE_DIRS[base][path]=/var/www/example.com&MAGE_DIRS[cache][path]=/var/tmp/cache`|No|
 
-	<tr>
-		<td>--use-secure-admin</td>
-		<td><p><code>1</code> means you use SSL to access the Magento Admin. Make sure your web server supports SSL before you select this option.</p>
-		<p><code>0</code> means you do not use SSL with the Admin. This is the default.</p></td>
-		<td>No</td>
-	</tr>
-	</tbody>
-</table>
-
-#### Related topics
-
-*	[Installing the Magento software using the command line]({{ page.baseurl }}/install-gde/install/cli/install-cli-install.html)
-*	[Remove sample data modules or update sample data]({{ page.baseurl }}/install-gde/install/cli/install-cli-sample-data-other.html)
-*	[Enable or disable modules]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-enable.html)
-*	[Display or change the Admin URI]({{ page.baseurl }}/install-gde/install/cli/install-cli-adminurl.html)
-*	[Uninstall modules]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall-mods.html)
-*	[Create or update the deployment configuration]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-deployment.html)
-*	[Enable or disable maintenance mode]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-maint.html)
-*	[Create the Magento database schema]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-db.html)
-*	[Update the Magento database schema and data]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-db-upgr.html)
-*	[Create or unlock a Magento administrator]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-admin.html)
-*	[Back up and roll back the file system, media, and database]({{ page.baseurl }}/install-gde/install/cli/install-cli-backup.html)
-*	[Uninstall themes]({{ page.baseurl }}/install-gde/install/cli/install-cli-theme-uninstall.html)
-*	[Uninstall language packages]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall-langpk.html)
-*	[Uninstall the Magento software]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-uninstall)
-*	[Update the Magento software]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-magento-update)
-*	[Reinstall the Magento software]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-magento-reinstall)

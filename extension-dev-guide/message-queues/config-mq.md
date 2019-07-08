@@ -1,166 +1,107 @@
 ---
 group: php-developer-guide
 subgroup: 99_Module Development
-title: Configure message queue topology
-menu_title: Configure message queue topology
+title: Configure message queues
+menu_title: Configure message queues
 menu_order: 18
 ee_only: True
 level3_menu_node: level3child
 level3_subgroup: mq
-redirect_from: /guides/v2.0/config-guide/mq/config-mq.html
 functional_areas:
   - Configuration
   - System
   - Setup
 ---
+Any module can be configured to send and receive messages to the message queue. To do this, you must create the following files in the `<module>/etc` directory:
 
-{: .bs-callout .bs-callout-warning }
-The message queue topology can only be configured after {{site.data.var.ce}} has been installed and before {{site.data.var.ee}} has been installed.
+* `communication.xml`
+* `queue.xml`
 
-Each module that is to be a {% glossarytooltip d5777fe2-f786-45d9-b052-cca8a10120d9 %}publisher{% endglossarytooltip %} must be configured as such. If you want a module to use the MQF, create a `<module>/etc/queue.xml` file and define the publisher, consumers, exchanges and bindings.
+## Create the `communication.xml` file##
 
-## Edit the <code>queue.xml</code> file
+The `<module>/etc/communication.xml` file defines aspects of the message queue system that all communication types have in common. Magento 2.1 supports AMQP and database connections.
 
-The `queue.xml` file can contain the following elements:
+### topic element###
 
-+ publisher
-+ topic
-+ consumer
-+ bind
+Topic configuration is flexible in that you can switch the transport layer for topics at deployment time. These values can be overwritten in the `env.php` file.
 
-### Required elements
+The `name` parameter is required. The topic definition must include either a `request` or a `schema`. Use `schema` if you want to implement a custom service interface.  Otherwise, specify `request`. If `request` is specified, then also specify `response` if the topic is synchronous.
 
-Each `queue.xml` file must contain the following lines:
+Parameter | Description
+--- | ---
+name | A string that uniquely identifies the topic. A topic name should be a series of strings that are separated by periods. The leftmost string should be the most general, and each string afterward should narrow the scope. For example, to describe actions for tending to pets, you might create names such as `cat.white.feed` and `dog.retriever.walk`. Wildcards are not supported in the `communication.xml` file.
+request | Specifies the data type of the topic.
+response | Specifies the format of the response. This parameter is required if you are defining a synchronous topic. Omit this parameter if you are defining an asynchronous topic.
+schema | The interface that describes the structure of the message. The format must be  `<module>\Api\<ServiceName>::<methodName>`.
 
-{% highlight xml %}
+### handler element ###
+
+The `handler` element specifies the class where the logic for handling messages exists and the method it executes.
+
+Parameter | Description
+--- | ---
+name | A string that uniquely defines the handler. The name can be derived from the topic name if the handler is specific to the topic. If the handler provides more generic capabilities, name the handler so that it describes those capabilities.
+type | The class that defines the handler.
+method | The method this handler executes.
+disabled | Determines whether this handler is disabled. The default value is `false`.
+
+### Sample `communication.xml` file
+
+The following sample defines two synchronous topics. The first topic is for RPC calls. The second uses a custom service interface.
+
+```xml
 <?xml version="1.0"?>
-
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/queue.xsd">
-.
-.
-.
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Communication/etc/communication.xsd">
+<topic name="synchronous.rpc.test" request="string" response="string">
+    <handler name="processRpcRequest" type="Magento\TestModuleSynchronousAmqp\Model\RpcRequestHandler" method="process"/>
+</topic>
+<topic name="magento.testModuleSynchronousAmqp.api.serviceInterface.execute" schema="Magento\TestModuleSynchronousAmqp\Api\ServiceInterface::execute">
+    <handler name="processRemoteRequest" type="Magento\TestModuleSynchronousAmqp\Model\RpcRequestHandler" method="process"/>
+</topic>
 </config>
+```
 
-{% endhighlight %}
+## Create the `queue.xml` file ##
 
-### publisher element
+The `queue.xml` file defines the broker that processes topics.  It also specifies the queue each topic will be sent to.
 
-The `publisher` element configures the type of connection and the exchange to publish to. By default, Magento uses one exchange. The name of exchange is a part of the publisher configuration. However multiple exchanges are supported, based on the AMQP model.
-<table>
-<tr>
-<th>Parameter</th><th>Description</th>
-</tr>
-<tr>
-<td>name</td>
-<td>A unique identifier for the publisher. The value is specified in a <code>topic</code> element. The default system publisher name is `default`.</td>
-</tr>
-<tr>
-<td>connection</td>
-<td>If RabbitMQ is to used to manage the queue, then the value must be <code>rabbitmq</code>. The value can also be <code>db</code> or the name of a custom {% glossarytooltip edb42858-1ff8-41f9-80a6-edf0d86d7e10 %}adapter{% endglossarytooltip %}.</td>
-</tr>
-<tr>
-<td>exchange</td>
-<td>The name of the exchange to publish to. The value is referenced from the <code>bind</code> element. The default system exchange name is `magento`.</td>
-</tr>
-</table>
+### broker element ###
 
-### topic element
+The `broker` element also contains `queue` elements.
 
-Configuring the `topic` element defines the interface that processes the message and assigns a publisher.
-<table>
-<tr>
-<th><p>Parameter</p></th><th><p>Description</p></th>
-</tr>
-<tr>
-<td>name</td>
-<td><p>The name assigned to the topic. The format should be <code><i>object</i><b>.</b><i>action</i></code> You can further distinguish topic names by appending <code><b>.</b><i>subaction</i></code> to the end of the name. Use the past tense for all verbs, to indicate the {% glossarytooltip c57aef7c-97b4-4b2b-a999-8001accef1fe %}event{% endglossarytooltip %} has already happened.</p>
-<p>Examples: <code>customer.created</code>, <code>customer.sent.email</code></p>
-<p>The value is specified in a <code>bind</code> element.</p></td>
-</tr>
-<tr>
-<td>schema</td>
-<td><p>The interface that describes the structure of the message. It should be in the format of a Data Interface from the Service Contracts. For example, <code>Magento\Customer\Api\Data\CustomerInterface</code>.
-</p>
-<p>You can also specify a service method signature, such as <code>Magento\Customer\Api\CustomerRepositoryInterface::save</code>. In this case, format the message as an array of all service method parameters, like for a <code>call_user_func_array</code> call. The consumer's callback should expect each message part to be passed as a separate parameter.
-</p></td>
-</tr>
-<tr>
-<td>publisher</td>
-<td>The <code>name</code> of a <code>publisher</code>.</td>
-</tr>
-</table>
+Parameter | Description
+--- | ---
+topic | A topic defined in the `communication.xml` file.
+type | The type of message broker. For this release, the value must be `amqp` or `db`.
+exchange | The name of the exchange to publish to. The default system exchange name is `magento`.
 
-### consumer element
+### queue element ###
 
-Each `consumer` elements maps the receiver of a message to a specific queue. The `class` and `method` parameters indicate what receives and processes the message.
-<table>
-<tr>
-<th>Parameter</th><th>Description</th>
-</tr>
-<tr>
-<td>name</td>
-<td>The name of the consumer. The value should be the same as the magic method that to be used as a callback. </td>
-</tr>
-<tr>
-<td>queue</td>
-<td>Defines the queue name to send the message to. This value is used in the definition of a <code>bind</code> element.</td>
-</tr>
-<tr>
-<td>connection</td>
-<td>Must be <code>rabbitmq</code> or other value specified in the `connection` parameter in of a publisher.</td>
-</tr>
-<tr>
-<td>class</td>
-<td>The path to a Magento class that consumes the message.</td>
-</tr>
-<tr>
-<td>method</td>
-<td>The method within the specified <code>class</code> that processes the message.</td>
-</tr>
-<tr>
-<td>max_messages</td>
-<td>Specifies the maximum number of messages to consume.</td>
-</tr>
-</table>
+The `queue` element defines the module's queues.
 
-### bind element
+Parameter | Description
+--- | ---
+name (required) | Defines the queue name to send the message to.
+consumer (required) | The name of the consumer.
+consumerInstance | The path to a Magento class that consumes the message.
+handler | Specifies the class and method that processes the message. The value must be specified in the format `<Vendor>\Module\<ServiceName>::<methodName>`.
+maxMessages | Specifies the maximum number of messages to consume.
 
-The `bind` elements link topics to queues and exchanges, defining the message queue topology. A topic can be sent to any number of queues.
+## Sample `queue.xml` file ##
 
-<table>
-<tr>
-<th>Parameter</th><th>Description</th>
-</tr>
-<tr>
-<td>queue</td>
-<td>The <code>name</code> of a queue defined in a <code>consumer</code> element.</td>
-</tr>
-<tr>
-<td>exchange</td>
-<td>The <code>name</code> of an exchange defined in a <code>publisher</code> element.</td>
-</tr>
-<tr>
-<td>topic</td>
-<td>The <code>name</code> of a topic defined in a <code>topic</code> element. You can specify an asterisk (\*) or pound sign (#) as wildcards. </td>
-</tr>
-</table>
-
-## Sample `queue.xml` file
-{% highlight xml %}
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/queue.xsd">
-    <publisher name="test-publisher-1" connection="rabbitmq" exchange="magento"/>
-    <publisher name="test-publisher-2" connection="db" exchange="magento"/>
-    <topic name="customer.created" schema="Magento\Customer\Api\Data\CustomerInterface" publisher="test-publisher-1"/>
-    <topic name="customer.deleted" schema="Magento\Customer\Api\Data\CustomerInterface" publisher="test-publisher-2"/>
-    <consumer name="customerCreatedListener" queue="test-queue-1" connection="rabbitmq" class="Data\Type" method="processMessage"/>
-    <consumer name="customerDeletedListener" queue="test-queue-2" connection="db" class="Other\Type" method="processMessage2" max_messages="98765"/>
-    <bind queue="test-queue-1" exchange="magento" topic="customer.created" />
-    <bind queue="test-queue-2" exchange="magento" topic="customer.deleted" />
+```xml
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Communication/etc/communication.xsd">
+<broker topic="synchronous.rpc.test" type="amqp" exchange="magento">
+    <queue consumer="synchronousRpcTestConsumer" name="synchronous.rpc.test" consumerInstance="Magento\Framework\MessageQueue\Rpc\Consumer"/>
+</broker>
+<broker topic="magento.testModuleSynchronousAmqp.api.serviceInterface.execute" type="amqp" exchange="magento">
+    <queue consumer="RemoteServiceTestConsumer" name="queue.magento.testModuleSynchronousAmqp.api.serviceInterface.execute" consumerInstance="Magento\Framework\MessageQueue\Rpc\Consumer"/>
+</broker>
 </config>
-{% endhighlight %}
+```
 
 #### Related Topics
 
 *	[Message Queues Overview]({{ page.baseurl }}/config-guide/mq/rabbitmq-overview.html)
-*	[Manage message queues]({{ page.baseurl }}/config-guide/mq/manage-mysql.html)
+*	[Migrate message queue configuration]({{ page.baseurl }}/extension-dev-guide/message-queues/queue-migration.html)
 *	[Install RabbitMQ]({{ page.baseurl }}/install-gde/prereq/install-rabbitmq.html)

@@ -11,7 +11,7 @@ functional_areas:
   - Setup
 ---
 
-## Intended audience   {#integrator-aud}
+## Intended audience {#integrator-aud}
 
 The audience for this topic is anyone who downloaded a compressed Magento software archive (`.zip` or `.tar`). If you'd rather use Composer, go back and [choose another starting point]({{ page.baseurl }}/install-gde/bk-install-guide.html).
 
@@ -23,7 +23,7 @@ The audience for this topic is anyone who downloaded a compressed Magento softwa
 
 {% include install/get-software_zip.md %}
 
-## Transfer the Magento archive to your server   {#zip-transfer}
+## Transfer the Magento archive to your server {#zip-transfer}
 
 To transfer the Magento software archive to your server:
 
@@ -31,8 +31,8 @@ To transfer the Magento software archive to your server:
 
 	There are many ways to configure FTP and SCP. Following are a few packages you can use. Magento does not recommend particular software.
 
-	*	Windows: [WinSCP](https://winscp.net/eng/download.php){: target="_blank"} or [Filezilla](https://filezilla-project.org/download.php){: target="_blank"}
-	*	Mac OS: [CyberDuck](https://cyberduck.io/?l=en){: target="_blank"} or [Filezilla](https://filezilla-project.org/download.php){: target="_blank"}
+	*	Windows: [WinSCP](https://winscp.net/eng/download.php) or [Filezilla](https://filezilla-project.org/download.php)
+	*	Mac OS: [CyberDuck](https://cyberduck.io/?l=en) or [Filezilla](https://filezilla-project.org/download.php)
 
 2.	Create a connection to your Magento server.
 
@@ -44,7 +44,7 @@ To transfer the Magento software archive to your server:
 
 	The following figure shows an example.
 
-	<img src="{{ site.baseurl }}/common/images/install-merch_ftp-transfer.png">
+	![]({{ site.baseurl }}/common/images/install-merch_ftp-transfer.png)
 
 4.	Transfer the archive from your local system to the web server docroot directory.
 
@@ -73,30 +73,16 @@ To transfer the Magento software archive to your server:
 
 8.	Continue with the next section.
 
-## Extract the software on your server   {#zip-extract}
+## Extract the software on your server {#zip-extract}
 
 Log in to your Magento server as, or switch to, the [Magento file system owner]({{ page.baseurl }}/install-gde/prereq/file-sys-perms-over.html) and extract the software package in the web server docroot using one of the following commands:
 
-<table>
-<tbody>
-<tr> 
-	<th>File format</th>
-	<th>Command to extract</th>
-</tr>
-<tr> 
-	<td>.tar.gz</td>
-	<td><code>tar zxf &lt;filename></code></td>
-</tr>
-<tr> 
-	<td>.zip</td>
-	<td><code>unzip &lt;filename></code></td>
-</tr>
-<tr> 
-	<td>.tar.bz2</td>
-	<td><code>tar jxf &lt;filename></code></td>
-</tr>
-</tbody>
-</table>
+| File format | Command to extract   |
+| ----------- | -------------------- |
+| `.tar.gz`   | `tar zxf <filename>` |
+| `.zip`      | `unzip <filename>`   |
+| `.tar.bz2`  | `tar jxf <filename>` |
+
 
 The Magento software extracts to the directory you created. After the file has extracted, either delete the Magento archive or move it to another directory.
 

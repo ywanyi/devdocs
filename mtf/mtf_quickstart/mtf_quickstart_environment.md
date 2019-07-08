@@ -18,7 +18,9 @@ Use Mozilla Firefox ESR 45 with Selenium 2.53.1. Later versions have compatibili
 
 Enter in terminal:
 
-    java -jar <path_to_selenium_directory>/selenium-server.jar
+```bash
+java -jar <path_to_selenium_directory>/selenium-server.jar
+```
 
 ## Run tests on non-default browser {#mtf_quickstart_env_selenium-non-def}
 
@@ -30,25 +32,35 @@ Run the Selenium Server with an additional argument.
 
 Example for Google Chrome with Selenium 2:
 
+```bash
+java -jar <path_to_selenium_directory>/selenium-server.jar -Dwebdriver.chrome.driver=<path_to_chrome_driver>/chromedriver.exe
+```
 
-    java -Dwebdriver.chrome.driver=<path_to_chrome_driver>/chromedriver.exe -jar <path_to_selenium_directory>/selenium-server.jar
+### Selenium 3
     
-{: .bs-callout .bs-callout-info }
-For Selenium 3 add the web driver to the directory where `selenium-server.jar` is located and run tests without additional argument: `java -jar <path_to_selenium_directory>/selenium-server.jar`
+For Selenium 3 add the web driver to the directory where `selenium-server.jar` is located and run tests without additional argument:
+
+```bash
+java -jar <path_to_selenium_directory>/selenium-server.jar
+```
 
 ## Run generator {#mtf_quickstart_env_generator}
 
-Generator generates [fixtures], [repositories], and [page objects]. Once the FTF is initialized, all classes must be pre-generated to facilitate creating and running the tests. Modules in the FTF are processed by generator in alphabetical order.
+Generator generates [fixtures], [repositories], and [page objects]. Once the FTF is initialized, all classes must be pre-generated to facilitate creating and running the tests. Modules in the FTF are processed by generator in the same order that they are processed during Magento loading.
 
 Enter in terminal:
 
-    cd <magento2_root_dir>/dev/tests/functional/utils
-    php generate.php
+```bash
+cd <magento2_root_dir>/dev/tests/functional/utils
+```
 
-## Next Steps   {#mtf_install_pre}
+```bash
+php generate.php
+```
+
+## Next Steps {#mtf_install_pre}
 
 [&lt;&lt; Prepare Magento application]({{ page.baseurl }}/mtf/mtf_quickstart/mtf_quickstart_magento.html)| [ Test run &gt;&gt;]({{ page.baseurl }}/mtf/mtf_quickstart/mtf_quickstart_runtest.html)
-
 
 
 <!-- LINK DEFINITIONS -->

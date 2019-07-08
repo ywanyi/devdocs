@@ -5,8 +5,6 @@ title: Cannot clone the Magento GitHub repository
 menu_title: Cannot clone the Magento GitHub repository
 menu_node:
 menu_order: 400
-redirect_from:
-  - /guides/v2.0/install-gde/trouble/tshoot_clone.html
 functional_areas:
   - Install
   - System
@@ -17,11 +15,12 @@ functional_areas:
 
 Error is similar to the following:
 
-<pre>Cloning into 'magento2'...
+```
+Cloning into 'magento2'...
 Permission denied (publickey).
-fatal: The remote end hung up unexpectedly</pre>
+fatal: The remote end hung up unexpectedly
+```
 
 ### Solution
 
-Upload your SSH key to GitHub as discussed in [the GitHub help page](https://help.github.com/articles/generating-ssh-keys){: target="_blank"}.
-
+Upload your SSH key to GitHub as discussed in [the GitHub help page](https://help.github.com/articles/generating-ssh-keys){:target="_blank"}.

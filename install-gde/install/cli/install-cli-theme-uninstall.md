@@ -1,43 +1,36 @@
 ---
 group: installation-guide
-subgroup: 05_Command-line installation
 title: Uninstall themes Composer packages
-menu_title: Uninstall themes Composer packages
-menu_node:
-menu_order: 200
-redirect_from:
-  - /guides/v2.0/install-gde/install/install-cli-theme-uninstall.html
 functional_areas:
   - Install
   - System
   - Setup
 ---
 
-## Prerequisite   {#instgde-install-uninst-theme-prereq}
+## Prerequisite {#instgde-install-uninst-theme-prereq}
 
-Before you use this command, you must know the relative path to your theme. Themes are located in a subdirectory of `<your Magento install dir>/app/design/<area name>`. You must specify the path to the theme starting with the area, which is either `frontend` (for storefront themes) or `adminhtml` (for {% glossarytooltip 18b930cf-09cc-47c9-a5e5-905f86c43f81 %}Magento Admin{% endglossarytooltip %} themes).
+Before you use this command, you must know the relative path to your theme. Themes are located in a subdirectory of `<magento_root>/app/design/<area name>`. You must specify the path to the theme starting with the area, which is either `frontend` (for storefront themes) or `adminhtml` (for [Magento Admin](https://glossary.magento.com/magento-admin) themes).
 
-For example, the path to the Luma {% glossarytooltip d2093e4a-2b71-48a3-99b7-b32af7158019 %}theme{% endglossarytooltip %} provided with Magento 2 is `frontend/Magento/luma`.
+For example, the path to the Luma [theme](https://glossary.magento.com/theme) provided with Magento 2 is `frontend/Magento/luma`.
 
 For more information about themes, see [Magento theme structure]({{ page.baseurl }}/frontend-dev-guide/themes/theme-structure.html).
 
-## Overview of uninstalling themes   {#instgde-install-uninst-theme-over}
+## Overview of uninstalling themes {#instgde-install-uninst-theme-over}
 
 This section discusses how to uninstall one or more themes, optionally including the themes' code from the file system. You can create backups first so you can restore the data at a later time.
 
-This command uninstalls *only* themes that are specified in `composer.json`; in other words, themes that are provided as {% glossarytooltip d85e2d0a-221f-4d03-aa43-0cda9f50809e %}Composer{% endglossarytooltip %} packages. If your theme is not a Composer package, you must uninstall it manually by:
+This command uninstalls *only* themes that are specified in `composer.json`; in other words, themes that are provided as [Composer](https://glossary.magento.com/composer) packages. If your theme is not a Composer package, you must uninstall it manually by:
 
 *	Updating the `parent` node information in `theme.xml` to remove references to the theme.
 *	Removing theme code from the file system.
 
 	[More information about theme inheritance]({{ page.baseurl }}/frontend-dev-guide/themes/theme-inherit.html).
 
-## First steps   {#instgde-cli-before}
-
+## First steps {#instgde-cli-before}
 {% include install/first-steps-cli.md %}
 In addition to the command arguments discussed here, see [Common arguments]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands.html#instgde-cli-subcommands-common).
 
-## Uninstall themes   {#instgde-install-uninst-theme-uninst}
+## Uninstall themes {#instgde-install-uninst-theme-uninst}
 
 Command usage:
 
@@ -67,7 +60,7 @@ The command performs the following tasks:
 
 8.	Removes themes from the `theme` database table.
 9.	Remove themes from code base using `composer remove`.
-10.	Cleans the {% glossarytooltip 0bc9c8bc-de1a-4a06-9c99-a89a29c30645 %}cache{% endglossarytooltip %}.
+10.	Cleans the [cache](https://glossary.magento.com/cache).
 11.	Cleans generated classes
 12.	If `--clear-static-content` is specified, cleans [generated static view files]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-static-view.html#config-cli-static-overview).
 
@@ -101,23 +94,4 @@ Messages similar to the following display:
 	Disabling maintenance mode
 
 {: .bs-callout .bs-callout-info }
-To uninstall a Magento {% glossarytooltip 29ddb393-ca22-4df9-a8d4-0024d75739b1 %}Admin{% endglossarytooltip %} theme, you must also remove it from your component's {% glossarytooltip 2be50595-c5c7-4b9d-911c-3bf2cd3f7beb %}dependency injection{% endglossarytooltip %} configuration, `<component root directory>/etc/di.xml`.
-
-#### Related topics
-
-*	[Installing the Magento software using the command line]({{ page.baseurl }}/install-gde/install/cli/install-cli-install.html)
-*	[Remove sample data modules or update sample data]({{ page.baseurl }}/install-gde/install/cli/install-cli-sample-data-other.html)
-*	[Enable or disable modules]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-enable.html)
-*	[Display or change the Admin URI]({{ page.baseurl }}/install-gde/install/cli/install-cli-adminurl.html)
-*	[Uninstall modules]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall-mods.html)
-*	[Create or update the deployment configuration]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-deployment.html)
-*	[Enable or disable maintenance mode]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-maint.html)
-*	[Create the Magento database schema]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-db.html)
-*	[Update the Magento database schema and data]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-db-upgr.html)
-*	[Configure the store]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-store.html)
-*	[Create or unlock a Magento administrator]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-admin.html)
-*	[Back up and roll back the file system, media, and database]({{ page.baseurl }}/install-gde/install/cli/install-cli-backup.html)
-*	[Uninstall language packages]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall-langpk.html)
-*	[Uninstall the Magento software]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-uninstall)
-*	[Update the Magento software]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-magento-update)
-*	[Reinstall the Magento software]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-magento-reinstall)
+To uninstall a Magento [Admin](https://glossary.magento.com/admin) theme, you must also remove it from your component's [dependency injection](https://glossary.magento.com/dependency-injection) configuration, `<component root directory>/etc/di.xml`.

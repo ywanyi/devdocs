@@ -1,18 +1,18 @@
 ---
 group: functional-testing-framework-guide
-title: Fixture Repository
+title: Fixture repository
 ---
 
 The repository stores pre-defined data for the fixture.
 It contains only data sets that are used in the test along with the associated field data.
-Repositories are stored in the `Repository` directory in the {% glossarytooltip c1e4242b-1f1a-44c3-9d72-1d5b1435e142 %}module{% endglossarytooltip %} to which they belong.
-Reference to the repository is placed in the fixture {% glossarytooltip 8c0645c5-aa6b-4a52-8266-5659a8b9d079 %}XML{% endglossarytooltip %} file in attribute named `repository`.
+Repositories are stored in the `Repository` directory in the [module](https://glossary.magento.com/module) to which they belong.
+Reference to the repository is placed in the fixture [XML](https://glossary.magento.com/xml) file in attribute named `repository`.
 
 In this topic you will learn how to create, use, and merge a repository.
 
 ## Create a repository for the entire fixture {#mtf_repository_create}
 
-Let's create a repository for the Widget fixture `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/Widget/Test/Fixture/Widget.xml`.
+Let's create a repository for the Widget fixture `<magento2>/dev/tests/functional/tests/app/Magento/Widget/Test/Fixture/Widget.xml`.
 
 [More details about fixtures]({{ page.baseurl }}/mtf/mtf_entities/mtf_fixture.html).
 
@@ -61,35 +61,35 @@ Assume that we have the following fixture:
 
 ```
 
-The `repository_class="Magento\Widget\Test\Repository\Widget"` attribute tells us that this fixture uses data from the `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/Widget/Test/Repository/Widget.xml` repository.
+The `repository_class="Magento\Widget\Test\Repository\Widget"` attribute tells us that this fixture uses data from the `<magento2>/dev/tests/functional/tests/app/Magento/Widget/Test/Repository/Widget.xml` repository.
 
 In this section we will show the logic of how to create this repository.
 
-Also `layout` and `widgetOptions` fields use `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/Widget/Test/Repository/Widget/LayoutUpdates.xml` and `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/Widget/Test/Repository/Widget/WidgetOptions.xml` repositories respectively.
+Also `layout` and `widgetOptions` fields use `<magento2>/dev/tests/functional/tests/app/Magento/Widget/Test/Repository/Widget/LayoutUpdates.xml` and `<magento2>/dev/tests/functional/tests/app/Magento/Widget/Test/Repository/Widget/WidgetOptions.xml` repositories respectively.
 
 [ Learn how to create repository for the fixture field](#mtf_repository_create-field).
 
-We want to specify data sets for two cases of submitting {% glossarytooltip f0dcf847-ce21-4b88-8b45-83e1cbf08100 %}Widget{% endglossarytooltip %} forms: `default` with minimum data, and `cms_page_link` with data needed to create new {% glossarytooltip f3944faf-127e-4097-9918-a2e9c647d44f %}CMS{% endglossarytooltip %} page link.
+We want to specify data sets for two cases of submitting [Widget](https://glossary.magento.com/widget) forms: `default` with minimum data, and `cms_page_link` with data needed to create new [CMS](https://glossary.magento.com/cms) page link.
 
 To create a new CMS page link the user must enter data of all required fields. The widget has three forms with fields to specify: [**Settings**](#mtf_repo_ex_set), [**Storefront Properties**](#mtf_repo_ex_store), [**Frontend Apps Options**](#mtf_repo_ex_front). The following text along with screenshots gives an example of how to create a data set of the repository.
 
 [See entire repository code](#mtf_repo_widgetxml).
 
-#### Settings form   {#mtf_repo_ex_set}
+#### Settings form {#mtf_repo_ex_set}
 
 ![cms_page_link "Settings" data set for entire fixture view on GUI]({{ site.baseurl }}/common/images/ftf/mtf_ent_fixt_repo_cms_set_ui.png)
 
 - Set the **Type** field (`field name="code"`) to "CMS Page Link". It corresponds to the following code in [the repository data set](#mtf_repo_widgetxml) `<field name="code" xsi:type="string">CMS Page Link</field>`.
 - Set the **Design Theme** field (`field name="theme_id"`) to "Magento Blank". It corresponds to the following code in [the repository data set](#mtf_repo_widgetxml) `<field name="theme_id" xsi:type="string">Magento Blank</field>`.
 
-#### Storefront Properties form   {#mtf_repo_ex_store}
+#### Storefront Properties form {#mtf_repo_ex_store}
 
 ![cms_page_link "Storefront properties" data set for entire fixture view on GUI]({{ site.baseurl }}/common/images/ftf/mtf_ent_fixt_repo_cms_set_ui_storefront.png)
 
 - Set the **Frontend App Title** field to "Cms Page Link [random integer value]". It corresponds to the following code in [the repository data set](#mtf_repo_widgetxml) `<field name="title" xsi:type="string">Cms Page Link %isolation%</field>`.
 - Set the **Assign to Store Views** field to "All Store Views". It corresponds to the following code in [the repository data set](#mtf_repo_widgetxml):
 
-```xml 
+```xml
 
  <field name="store_ids" xsi:type="array">
     <item name="dataset" xsi:type="string">all_store_views</item>
@@ -102,7 +102,7 @@ To create a new CMS page link the user must enter data of all required fields. T
     - Set the **Container** field to "Main content area". It corresponds to the following code in [the repository data set](#mtf_repo_widgetxml) `<item name="block" xsi:type="string">Main Content Area</item>`.
     - Set the **Template** field to "CMS Page Link Block Template". It corresponds to the following code in [the repository data set](#mtf_repo_widgetxml) `<item name="template" xsi:type="string">CMS Page Link Block Template</item>`.
 
-#### Frontend App Options   {#mtf_repo_ex_front}
+#### Frontend App Options {#mtf_repo_ex_front}  
 
 ![cms_page_link "Frontend App Options" data set for entire fixture view on GUI]({{ site.baseurl }}/common/images/ftf/mtf_ent_fixt_repo_cms_set_ui_frontend-app.png)
 
@@ -110,7 +110,7 @@ To create a new CMS page link the user must enter data of all required fields. T
 - Set the **Anchor Custom Title** field to "anchor title".
 - Choose in the **CMS Page** grid newly created CMS page.
 
-```xml 
+```xml
 
 <field name="widgetOptions" xsi:type="array">
     <item name="0" xsi:type="array">
@@ -122,11 +122,11 @@ To create a new CMS page link the user must enter data of all required fields. T
 
 This simple code contains a bit more complex logic, where [the repository is applied to the fixture field](#mtf_repository_create-field). Just to remind you, how this field is represented in the fixture: `<field name="widgetOptions" source="Magento\Widget\Test\Fixture\Widget\WidgetOptions" repository="Magento\Widget\Test\Repository\Widget\WidgetOptions" group="widget_options" />`.
 
-In brief, we reference another repository `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/Widget/Test/Repository/Widget/WidgetOptions.xml`, and a [source]({{ page.baseurl }}/mtf/mtf_entities/mtf_fixture.html#mtf_fixture_source) that is `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/Widget/Test/Fixture/Widget/WidgetOptions.php`.
+In brief, we reference another repository `<magento2>/dev/tests/functional/tests/app/Magento/Widget/Test/Repository/Widget/WidgetOptions.xml`, and a [source]({{ page.baseurl }}/mtf/mtf_entities/mtf_fixture.html#mtf_fixture_source) that is `<magento2>/dev/tests/functional/tests/app/Magento/Widget/Test/Fixture/Widget/WidgetOptions.php`.
 
 The `WidgetOptions.xml` repository includes `cmsPageLink` data set:
 
-```xml 
+```xml
 
 <dataset name="cmsPageLink">
     <field name="anchor_text" xsi:type="string">text</field>
@@ -138,15 +138,15 @@ The `WidgetOptions.xml` repository includes `cmsPageLink` data set:
 
 ```
 
-The source understands the `entities` field as an instruction to create a CMS Page using `<dataset name="default">` from the `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/Cms/Test/Repository/CmsPage.xml` repository.
+The source understands the `entities` field as an instruction to create a CMS Page using `<dataset name="default">` from the `<magento2>/dev/tests/functional/tests/app/Magento/Cms/Test/Repository/CmsPage.xml` repository.
 
-#### Widget.xml   {#mtf_repo_widgetxml}
+#### Widget.xml {#mtf_repo_widgetxml}
 
-Now we can create a repository XML file `Widget.xml`. In our case the file should be placed in `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/Widget/Test/Repository`. The full name must be specified in the `repository_class` attribute of the fixture: `repository_class="Magento\Widget\Test\Repository\Widget"`.
+Now we can create a repository XML file `Widget.xml`. In our case the file should be placed in `<magento2>/dev/tests/functional/tests/app/Magento/Widget/Test/Repository`. The full name must be specified in the `repository_class` attribute of the fixture: `repository_class="Magento\Widget\Test\Repository\Widget"`.
 
 See the entire repository sample so far:
 
-```xml 
+```xml
 
 <?xml version="1.0" ?>
 <!--
@@ -234,9 +234,9 @@ The `default` data set is used in the test when the repository hasn't been speci
 
 In the preceding section, the Widget fixture code contains fields with the links for repositories. Let's consider the field `layout` with `repository="Magento\Widget\Test\Repository\Widget\LayoutUpdates`.
 
-The repository value is a reference to the repository XML file. Therefore, we should create `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/Widget/Test/Repository/Widget/LayoutUpdates.xml`. The XML structure of this repository is the same as of [repository for the entire fixture](#mtf_repository_create).
+The repository value is a reference to the repository XML file. Therefore, we should create `<magento2>/dev/tests/functional/tests/app/Magento/Widget/Test/Repository/Widget/LayoutUpdates.xml`. The XML structure of this repository is the same as of [repository for the entire fixture](#mtf_repository_create).
 
-Assume that we want to provide data for the {% glossarytooltip 73ab5daa-5857-4039-97df-11269b626134 %}Layout{% endglossarytooltip %} Update block for the following cases shown on the screenshots (name of data sets have orange font, fields defined in repository are highlighted in orange).
+Assume that we want to provide data for the [Layout](https://glossary.magento.com/layout) Update block for the following cases shown on the screenshots (name of data sets have orange font, fields defined in repository are highlighted in orange).
 
 Case 1. **all_pages** data set:
 
@@ -264,7 +264,7 @@ Case 3. **for_cms_page_link** data set:
 
 The repository code for these cases follows:
 
-```xml 
+```xml
 <?xml version="1.0" ?>
 <!--
 /**
@@ -307,9 +307,9 @@ The repository code for these cases follows:
 
 The configuration repository stores predefined data sets for Magento configuration settings. It is the repository for the [Magento\_Config module]({{ site.mage2bloburl }}/{{ page.guide_version }}/app/code/Magento/Config) and is named `ConfigData.xml`.
 
-Let's see the following example of configuration settings for [Authorize.Net module]({{ site.mage2bloburl }}/{{ page.guide_version }}/app/code/Magento/Authorizenet) `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/Authorizenet/Test/Repository/ConfigData.xml`.
+Let's see the following example of configuration settings for [Authorize.Net module]({{ site.mage2bloburl }}/{{ page.guide_version }}/app/code/Magento/Authorizenet) `<magento2>/dev/tests/functional/tests/app/Magento/Authorizenet/Test/Repository/ConfigData.xml`.
 
-```xml 
+```xml
 
 <?xml version="1.0"?>
 <!--
@@ -377,7 +377,7 @@ Let's see the following example of configuration settings for [Authorize.Net mod
 
 ```
 
-Path to the `Authorizenet` UI form in {% glossarytooltip 29ddb393-ca22-4df9-a8d4-0024d75739b1 %}Admin{% endglossarytooltip %} is **STORES > Settings > Configuration > SALES > Payment Methods > Authorize.net Direct Post**.
+Path to the `Authorizenet` UI form in [Admin](https://glossary.magento.com/admin) is **STORES > Settings > Configuration > SALES > Payment Methods > Authorize.net Direct Post**.
 
 This repository contains two data sets: `authorizenet` that covers seven fields, and `authorizenet_rollback` that covers one field.
 
@@ -415,25 +415,98 @@ Modules that require configuration adjustment store `ConfigData.xml` in their `R
 
 As you can see, the `ConfigData.xml` of the [`Magento_Authorizenet` module]({{ site.mage2bloburl }}/{{ page.guide_version }}/app/code/Magento/Authorizenet) and the `ConfigData.xml` of the [`Magento_Backend` module]({{ site.mage2bloburl }}/{{ page.guide_version }}/app/code/Magento/Backend) have the same reference to the repository class; that is `Magento\Config\Test\Repository\ConfigData`.
 
-`ConfigData.php` will be generated in `<magento2_root_dir>/dev/tests/functional/generated/Magento/Config/Test/Repository`. This PHP repository will contain repository data sets from all Magento modules that have a `ConfigData.xml` repository.
+`ConfigData.php` will be generated in `<magento2>/dev/tests/functional/generated/Magento/Config/Test/Repository`. This PHP repository will contain repository data sets from all Magento modules that have a `ConfigData.xml` repository.
 
 To run the generator, enter the following command in your terminal:
 
-    php <magento2_root_dir>/dev/tests/functional/utils/generate.php
+    php <magento2>/dev/tests/functional/utils/generate.php
 
 The preceding is an example of repository merging. Using the approach from the example you can merge repositories for any other fixture, not `Config` only.
+
+### Data set replacement {#dataset-replacement}
+
+You can modify your data set without changing the name of the data set. Simply use a `replace` attribute. For example,
+ 
+ ```xml
+ 
+ <dataset name="customer_new_default" replace="default">
+ 
+ ```
+ 
+ This node means that `customer_new_default` data set replaces `default` data set.
+ 
+ Let's see a use case example. Assume that the Customer fixture in the Magento_Customer module has a repository with the `default` data set:
+ 
+  ```xml
+  
+ <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+     <repository class="Magento\Customer\Test\Repository\Customer">
+         <dataset name="default">
+             <field name="firstname" xsi:type="string">John</field>
+             <field name="lastname" xsi:type="string">Doe</field>
+             <field name="group_id" xsi:type="array">
+                 <item name="dataset" xsi:type="string">General</item>
+             </field>
+             <field name="email" xsi:type="string">JohnDoe_%isolation%@example.com</field>
+             <field name="password" xsi:type="string">123123q</field>
+             <field name="password_confirmation" xsi:type="string">123123q</field>
+         </dataset>
+     </repository>
+ </config>
+  
+  ```
+  
+Later you installed a new module Magento_CustomerNew module that changed Customer fixture. You don't want to change the `default` data set name in the test. Instead, you can simply replace the `default` data set, without changing the name:
+
+  ```xml
+  
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Customer\Test\Repository\Customer">
+        <dataset name="customer_new_default" replace="default">
+            <field name="firstname" xsi:type="string">John</field>
+            <field name="lastname" xsi:type="string">Doe</field>
+            <field name="email" xsi:type="string">JohnDoe_%isolation%@example.com</field>
+            <field name="new_field" xsi:type="string">Some value</field>
+            <field name="password" xsi:type="string">123123q</field>
+            <field name="password_confirmation" xsi:type="string">123123q</field>
+        </dataset>
+    </repository>
+</config>
+  
+  ```
+
+After the repository generation 
+    
+    php <magento2>/dev/tests/functional/utils/generate.php
+
+you have the following code in the Customer repository (`<magento2>/dev/tests/functional/generated/Magento/Customer/Test/Repository/Customer.php`):
+
+```php
+  
+$this->_data['default'] = [
+  'firstname' => 'John',
+  'lastname' => 'Doe',
+  'email' => 'JohnDoe_%isolation%@example.com',
+  'new_field' => 'Some value',
+  'password' => '123123q',
+  'password_confirmation' => '123123q',
+];
+  
+```
+
+As you can see, a repository with the name `default` contains data from the `customer_new_default` repository.
 
 ## Credentials and `%isolation%` in repository {#mtf_repository_credent_iso}
 
 Credentials are stored in an `*.xml` file that is specified in `phpunit.xml`.
 
-You can find a template for credentials in [`<magento2_root_dir>/dev/tests/functional/credentials.xml.dist`]({{ site.mage2bloburl }}/{{ page.guide_version }}/dev/tests/functional/credentials.xml.dist).
+You can find a template for credentials in [`<magento2>/dev/tests/functional/credentials.xml.dist`]({{ site.mage2bloburl }}/{{ page.guide_version }}/dev/tests/functional/credentials.xml.dist).
 
 Credentials always should stay invisible for security reasons. The FTF implicitly pastes credentials during the test run only.
 There are two ways to paste credentials:
 
 - **Using path**. If a field in a repository has a `name` that matches field `path` in `credentials.xml`, then the value of this field will be substituted for the value from `credential.xml` during the test.
-- **Using placeholder**. If a field in a repository has value wrapped in `% %` that matches the value of the `replace` field attribute in `credentials.xml`, then the value of this field will be substituted with the value from `credential.xml` during the test.
+- **Using placeholder**. If a field in a repository has value wrapped in `% %` that matches the value of the `replace` field attribute in `credentials.xml`, then the value of this field will be substituted for the value from `credential.xml` during the test.
 
 ### Example with substitution by <code>path</code> {#mtf_repo_credent_path}
 

@@ -6,9 +6,9 @@ menu_title: Page Grids
 menu_order: 3
 menu_node:
 ---
-In the {% glossarytooltip 18b930cf-09cc-47c9-a5e5-905f86c43f81 %}Magento Admin{% endglossarytooltip %}, a grid is used on all pages to establish global layouts for page templates. The grid assigns a set number of columns and rows for a page, and designers can create a layout by dividing the columns into sections, where design patterns and content can be placed.
+In the [Magento Admin](https://glossary.magento.com/magento-admin), a grid is used on all pages to establish global layouts for page templates. The grid assigns a set number of columns and rows for a page, and designers can create a layout by dividing the columns into sections, where design patterns and content can be placed.
 
-## Page Grid   {#page}
+## Page Grid {#page}
 
 <ul>
 	<li>A 12-column fluid-width content grid is placed next to the page’s 1-column fixed-width left navigation</li>
@@ -18,7 +18,8 @@ In the {% glossarytooltip 18b930cf-09cc-47c9-a5e5-905f86c43f81 %}Magento Admin{%
 
 ![](img/PageGrid.png)
 
-## Slide-Out Grid   {#slide-out}
+
+## Slide-Out Grid {#slide-out}
 
 A Slide-out panel, similar to a modal window, breaks apart and simplifies a complex subtask that is included within a primary task.
 
@@ -31,9 +32,10 @@ For example:
 
 <b>Layout and behavior:</b> When a panel spawns, it slides from right to left atop and almost completely over the parent page. A narrow gutter of space remains at left, showing the left navigation and a small sliver of the parent page.
 
-Standard {% glossarytooltip 73ab5daa-5857-4039-97df-11269b626134 %}layout{% endglossarytooltip %} within the edges of a browser screen
+Standard [layout](https://glossary.magento.com/layout) within the edges of a browser screen
 
 ![](img/slideout-panel7.png)
+
 
 (Panel position in relation to browser edge)
 
@@ -41,8 +43,10 @@ Standard {% glossarytooltip 73ab5daa-5857-4039-97df-11269b626134 %}layout{% endg
 
 ![](img/slideout-panel8.png)
 
+
 (Nested page-grid with additional padding)
 
 <b>Nested Slide-outs:</b> For multiple panels displayed, additional gutter space is used at left to show a small sliver of a Slide-out below another Slide-out.
 
 ![](img/slideout-panel9.png)
+

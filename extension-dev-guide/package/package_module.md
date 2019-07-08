@@ -4,19 +4,11 @@ subgroup: 05_Package
 title: Package a component
 menu_title: Package a component
 menu_order: 2
-redirect_from:
-  - /guides/v2.0/extension-dev-guide/package_module.html
 ---
 
-#### Contents
+## Overview of packaging {#package-over}
 
-*   [Overview of packaging](#package-over)
-*   [Create a Magento Composer file](#composer)
-*   [Package and publish your extension](#packaging)
-
-## Overview of packaging   {#package-over}
-
-The Magento application uses {% glossarytooltip d85e2d0a-221f-4d03-aa43-0cda9f50809e %}Composer{% endglossarytooltip %} packages to distribute, install, and upgrade components in an application instance.
+The Magento application uses [Composer](https://glossary.magento.com/composer) packages to distribute, install, and upgrade components in an application instance.
 
 To package a component, you must:
 
@@ -26,25 +18,25 @@ To package a component, you must:
 
     Use our [validation tool](https://github.com/magento/marketplace-tools){:target="_blank"} to check your package before you distribute it.
 
-## Create a Magento Composer file   {#composer}
+## Create a Magento Composer file {#composer}
 
-The Magento `composer.json` file defines the name, requirements, version, and other basic information about the component. This file must be placed in the root directory of the {% glossarytooltip c1e4242b-1f1a-44c3-9d72-1d5b1435e142 %}module{% endglossarytooltip %}.
+The Magento `composer.json` file defines the name, requirements, version, and other basic information about the component. This file must be placed in the root directory of the [module](https://glossary.magento.com/module).
 
 The `composer.json` uses [Composer's generic schema](https://getcomposer.org/doc/04-schema.md), with the following restrictions:
 
 
 Element | Description
 --- | ---
-`name` | A fully-qualified component name, in the format `<vendor-name>/<component-name>`. All letters must be in lowercase. Use dashes in the `<component-name>` to separate words.
+`name` | A fully-qualified component name, in the format `<vendor-name>/<component-name>`. All letters must be in lowercase. Use dashes in the `<component-name>` to separate words. Themes must use the format `<vendor-name>/theme-<area>-<theme-name>`.
 `type` | For modules, this value must be set to `magento2-module`. Other possible types are `metapackage`, `magento2-theme`, and `magento2-language`.
 `autoload` | Specify necessary information to be loaded, such as [registration.php]({{ page.baseurl }}/extension-dev-guide/build/component-registration.html). For more information, see [Autoloading](https://getcomposer.org/doc/01-basic-usage.md#autoloading) from Composer.
 
 
 {% include php-dev/composer-types.md %}
 
-### Using metapackages   {#package-metapackage}
+### Using metapackages {#package-metapackage}
 
-Metapackages allow you to group an {% glossarytooltip 55774db9-bf9d-40f3-83db-b10cc5ae3b68 %}extension{% endglossarytooltip %} that consists of multiple packages into a cohesive unit. This works exactly as described in standard [composer.json documentation](https://getcomposer.org/doc/04-schema.md#type). If you have an extension that uses more than one package you must use a {% glossarytooltip 7490850a-0654-4ce1-83ff-d88c1d7d07fa %}metapackage{% endglossarytooltip %} as the *root package*. Otherwise you should not use metapackage. A metapackage that you submit to Magento Marketplace should be a .zip file containing only the metapackage `composer.json` file.
+Metapackages allow you to group an [extension](https://glossary.magento.com/extension) that consists of multiple packages into a cohesive unit. This works exactly as described in standard [composer.json documentation](https://getcomposer.org/doc/04-schema.md#type). If you have an extension that uses more than one package you must use a [metapackage](https://glossary.magento.com/metapackage) as the *root package*. Otherwise you should not use metapackage. A metapackage that you submit to Magento Marketplace should be a .zip file containing only the metapackage `composer.json` file.
 
 {: .bs-callout .bs-callout-info }
 We recommend metapackages refer to specific component versions. Do not use wildcards to represent version ranges.
@@ -54,7 +46,7 @@ We recommend metapackages refer to specific component versions. Do not use wildc
 The following example is a `composer.json` for a metapackage:
 
 
-{% highlight JSON %}
+```json
 
 {
     "name": "magento/product-community-edition",
@@ -96,13 +88,13 @@ The following example is a `composer.json` for a metapackage:
 }
 
 
-{% endhighlight %}
+```
 
 ### Sample composer.json file
 
 The following example is a `composer.json` file for a module:
 
-{% highlight JSON %}
+```json
 {
   "name": "magento/sample-module-newpage",
   "description": "A Magento 2 module that creates a new page",
@@ -124,9 +116,9 @@ The following example is a `composer.json` file for a module:
   }
 }
 
-{% endhighlight %}
+```
 
-## Package and publish your extension   {#packaging}
+## Package and publish your extension {#packaging}
 
 Create a package of your extension by performing a zip operation on the directory with your extension (excluding unnecessary directories). For example:
 
@@ -134,7 +126,7 @@ Create a package of your extension by performing a zip operation on the director
 
 Use alphanumeric characters for the package filename with dashes to separate words. Do not use whitespaces.
 
-Magento can retrieve your extension package from any valid GitHub {% glossarytooltip a05c59d3-77b9-47d0-92a1-2cbffe3f8622 %}URL{% endglossarytooltip %}.
+Magento can retrieve your extension package from any valid GitHub [URL](https://glossary.magento.com/url).
 
 
 
@@ -146,18 +138,18 @@ Magento can retrieve your extension package from any valid GitHub {% glossarytoo
 {: .bs-callout .bs-callout-info }
 Third party repositories are supported.
 
-### Hosting on GitHub and Packagist   {#hosting}
+### Hosting on GitHub and Packagist {#hosting}
 
-Prerequisite: git must be set up on your machine.
+Prerequisite: Git must be set up on your machine.
 
-1. Navigate to your component directory, with the `composer.json` file in the root, and make it a new git repository. See the [GitHub documentation](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/) for details.
+1. Navigate to your component directory, with the `composer.json` file in the root, and make it a new Git repository. See the [GitHub documentation](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/) for details.
 2. When you have committed and pushed your component to your GitHub repository, you can either:
   * Use [Composer to refer to it directly](https://getcomposer.org/doc/05-repositories.md#vcs), or
   * Use the following steps to refer to the package through Packagist.
     1. Register an account at [packagist.org](https://packagist.org/).
     2. Click the Submit Package button and paste your GitHub repository link. Packagist automatically gathers the information from the component's `composer.json` file and link it to the GitHub repository, allowing you to reference the package as `vendor/module` without any additional repository information, because this is required solely using GitHub.
 
-### Hosting on a private repository   {#private_repos}
+### Hosting on a private repository {#private_repos}
 
 {: .bs-callout .bs-callout-info }
 If you use the Setup Wizard, you must use the Magento Marketplace repository. A private repository can be used for development or private code but installation must be done with a command line interface (you can install a package that specifies a private repository only with a command line installation).
@@ -167,7 +159,7 @@ If you use the Setup Wizard, you must use the Magento Marketplace repository. A 
 3. Submit/register the package on your own repository. For example, it can be hosted as a reference to a code repository or submitted as a zip-archive.
 4. To use the private packaging repository in a project, add the following to your `composer.json`file:
 
-{% highlight JSON %}
+```json
 
 {
     "repositories": [
@@ -177,7 +169,7 @@ If you use the Setup Wizard, you must use the Magento Marketplace repository. A 
         }
     ]
 }
-{% endhighlight %}
+```
 
 All packages on the private repository can now be referenced within the `require` field.
 

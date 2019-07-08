@@ -22,7 +22,7 @@ To use SSH, you need to:
 You create an SSH key pair including a public and private key:
 
 * The _public key_ is safe to provide for accessing a site, [SSH](#ssh), and [sFTP](#sftp).
-* The _private key_ should remain private on your workspace that you use for remote accessing environments. **Never share your private key.** Don't add it to a ticket, copy it to a chat, or attach it to emails.
+* The _private key_ should remain private on your workspace that you use for remote accessing environments. **Never share your private key.** Do not add it to a ticket, copy it to a chat, or attach it to emails.
 
 ## How SSH keys work {#work}
 
@@ -79,19 +79,18 @@ Example SSH command:
 
 	ssh abcdefg123abc-smith-a12b34c--mymagento@ssh.us-2.magento.cloud
 
-### Git SSH commands for Pro Staging and Production {#pro}
+### SSH commands for Pro Staging and Production {#pro}
 
-You can't use the Magento Cloud CLI to SSH into Pro plan Staging and Production systems. You can SSH into those environments and use Git CLI commands for managing your branches and Linux/Unix commands for managing the system.
+You can not use the Magento Cloud CLI to log in with SSH to the Pro Staging and Production environments, which are not added into the Project Web Interface. You can log in with SSH to those environments and use Linux/Unix commands for managing the system.
 
 With your SSH keys added to those servers, you can use a terminal application, the SSH command, and the URL to access the server.
 
 For the URLs, see the following:
 
-*	Staging: `http[s]://staging.<your domain>.c.<project ID>.ent.magento.cloud`
-*	Production:
+*	Staging: `ssh <project ID>_stg@<project ID>.ent.magento.cloud`
+*	Production: `ssh <project ID>@<project ID>.ent.magento.cloud`
 
-	*	Load balancer URL: `http[s]://<your domain>.c.<project ID>.ent.magento.cloud`
-	*	Direct access to one of the three redundant servers: `http[s]://<your domain>.{1|2|3}.<project ID>.ent.magento.cloud`
+For example, to log in to the Staging environment, use the following command: `ssh abcdefghij_stg@abcdefghij.ent.magento.cloud`. For production: `ssh abcdefghij@abcdefghij.ent.magento.cloud`
 
 ## SSH tunneling {#env-start-tunn}
 
@@ -124,6 +123,6 @@ To add your SSH public key information to your client:
 
 Depending on the client, you may need to enter additional options and setup to complete SSH authentication for sFTP. Review the documentation for your selected client.
 
-For **Starter environments and Pro Integration environments**, you may also want to consider [adding a mount]({{ page.baseurl }}/cloud/project/project-conf-files_magento-app.html#mounts) for access to a specific directory. You would add the mount to your `.magento.app.yaml` file. For a list of writable directories, see [Project structure]({{ page.baseurl }}/cloud/project/project-start.html). This mount point will only work in those environments.
+For **Starter environments and Pro Integration environments**, you may also want to consider [adding a `mount`]({{ page.baseurl }}/cloud/project/project-conf-files_magento-app.html#mounts) for access to a specific directory. You would add the mount to your `.magento.app.yaml` file. For a list of writable directories, see [Project structure]({{ page.baseurl }}/cloud/project/project-start.html). This mount point will only work in those environments.
 
 For **Pro Staging and Production environments**, you need to enter a [Support ticket]({{ page.baseurl }}/cloud/trouble/trouble.html) to request sFTP access in those environments. We can then create a mount point and provide access to the specific `pub/media` folder.

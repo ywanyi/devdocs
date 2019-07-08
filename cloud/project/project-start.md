@@ -1,45 +1,35 @@
 ---
 group: cloud-guide
-subgroup: 100_project
 title: Project structure
-menu_title: Project structure
-menu_order: 10
-menu_node:
-redirect_from:
-  - /guides/v2.0/cloud/access-acct/first-time-setup_dir-structure.html
 functional_areas:
   - Cloud
   - Configuration
 ---
+All {{site.data.var.ece}} projects include essential files for credentials and application configuration:
 
-When you create your project, you receive a cloned repository of {{site.data.var.ece}} code.
+File | Description
+--- | ---
+`/.magento/routes.yaml` | Configuration file that redirects `www` to the naked domain and `php` application to serve HTTP. See [Configure environments]({{ page.baseurl }}/cloud/env/environments.html).
+`/.magento/services.yaml` | Configuration file that defines a MySQL instance, Redis, and ElasticSearch. See [Configure environments]({{ page.baseurl }}/cloud/env/environments.html).
+`/app` | The `code` folder is used for custom modules. The `design` folder is used for custom themes. See [Install a theme]({{ page.baseurl }}/cloud/howtos/custom-theme.html). The `etc` folder contains configuration files for Magento.
+`/m2-hotfixes` | Used for custom patches.
+`.gitignore` | Specify which files and directories to ignore. See [`.gitignore` reference](#ignoring-files).
+`.magento.app.yaml` | Configuration file that defines the properties to build your application. See [Configure environments]({{ page.baseurl }}/cloud/env/environments.html).
+`.magento.env.yaml` | Configuration file that defines actions for the build, deploy, and post-deploy phases. The ece-tools package includes a sample of this file with detailed descriptions for the available variables. See [Configure environments]({{ page.baseurl }}/cloud/env/environments.html).
+`composer.json` | Fetches the Magento Enterprise Edition and the necessary configuration scripts to prepare your application. See [Prepare your Magento install]({{ page.baseurl }}/cloud/setup/first-time-setup-import-prepare.html).
+`composer.lock` | Stores version dependencies for every package.
+`magento-vars.php` | A file used to define [multiple stores]({{ page.baseurl }}/cloud/project/project-multi-sites.html) and sites using [Magento variables]({{ page.baseurl }}/config-guide/multi-site/ms_over.html).
 
-## Local project directory structure {#cloud-structure-local}
+{: .bs-callout .bs-callout-info}
+When you push your local environment to the remote server, our deploy script uses the values defined by configuration files in the `.magento` directory, then the script deletes the directory and its contents. Your local development environment is not affected.
 
-Not including the Magento application itself, your local project has the following structure:
+## Ignoring files
 
-{% highlight xml %}
-├── .git
-├── .gitignore
-├── .magento
-│   ├── routes.yaml
-│   └── services.yaml
-├── .magento.app.yaml
-├── auth.json
-├── composer.json
-├── composer.lock
-├── magento-vars.php
-├── php.ini
-└── README.md
-{% endhighlight %}
+We include a base `.gitignore` file with the {{site.data.var.ece}} project repository. See [.gitignore file](https://github.com/magento/magento-cloud/blob/master/.gitignore). You can add an ignored file when staging a commit by using the `-f` option:
 
-{: .bs-callout .bs-callout-info }
-When you push your local environment to the remote server, our deploy script uses the values defined by configuration files in the `.magento` directory, then the script deletes the directory and its contents. Your local development environment isn't affected.
-
-### .gitignore file {gitignore}
-Depending on your {{site.data.var.ece}} version, you may need different information added to or commented out in your `.gitignore` file. Git uses this file to determine which files and directories to ignore, before you make a commit to your branches. A .gitignore file should be committed into your root Magento in the repository, in order to share the ignore rules with any other users that clone the repository.
-
-We include a base `.gitignore` file with the project repository. For a review of the {{site.data.var.ece}} file, see [.gitignore file](https://github.com/magento/magento-cloud/blob/master/.gitignore){:target="_blank"}. You can review the recommended files for your file in the [`.gitignore` reference]({{ site.baseurl }}/guides/v2.2/config-guide/prod/config-reference-gitignore.html).
+```bash
+git add <path/filename> -f
+```
 
 ## Magento application root directory {#rootdir}
 
@@ -60,18 +50,18 @@ For Pro:
 
 In Integration, Staging, and Production, *only* the following directories are writable due to security reasons:
 
-*	`var`
-*	`pub/static`
-*	`pub/media`
-*	`app/etc`
-*	`/tmp`
+-	`var`
+-	`pub/static`
+-	`pub/media`
+-	`app/etc`
+-	`/tmp`
 
-{: .bs-callout .bs-callout-info }
+{: .bs-callout .bs-callout-info}
 In Production, each node in the three-node cluster has a `/tmp` directory that is not shared with the other nodes.
 
 ## Logs {#logs}
 
-Logs for all environments are located under the `/var/log` directory. You can access that directory by opening an SSH tunnel to the environment using the `magento-cloud environment:ssh -e <environment id>` command.
+The `/var/log` directory contains logs for each environment. You can access that directory by opening an SSH tunnel to the environment using the `magento-cloud environment:ssh -e <environment id>` command.
 
 For Pro, the deployment log for Staging and Production is located in `/var/log/platform/<project ID>`.
 
@@ -88,20 +78,20 @@ You can review these logs via SSH into the environment. Change to the directorie
 Logs from the deploy hook are located on the server in the following locations:
 
 *	Integration: `/var/log/deploy.log`
-*	Staging: `/var/log/platform/<prodject ID>/post_deploy.log`
-*	Production: `/var/log/platform/{1|2|3}.<prodject ID>/post_deploy.log`
+*	Staging: `/var/log/platform/<project ID>/deploy.log`
+*	Production: `/var/log/platform/{1|2|3}.<project ID>/deploy.log`
 
 The value of `<project ID>` depends on the project ID and whether the environment is Staging or Production. For example, with a project ID of `yw1unoukjcawe`, the Staging environment user is `yw1unoukjcawe_stg` and the Production environment user is `yw1unoukjcawe`.
 
-For example, on the Staging environment for project `yw1unoukjcawe`, the deploy log is located at `/var/log/platform/yw1unoukjcawe_stg/post_deploy.log`.
+For example, on the Staging environment for project `yw1unoukjcawe`, the deploy log is located at `/var/log/platform/yw1unoukjcawe_stg/deploy.log`.
 
-For Production, you have a three node structure. Logs are available with specific information for that node. For example, on the Production environment for project `yw1unoukjcawe`, the deploy log is located at node 1 `/var/log/platform/1.yw1unoukjcawe/post_deploy.log`, node 2 `/var/log/platform/2.yw1unoukjcawe/post_deploy.log`, and node 3 `/var/log/platform/3.yw1unoukjcawe/post_deploy.log`.
+For Production, you have a three node structure. Logs are available with specific information for that node. For example, on the Production environment for project `yw1unoukjcawe`, the deploy log is located at node 1 `/var/log/platform/1.yw1unoukjcawe/deploy.log`, node 2 `/var/log/platform/2.yw1unoukjcawe/deploy.log`, and node 3 `/var/log/platform/3.yw1unoukjcawe/deploy.log`.
 
 Logs for all deployments that have occurred on this environment are appended to this file. Check the timestamps on log entries to verify and locate the logs you want for a specific deployment.
 
 The actual log output is highly verbose to allow troubleshooting. The following is a condensed example:
 
-{% highlight xml %}
+```xml
 [2016-10-11 22:15:38] Starting pre-deploy.
 ...
 [2016-10-11 22:15:39] Pre-deploy complete.
@@ -112,7 +102,7 @@ The actual log output is highly verbose to allow troubleshooting. The following 
 ... more ...
 
 [2016-10-11 22:15:46] Deployment complete.
-{% endhighlight %}
+```
 
 The deploy log contains start and stop messages for each of the two hooks:
 `Starting pre-deploy`, `Pre-deploy complete.`, `Start deploy.`, and `Deployment complete.`.
@@ -124,10 +114,3 @@ To review other application logs in Staging or Production, you can access and re
 For Pro plan Staging, the project ID has `_stg` at the end. For example, if you receive 500 errors in Staging and want to review the nginx logs, you can SSH to the Staging environment and locate the logs in `/var/log/platform/ProjectID_stg`.
 
 For Pro plan Production, you have three nodes to check for logs.
-
-#### Related topics
-
-*	[Get started with an environment]({{ page.baseurl }}/cloud/env/environments-start.html)
-*	[`.magento.app.yaml`]({{ page.baseurl }}/cloud/project/project-conf-files_magento-app.html)
-*	[`routes.yaml`]({{ page.baseurl }}/cloud/project/project-conf-files_routes.html)
-*	[`services.yaml`]({{ page.baseurl }}/cloud/project/project-conf-files_services.html)

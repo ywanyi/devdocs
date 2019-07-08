@@ -1,10 +1,6 @@
 ---
 group: configuration-guide
-subgroup: 04_CLI
 title: Deploy static view files
-menu_title: Deploy static view files
-menu_node:
-menu_order: 300
 functional_areas:
   - Configuration
   - System
@@ -15,95 +11,86 @@ functional_areas:
 
 ## Overview of static view files deployment {#config-cli-static-overview}
 
-The static view files deployment command enables you to write {% glossarytooltip 363662cb-73f1-4347-a15e-2d2adabeb0c2 %}static files{% endglossarytooltip %} to the Magento file system when the Magento software is set for <a href="{{ page.baseurl }}/config-guide/bootstrap/magento-modes.html#production-mode">production mode</a>.
+The static view files deployment command enables you to write [static files](https://glossary.magento.com/static-files) to the Magento file system when the Magento software is set for [production mode].
 
 The term *static view file* refers to the following:
 
--   "Static" means it can be cached for a site (that is, the file is not dynamically generated). Examples include images and {% glossarytooltip 6c5cb4e9-9197-46f2-ba79-6147d9bfe66d %}CSS{% endglossarytooltip %} generated from LESS.
--   "View" refers to the presentation layer (from MVC).
+_ "Static" means it can be cached for a site (that is, the file is not dynamically generated).
+    Examples include images and [CSS](https://glossary.magento.com/css) generated from LESS.
+- "View" refers to the presentation layer (from MVC).
 
-Static view files are located in the `<your Magento install dir>/pub/static` directory, and some are cached in the `<your Magento install dir>/var/view_preprocessed` directory as well.
+Static view files are located in the `<magento_root>/pub/static` directory, and some are cached in the `<magento_root>/var/view_preprocessed` directory as well.
 
-Static view file deployment is affected by Magento modes as follows:
+Static view files deployment is affected by Magento modes as follows:
 
--   **[Default]({{ page.baseurl }}/config-guide/bootstrap/magento-modes.html#default-mode)** and **[developer]({{ page.baseurl }}/config-guide/bootstrap/magento-modes.html#developer-mode)** modes: Magento generates them on demand, but the rest are cached in a file for speed of access.
--   **[Production]({{ page.baseurl }}/config-guide/bootstrap/magento-modes.html#production-mode)** mode: Static files are *not* generated or cached.
+-   **[Default]** and **[developer]** modes: Magento generates them on demand, but the rest are cached in a file for speed of access.
+-   **[Production]** mode: Static files are *not* generated or cached.
 
 You must write static view files to the Magento file system manually using the command discussed in this topic; after that, you can restrict permissions to limit your vulnerabilities and to prevent accidental or malicious overwriting of files.
 
-<div class="bs-callout bs-callout-warning" markdown="1">
-_Developer mode only_: When you install or enable a new module, it might load new JavaScript, CSS, layouts, and so on. To avoid issues with static files, you must clean the old files to make sure you get all the changes for the new {% glossarytooltip c1e4242b-1f1a-44c3-9d72-1d5b1435e142 %}module{% endglossarytooltip %}.
-
-You can clean generated static view files in several ways. Refer to [Clean static files cache topic for details]({{ page.baseurl }}/frontend-dev-guide/cache_for_frontdevs.html#clean_static_cache) for more information.
-</div>
+{: .bs-callout .bs-callout-warning }
+_Developer mode only_: When you install or enable a new module, it might load new JavaScript, CSS, layouts, and so on. To avoid issues with static files, you must clean the old files to make sure you get all the changes for the new [module](https://glossary.magento.com/module).
+<br/>
+You can clean generated static view files in several ways. Refer to [Clean static files cache topic for details] for more information.
 
 ## Deploy static view files {#config-cli-subcommands-xlate-dict}
 
 To deploy static view files:
 
-1.  Log in to the Magento server as, or <a href="{{ page.baseurl }}/install-gde/prereq/file-sys-perms-over.html">switch to</a>, the {% glossarytooltip 5e7de323-626b-4d1b-a7e5-c8d13a92c5d3 %}Magento file system owner{% endglossarytooltip %}.
-2.  Delete the contents of `<your Magento install dir>/pub/static`.
-3.  Run the static view files deployment tool `<your Magento install dir>/bin/magento setup:static-content:deploy`.
-<!-- 4.	Set read-only file permissions for the `pub/static` directory, its subdirectories, and files. -->
+1.  Log in to the Magento server as, or [switch to], the [Magento file system owner](https://glossary.magento.com/magento-file-system-owner).
+2.  Delete the contents of `<magento_root>/pub/static`.
+3.  Run the static view files deployment tool `<magento_root>/bin/magento setup:static-content:deploy`.
 
-	<div class="bs-callout bs-callout-info" id="info" markdown="1">
-  If you enable static view file merging in the Magento Admin, the `pub/static` directory system must be writable.
-	</div>
+    {: .bs-callout .bs-callout-info }
+    If you enable static view file merging in the Magento Admin, the `pub/static` directory system must be writable.
 
 Command options:
 
-	magento setup:static-content:deploy <lang> ... <lang> [--dry-run]
+```bash
+magento setup:static-content:deploy [<languages>] [-t|--theme[="<theme>"]] [--exclude-theme[="<theme>"]] [-l|--language[="<language>"]] [--exclude-language[="<language>"]] [-a|--area[="<area>"]] [--exclude-area[="<area>"]] [-j|--jobs[="<number>"]]  [--no-javascript] [--no-css] [--no-less] [--no-images] [--no-fonts] [--no-html] [--no-misc] [--no-html-minify] [-d|--dry-run]
+```
 
 The following table explains this command's parameters and values.
 
-<table>
-	<tbody>
-		<tr>
-			<th>Option</th>
-			<th>Description</th>
-			<th>Required?</th>
-		</tr>
-	<tr>
-		<td>&lt;languages&gt;</td>
-		<td><p>Space-separated list of <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" target="_blank">ISO-639</a> language codes for which to output static view files. (Default is <code>en_US</code>.)</p>
-		<p>You can find the list by running <code>magento info:language:list</code>.</p></td>
-	<td><p>No</p></td>
-	</tr>
-		<tr>
-		<td>--dry-run</td>
-		<td><p>Include to view the files output by the tool without outputting anything.</p></td>
-		<td><p>No</p></td>
-	</tr>
-	</tbody>
-</table>
+|Option|Description|Default|Required?|
+|--- |--- |--- |
+|-languages|Space-separated list of ISO-639 language codes for which to output static view files. You can find the list by running bin/magento info:language:list.|en_US|No|
+|--language (-l)|Generate files only for the specified languages. The default, with no option specified, is to generate files for all ISO-639 language codes. You can specify the name of one language code at a time. <br />For example, --language es_ES|all|No|
+|--exclude-language|Generate files for the specified language codes. The default, with no option specified, is to exclude nothing. You can specify the name of one language code or a comma-separated list of language codes.|none|No|
+|--theme theme|Themes for which to deploy static content. <br />For example, --theme Magento/blank --theme Magento/luma|all|No|
+|--exclude-theme theme|Themes to exclude when deploying static content.<br />For example, --exclude-theme Magento/blank|none|No|
+|--area (-a)|Generate files only for the specified areas. The default, with no option specified, is to generate files for all areas. Valid values are adminhtml and frontend.<br />For example, --area adminhtml|all|No|
+|--exclude-area|Do not generate files for the specified areas. The default, with no option specified, is to exclude nothing.|none|No|
+|--jobs (-j)|Enable parallel processing using the specified number of jobs.|0|No|
+|--symlink-locale|Create symlinks for the files of those locales, which are passed for deployment, but have no customizations.| |No|
+|--content-version=CONTENT-VERSION|Custom version of static content can be used if running deployment on multiple nodes to ensure that static content version is identical and caching works properly.| |No|
+|--no-javascript|Do not deploy JavaScript files| |No|
+|--no-css|Do not deploy CSS files.| |No|
+|--no-less|Do not deploy LESS files.| |No|
+|--no-images|Do not deploy images.| |No|
+|--no-fonts|Do not deploy font files.| |No|
+|--no-html|Do not deploy HTML files.| |No|
+|--no-misc|Do not deploy other types of files (that is .md, .jbf, .csv, .json, .txt, .htc, or .swf files).| |No|
+|--no-html-minify|Do not minify HTML files.| |No|
+|-s<br />-s quick<br />-s standard<br />-s compact|Define the deployment strategy. Use these options only if you have more than one locale. <br />Use the quick strategy to minimize deployment time. <br />Use the standard strategy to deploy all static view files for all packages. <br />Use the compact strategy to conserve disk space on the server.|quick|No|
+|--force (-f)|Deploy files in any mode. By default, the static content deployment tool can be run only in production mode. Use this option to run it in default or developer mode.|production|No|
 
-For example, to deploy static view files for the `pt_BR` language:
 
-	magento --ansi setup:static-content:deploy pt_BR
+{: .bs-callout .bs-callout-info}
+If you specify values for both `<languages>` and `--language`, `<languages>` takes precedence.
 
-The following are some sample messages that display to indicate successful deployment:
+{: .bs-callout .bs-callout-info}
+The following parameters were added in version 2.1.1: `--exclude-language`, `--theme <theme>`, `--exclude-theme <theme>`, `--area (-a)`, `--exclude-area`, `--jobs (-j)`, `--no-javascript`, `--no-css`, `--no-less`, `--no-images`, `--no-fonts`, `--no-html`, `--no-misc`, `--no-html-minify`.
 
-	Requested languages: pt_BR
-	=== frontend -> Magento/luma -> pt_BR ===
-	... progress indicator ...
-	Successful: 1613 files; errors: 0
+### Deploy static view files without installing Magento {#deploy_without_db}
 
-	=== frontend -> Magento/blank -> pt_BR ===
-	... progress indicator ...
-	Successful: 1620 files; errors: 0
+We regret that this information was added in error. You _cannot_ yet deploy static view files without a connection to the Magento database. We expect this ability will be added in a future release. We apologize for any inconvenience this might have caused.
 
-	=== adminhtml -> Magento/backend -> pt_BR ===
-	... progress indicator ...
-	Successful: 1626 files; errors: 0
-
-	=== Minify templates ===
-	... progress indicator ...
-	Successful: 858 files modified
-	---
-	New version of deployed files: 1430773903
+You should be able to [compile code] without a connection to the Magento database.
 
 ## Troubleshooting the static view files deployment tool {#view-file-trouble}
-[Install the Magento software first]({{ page.baseurl }}/install-gde/bk-install-guide.html); otherwise, you cannot run the static view files deployment tool.
+
+[Install the Magento software first]; otherwise, you cannot run the static view files deployment tool.
 
 **Symptom**: The following error is displayed when you run the static view files deployment tool:
 
@@ -115,32 +102,34 @@ Use the following steps:
 
 1.  Install the Magento software in any of the following ways:
 
-    -   [Command line]({{ page.baseurl }}/install-gde/install/cli/install-cli.html)
-    -   [Setup wizard]({{ page.baseurl }}/install-gde/install/web/install-web.html)
+-   [Command line]
+-   [Setup wizard]
 
-2.  Log in to the Magento server as, or switch to, the [Magento file system owner]({{ page.baseurl }}/install-gde/prereq/file-sys-perms-over.html).
-3.  Delete the contents of `<your Magento install dir>/pub/static` directory.
-4.  <a href="#config-cli-subcommands-xlate-dict">Run the static view files deployment tool</a>.
+2.  Log in to the Magento server as, or [switch to], the Magento file system owner.
+3.  Delete the contents of `<magento_root>/pub/static` directory.
+4.  [Run the static view files deployment tool].
 
-## Tips for developers customizing the static content deployment tool
+{: .bs-callout .bs-callout-info}
+If you enable static view file merging in the Magento Admin, the `pub/static` directory system must be writable.
 
-When creating a custom implementation of the {% glossarytooltip a3e37235-4e8b-464f-a19d-4a120560206a %}static content{% endglossarytooltip %} deployment tool, do not use non atomic writing to files that should be available on the client side. Otherwise, those files might be loaded on the client side with partial content.
+## Tip for developers customizing the static content deployment tool
 
-One of the options for making it atomic, is writing to files stored in a temporary directory and copying or moving them to the destination directory (from where they are actually loaded to client side) once writing is over. For details about writing to files see [http://php.net/manual/en/function.fwrite.php](http://php.net/manual/en/function.fwrite.php){:target="_blank"}.
+When creating a custom implementation of the [static content](https://glossary.magento.com/static-content) deployment tool, use only [atomic] file writing for files that should be available on the client.
+If you use non-atomic file writing, those files might be loaded on the client with partial content.
 
-Please note, that the default Magento implementation of `\Magento\Framework\Filesystem\Directory\WriteInterface::writeFile` uses non-atomic write to file.
+One of the options for making it atomic is to write to files stored in a temporary directory and copying or moving them to the destination directory (from where they are loaded to client) after writing is over.
+For details about writing to files, see [fwrite.php].
 
-## Related topics
-
--   <a href="{{ page.baseurl }}/config-guide/cli/config-cli-subcommands-cache.html">Manage the cache</a>
--   <a href="{{ page.baseurl }}/config-guide/cli/config-cli-subcommands-index.html">Manage the indexers</a>
--   <a href="{{ page.baseurl }}/config-guide/cli/config-cli-subcommands-cron.html">Configure and run cron</a>
--   <a href="{{ page.baseurl }}/config-guide/cli/config-cli-subcommands-compiler.html">Code compiler</a>
--   <a href="{{ page.baseurl }}/config-guide/cli/config-cli-subcommands-mode.html">Set the Magento mode</a>
--   <a href="{{ page.baseurl }}/config-guide/cli/config-cli-subcommands-urn.html">URN highlighter</a>
--   <a href="{{ page.baseurl }}/config-guide/cli/config-cli-subcommands-depen.html">Dependency reports</a>
--   <a href="{{ page.baseurl }}/config-guide/cli/config-cli-subcommands-i18n.html">Translation dictionaries and language packages</a>
--   <a href="{{ page.baseurl }}/config-guide/cli/config-cli-subcommands-less-sass.html">Create symlinks to LESS files</a>
--   <a href="{{ page.baseurl }}/config-guide/cli/config-cli-subcommands-test.html">Run unit tests</a>
--   <a href="{{ page.baseurl }}/config-guide/cli/config-cli-subcommands-layout-xml.html">Convert layout XML files</a>
--   <a href="{{ page.baseurl }}/config-guide/cli/config-cli-subcommands-perf-data.html">Generate data for performance testing</a>
+[production mode]: {{ page.baseurl }}/config-guide/bootstrap/magento-modes.html#production-mode
+[switch to]: {{ page.baseurl }}/install-gde/prereq/file-sys-perms-over.html
+[Default]: {{ page.baseurl }}/config-guide/bootstrap/magento-modes.html#default-mode
+[developer]: {{ page.baseurl }}/config-guide/bootstrap/magento-modes.html#developer-mode
+[Production]: {{ page.baseurl }}/config-guide/bootstrap/magento-modes.html#production-mode
+[Clean static files cache topic for details]: {{ page.baseurl }}/frontend-dev-guide/cache_for_frontdevs.html#clean_static_cache
+[compile code]: {{ page.baseurl }}/config-guide/cli/config-cli-subcommands-compiler.html
+[Install the Magento software first]: {{ page.baseurl }}/install-gde/bk-install-guide.html
+[Command line]: {{ page.baseurl }}/install-gde/install/cli/install-cli.html
+[Setup wizard]: {{ page.baseurl }}/install-gde/install/web/install-web.html
+[Run the static view files deployment tool]: #config-cli-subcommands-xlate-dict
+[atomic]: https://en.wikipedia.org/wiki/Linearizability
+[fwrite.php]: http://php.net/manual/en/function.fwrite.php

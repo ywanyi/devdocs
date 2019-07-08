@@ -12,7 +12,7 @@ functional_areas:
 
 ## Incorrect credentials
 
-This topic discusses how to resolve issues with incorrect credentials in your `auth.json`. You might have entered Magento Community Edition (CE) credentials or shared keys for Magento Enterprise Edition (EE).
+This topic discusses how to resolve issues with incorrect credentials in your `auth.json`. You might have entered {{site.data.var.ce}} credentials or shared keys for {{site.data.var.ee}}.
 
 ### Symptom
 
@@ -31,7 +31,7 @@ To see the error log:
 
 To resolve this issue, you must clone the project locally and update `auth.json` with the correct {{site.data.var.ee}} [authorization keys]({{ page.baseurl }}/install-gde/prereq/connect-auth.html) and run `composer update` to update project dependencies. After that, you can deploy your project successfully and get started with your development.
 
-Make sure you're using your own keys, and *not* [shared account keys](http://docs.magento.com/m2/ce/user_guide/magento/magento-account-share.html){:target="_blank"}.
+Verify that you are using your own keys, and *not* [shared account keys](http://docs.magento.com/m2/ce/user_guide/magento/magento-account-share.html).
 
 #### Get started
 
@@ -74,7 +74,7 @@ To resolve the issue with credentials:
 
 {% collapsible Click to show/hide snippet %}
 
-{% highlight xml %}
+```xml
  Building application 'mymagento' (runtime type: php:7.0, tree: e8450f9)
       Generating runtime configuration.
 
@@ -139,7 +139,7 @@ To resolve the issue with credentials:
 
 To aqf7hrijhl52o@git.us.magento.cloud:aqf7hrijhl52o.git
    34afd91..98c2166  master -> master
-{% endhighlight %}
+```
 
 {% endcollapsible %}
 
@@ -147,11 +147,5 @@ To aqf7hrijhl52o@git.us.magento.cloud:aqf7hrijhl52o.git
 
 To verify the deployment was successful, enter one of the URLs displayed under `Environment routes:` in a web browser.
 
-{: .bs-callout .bs-callout-warning }
-For security reasons, we strongly recommend you change your Magento Admin URI, administrator username, and administrator password. For step-by-step details, see [Set Magento environment variables]({{ page.baseurl }}/cloud/env/set-variables.html).
-
-#### Related topics
-
-*	[Manage your projects]({{ page.baseurl }}/cloud/project/projects.html)
-*	[Manage your environments]({{ page.baseurl }}/cloud/env/environments.html)
-*	[Tutorials]({{ page.baseurl }}/cloud/howtos/how-to.html)
+{: .bs-callout .bs-callout-warning}
+For security reasons, we strongly recommend you change your Magento Admin URI, administrator username, and administrator password. For step-by-step details, see [Set environment and project variables]({{ page.baseurl }}/cloud/project/project-webint-basic.html#project-conf-env-var).

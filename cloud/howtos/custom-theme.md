@@ -23,7 +23,7 @@ We recommend using a branch for adding, configuring, and testing your theme.
 
 To install a theme manually, you must have the theme's code, either in a compressed archive or in a directory structure similar to the following:
 
-{% highlight xml %}
+```xml
 <VendorName>
   ├── composer.json
       ├── etc
@@ -37,11 +37,11 @@ To install a theme manually, you must have the theme's code, either in a compres
           ├── fonts
           ├── images
           └── js
-{% endhighlight %}
+```
 
 To install a theme manually:
 
-1.	Copy the theme's code under `<Magento root dir>/app/design/frontend` for a storefront theme or `<Magento root dir>/app/design/adminhtml` for an Admin theme. Make sure the top-level directory is `<VendorName>`; otherwise, the theme won't install properly.
+1.	Copy the theme's code under `<Magento root dir>/app/design/frontend` for a storefront theme or `<Magento root dir>/app/design/adminhtml` for an Admin theme. Verify that the top-level directory is `<VendorName>`; otherwise, the theme will not install properly.
 
     For example:
 
@@ -90,7 +90,3 @@ To summarize the procedure:
 6.  Click **Content** > Design > **Themes**.
 
     The theme displays in the right pane.
-
-#### Related topics
-
-*	[Install, manage, and upgrade modules]({{ page.baseurl }}/cloud/howtos/install-components.html)

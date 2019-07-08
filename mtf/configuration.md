@@ -3,7 +3,7 @@ group: functional-testing-framework-guide
 title: Functional Testing Framework Configuration
 ---
 
-The Functional Testing Framework configuration settings are located in two {% glossarytooltip 8c0645c5-aa6b-4a52-8266-5659a8b9d079 %}XML{% endglossarytooltip %} files:
+The Functional Testing Framework configuration settings are located in two [XML](https://glossary.magento.com/xml) files:
 
 - `phpunit.xml`
 - `config.xml`
@@ -13,9 +13,8 @@ The Functional Testing Framework configuration settings are located in two {% gl
 The `<magento2_root_dir>/dev/tests/functional/phpunit.xml` contains PHPUnit configuration settings. Blocks of settings are described in [PHPUnit documentation], except `<php>` that contains parameters described in the following table.
 
 {% collapsible Show/hide the default phpunit.xml code %}
-
-```xml 
-{% remote_markdown  https://raw.githubusercontent.com/magento/magento2/2.0/dev/tests/functional/phpunit.xml.dist %}
+```xml
+{% remote_markdown  https://raw.githubusercontent.com/magento/magento2/2.1/dev/tests/functional/phpunit.xml.dist %}
 ```
 {% endcollapsible %}
 
@@ -30,7 +29,7 @@ The `<magento2_root_dir>/dev/tests/functional/phpunit.xml` contains PHPUnit conf
 | `module_whitelist` | List of special FTF modules which are present in functional tests but are not enabled in the Magento application. | `"<names of modules>"` | Make listed modules (that are not enabled in Magento) visible for the FTF. |
 | `basedir` | A directory where PHPUnit reports are stored. | `"<directory for PHPUnit reports>"` |  |
 | `credentials_file_path` | Path to the file with credentials required by services such as payment and shipment. | `"./credentials.xml.dist"` | [Edit `credentials.xml` to work with Magento modules that require credentials]({{ page.baseurl }}/mtf/mtf_quickstart/mtf_quickstart_config.html){: target="_blank"} |
-| `mage_mode` | Magento mode ([About Magento modes]({{ page.baseurl }}/config-guide/bootstrap/magento-modes.html){: target="_blank"}). | `"default", "developer", "production"` | This parameter is intended to be used directly in a test. The FTF doesn't use it. |
+| `mage_mode` | Magento mode ([About Magento modes]({{ page.baseurl }}/config-guide/bootstrap/magento-modes.html){: target="_blank"}). | `"default", "developer", "production"` | This parameter is intended to be used directly in a test. The FTF doesn't use it. [Open an example]({{ site.mage2bloburl }}/{{ page.guide_version }}/dev/tests/functional/tests/app/Magento/PageCache/Test/TestCase/FlushAdditionalCachesTest.php) |
 | `module_filter` | Applicable for [test suites]({{ page.baseurl }}/mtf/features/test_suite.html) only. Enables you to select test cases for specific modules. [Learn more about the &lt;module&gt; filter in a test suite.]({{ page.baseurl }}/mtf/features/test_suite.html#scope-testsuite){: target="_blank"} | `"Magento_<name_of_module>"` | Use it when you don't want to modify the test suite. |
 | `module_filter_strict` | Applicable for a [tests suite]({{ page.baseurl }}/mtf/features/test_suite.html) only. It has the same effect as `strict` in the `<module>`. [Learn more about `strict` parameter of the &lt;module&gt; filter in a test suite.]({{ page.baseurl }}/mtf/features/test_suite.html#scope-testsuite){: target="_blank"} | `"1"`, `"0"` | Use it when you don't want to modify the test suite. |
 
@@ -42,22 +41,22 @@ The FTF configuration settings are declared and specified in two places:
 
 The file is located in `<magento2_root_dir>dev/tests/functional/vendor/magento/mtf/etc`
 
-```xml 
-{% remote_markdown https://raw.githubusercontent.com/magento/mtf/2.0/etc/config.xml.dist%}
+```xml
+{% remote_markdown https://raw.githubusercontent.com/magento/mtf/develop/etc/config.xml.dist%}
 ```
 
 ![image]({{ site.baseurl }}/common/images/ftf/ftf_mtf-config-xsd-dia.svg)
 
 Figure 1. - XML Schema for the `<magento2_root_dir>dev/tests/functional/vendor/magento/mtf/etc/config.xml`.
 
-{%endcollapsible%}
+{% endcollapsible %}
 
 {% collapsible in Magento functional tests %}
 
 The file is located in `<magento2_root_dir>dev/tests/functional/`
 
-```xml 
-{% remote_markdown https://raw.githubusercontent.com/magento/magento2/2.0/dev/tests/functional/etc/config.xml.dist %}
+```xml
+{% remote_markdown https://raw.githubusercontent.com/magento/magento2/2.1/dev/tests/functional/etc/config.xml.dist %}
 ```
 
 ![image]({{ site.baseurl }}/common/images/ftf/ftf_config-xsd-dia.svg)

@@ -1,28 +1,21 @@
 ---
 group: installation-guide
-subgroup: 05_Command-line installation
 title: Enable or disable modules
-menu_title: Enable or disable modules
-menu_node:
-menu_order: 7
-redirect_from:
-  - /guides/v2.0/install-gde/install/install-cli-subcommands-enable.html
 functional_areas:
   - Install
   - System
   - Setup
 ---
 
-## First steps   {#instgde-cli-before}
-
+## First steps {#instgde-cli-before}
 {% include install/first-steps-cli.md %}
 In addition to the command arguments discussed here, see [Common arguments]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands.html#instgde-cli-subcommands-common).
 
-## Prerequisites   {#instgde-cli-subcommands-enable-disable-prereq}
+## Prerequisites {#instgde-cli-subcommands-enable-disable-prereq}
 
 This command has no prerequisites.
 
-## Module enable, disable   {#instgde-cli-subcommands-enable-disable}
+## Module enable, disable {#instgde-cli-subcommands-enable-disable}
 
 To enable or disable available modules, use the following command:
 
@@ -31,7 +24,7 @@ To enable or disable available modules, use the following command:
 
 where
 
-*	`<module-list>` is a space-delimited list of modules to enable or disable. If any {% glossarytooltip c1e4242b-1f1a-44c3-9d72-1d5b1435e142 %}module{% endglossarytooltip %} name contains special characters, enclose the name in either single or double quotes.
+*	`<module-list>` is a space-delimited list of modules to enable or disable. If any [module](https://glossary.magento.com/module) name contains special characters, enclose the name in either single or double quotes.
 *	`--all` to enable or disable all modules at the same time.
 *	`-f` or `--force` to force a module to be enabled or disabled despite dependencies. Before you use this option, see [About enabling and disabling modules](#instgde-cli-subcommands-enable-modules).
 *	`-c` or `--clear-static-content` cleans [generated static view files]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-static-view.html#config-cli-static-overview).
@@ -50,32 +43,19 @@ For example, to disable the Weee module, enter:
 
 For important information about enabling and disabling modules, see [About enabling and disabling modules](#instgde-cli-subcommands-enable-modules).
 
-## Update the database   {#instgde-cli-subcommands-enable-update}
+## Update the database {#instgde-cli-subcommands-enable-update}
 
 If you enabled one or more modules, run the following command to update the database:
 
-	magento setup:upgrade
+```bash
+bin/magento setup:upgrade
+```
 
-## About enabling and disabling modules   {#instgde-cli-subcommands-enable-modules}
+Then clean the cache:
 
+```bash
+bin/magento cache:clean
+```
+
+## About enabling and disabling modules {#instgde-cli-subcommands-enable-modules}
 {% include install/enable-disable-modules.md %}
-
-#### Related topics
-
-*	[Installing the Magento software using the command line]({{ page.baseurl }}/install-gde/install/cli/install-cli-install.html)
-*	[Remove sample data modules or update sample data]({{ page.baseurl }}/install-gde/install/cli/install-cli-sample-data-other.html)
-*	[Enable or disable modules]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-enable.html)
-*	[Display or change the Admin URI]({{ page.baseurl }}/install-gde/install/cli/install-cli-adminurl.html)
-*	[Uninstall modules]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall-mods.html)
-*	[Create or update the deployment configuration]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-deployment.html)
-*	[Enable or disable maintenance mode]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-maint.html)
-*	[Create the Magento database schema]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-db.html)
-*	[Update the Magento database schema and data]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-db-upgr.html)
-*	[Configure the store]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-store.html)
-*	[Create or unlock a Magento administrator]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-admin.html)
-*	[Back up and roll back the file system, media, and database]({{ page.baseurl }}/install-gde/install/cli/install-cli-backup.html)
-*	[Uninstall themes]({{ page.baseurl }}/install-gde/install/cli/install-cli-theme-uninstall.html)
-*	[Uninstall language packages]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall-langpk.html)
-*	[Uninstall the Magento software]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-uninstall)
-*	[Update the Magento software]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-magento-update)
-*	[Reinstall the Magento software]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-magento-reinstall)

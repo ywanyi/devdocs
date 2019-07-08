@@ -22,18 +22,19 @@ The message queue system must be established before you install Magento. The bas
 1. Install RabbitMQ and any prerequisites.
 2. Connect RabbitMQ and Magento.
 
-{: .bs-callout .bs-callout-info }
+{:.bs-callout .bs-callout-info}
 A basic message queue system can be implemented on {{site.data.var.ee}} using cron instead of RabbitMQ. See [Configure message queues]({{ page.baseurl }}/config-guide/mq/manage-mysql.html) for more information.
 
 ## Install RabbitMQ on Ubuntu {#ubuntu-install}
 
 To install RabbitMQ on Ubuntu 16 enter the following command:
-
-    sudo apt install -y rabbitmq-server
+```bash
+sudo apt install -y rabbitmq-server
+```
 
 This command also installs the required Erlang packages.
 
-If you have an older version of Ubuntu, RabbitMQ recommends installing the package from their {% glossarytooltip a3c8f20f-b067-414e-9781-06378c193155 %}website{% endglossarytooltip %}.
+If you have an older version of Ubuntu, RabbitMQ recommends installing the package from their [website](https://glossary.magento.com/website).
 
 1. Download [rabbitmq-server_3.6.6-1_all.deb](https://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server_3.6.6-1_all.deb){:target="_blank"}.
 2. Install the package with `dpkg`.
@@ -49,9 +50,13 @@ RabbitMQ was written using the Erlang programming language, which must be instal
 See [Manual installation](https://www.erlang-solutions.com/resources/download.html){:target="_blank"} for more information.
 
 Run the following commands to install this feature.
+```bash
+wget http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
+```
 
-1. `wget http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm`
-2. `rpm -Uvh erlang-solutions-1.0-1.noarch.rpm`
+```bash
+rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
+```
 
 ### Install RabbitMQ
 
@@ -60,8 +65,13 @@ The RabbitMQ server is included on CentOS, but the version is often old. RabbitM
 1. Download [rabbitmq-server-3.5.6-1.noarch.rpm](https://www.rabbitmq.com/releases/rabbitmq-server/v3.5.6/rabbitmq-server-3.5.6-1.noarch.rpm){:target="_blank"}.
 2. Run the following commands as a user with root permissions:
 
-`rpm --import https://www.rabbitmq.com/rabbitmq-signing-key-public.asc{:target="_blank"}
-`yum install rabbitmq-server-3.5.6-1.noarch.rpm`
+```bash
+rpm --import https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+```
+
+```bash
+yum install rabbitmq-server-3.5.6-1.noarch.rpm
+```
 
 Refer to [Installing on RPM-based Linux](https://www.rabbitmq.com/install-rpm.html){:target="_blank"} for more information.
 
@@ -83,34 +93,14 @@ Add the following command line parameters when you install {{site.data.var.ee}}:
 
 where:
 
-<table>
-<tr>
-<th>Parameter</th><th>Description</th>
-</tr>
-<tr>
-<td>amqp-host</td>
-<td>The hostname where RabbitMQ is installed.</td>
-</tr>
-<tr>
-<td>amqp-port</td>
-<td>The port to use to connect to RabbitMQ. The default is 5672.</td>
-</tr>
-<tr>
-<td>amqp-user</td>
-<td>The username for connecting to RabbitMQ. Do not use the default user `guest`. </td>
-</tr>
-<tr>
-<td>amqp-password</td>
-<td>The password for connecting to RabbitMQ. Do not use the default password `guest`. </td>
-</tr>
-<tr>
-<td>amqp-virtualhost</td>
-<td><p>The virtual host for connecting to RabbitMQ. The default is <code>/</code>. </p>
-<p>For additional information, see RabbitMQ documentation:</p>
-<ul><li><a href="https://www.rabbitmq.com/vhosts.html" target="_blank">Virtual hosts</a></li>
-<li><a href="https://www.rabbitmq.com/access-control.html" target="_blank">Access control</a></li></ul></td>
-</tr>
-</table>
+|Parameter|Description|
+|--- |--- |
+|`amqp-host`|The hostname where RabbitMQ is installed.|
+|`amqp-por`t|The port to use to connect to RabbitMQ. The default is `5672`.|
+|`amqp-user`|The username for connecting to RabbitMQ. Do not use the default user `guest`.|
+|`amqp-password`|The password for connecting to RabbitMQ. Do not use the default password `guest`.|
+|`amqp-virtualhost`|The virtual host for connecting to RabbitMQ. The default is `/`.
+
 
 ## Start the message queue consumers
 

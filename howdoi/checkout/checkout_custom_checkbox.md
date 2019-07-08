@@ -12,7 +12,7 @@ functional_areas:
 
 This topic describes how to add a custom field that influences other fields on the checkout page.
 
-Let's consider a case where you need to add a checkbox whose state (selected or cleared) changes the state of other fields. When the checkbox is selected, the Shipping Address fields prepopulate with a certain address.
+Let's consider a case where you need to add a checkbox whose state (selected or cleared) changes the state of other fields: when the checkbox is selected, the Shipping Address fields get prepopulated with a certain address.
 
 To implement such a checkbox, take the following steps:
 
@@ -20,7 +20,7 @@ To implement such a checkbox, take the following steps:
 2. [Declare the plugin in your module's `di.xml`](#declare-plugin).
 3. [Create a JS component for the checkbox with custom logic](#create-jscomponent).
 
-## Step 1: Create a plugin for the `LayoutProcessor`'s process method {#create-plugin}
+## Create a plugin for the `LayoutProcessor`'s process method {#create-plugin}
 
 In your custom module directory, create the following new file: `<your_module_dir>/Block/Checkout/SomeProcessor.php`. In this file, add the following code sample. This is a plugin that adds a checkbox, makes the street labels trackable, and assigns dependencies to the checkbox.
 
@@ -132,9 +132,7 @@ For more information on creating plugins, see [Plugins (Interceptors)]({{ page.b
 
 ## Step 2: Declare plugin in di.xml {#declare-plugin}
 
-In `<your_module_dir>/etc/frontend/di.xml`, declare the plugin you created on the previous step. The plugin name is arbitrary.
-
-In the following example, it is `ProcessAddressConfiguration`:
+In `<your_module_dir>/etc/frontend/di.xml`, declare the plugin you created on the previous step. The plugin name is arbitrary, in our example it's `ProcessAddressConfiguration`:
 
 ```xml
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

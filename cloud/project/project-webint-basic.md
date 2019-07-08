@@ -10,7 +10,7 @@ functional_areas:
   - Configuration
 ---
 
-The {{site.data.var.ece}} [Project Web Interface](https://accounts.magento.cloud){:target="_blank"} enables you to do the following for all Starter and Pro environments:
+The {{site.data.var.ece}} [Project Web Interface](https://accounts.magento.cloud) enables you to do the following for all Starter and Pro environments:
 
 * [Access projects](#project-access)
 * Create and manage projects
@@ -79,11 +79,11 @@ One of these environment variables enables or disables outgoing emails for the e
 
 	![Set outgoing emails]({{ site.baseurl }}/common/images/cloud_project-conf-env.png)
 
-Configure your email notifications, services, and more as needed through the Magento Admin and test emails. If you need to enable this setting for Pro plan on Staging and Production, you will need to enter a [Support ticket]({{ page.baseurl }}/cloud/trouble/trouble.html).
+Configure your email notifications, services, and more as needed through the Magento Admin and test emails.
 
 ## Set environment and project variables {#project-conf-env-var}
 
-You can set project wide and environment specific variables through the Project Web Interface. Variables can be either text or JSON format. For more information on variables, see [Overview of environment variables]({{ page.baseurl }}/cloud/env/variables-intro.html).
+You can set project wide and environment specific variables through the Project Web Interface. Variables can be either text or JSON format. For more information, see [Environment variables]({{ page.baseurl }}/cloud/env/variables-intro.html).
 
 For an example of variables, we walk you through creating Magento Admin variables through Onboarding and project creation tasks. You may want to add _environment variables_ for sensitive data like payment method information. _Project variables_ are set across all branches and environments.
 
@@ -107,10 +107,9 @@ To set environment specific variables in the Project Web Interface:
 6. As needed, select options for **JSON value**, **Visible during build**, and **Visible during runtime**. If you do not have Super User access, you may only see the JSON value option.
 7. Click **Add Variable**. After you add the variable, the environment will deploy. Wait until deployment completes before more edits.
 
-<div class="bs-callout bs-callout-warning" markdown="1">
-If you're attempting to [override Magento configuration settings]({{ site.baseurl }}/guides/v2.2/config-guide/prod/config-reference-var-name.html), you must prepend the variable name with `env:`. For example:
+{:.bs-callout .bs-callout-warning}
+If you are attempting to [override Magento configuration settings]({{ site.baseurl }}/guides/v2.2/config-guide/prod/config-reference-var-name.html), you must prepend the variable name with `env:`. For example:
 ![Environment variable example]({{ site.baseurl }}/common/images/cloud_env_var_example.png)
-</div>
 
 ### Project variable {#project}
 
@@ -173,10 +172,3 @@ We recommend [creating a snapshot]({{ page.baseurl }}/cloud/project/project-webi
 
 *	Environment variable added
 *	Environment snapshot created
-
-#### Related topics
-
-* [Project structure]({{ page.baseurl }}/cloud/project/project-start.html)
-* [Create and manage users]({{ page.baseurl }}/cloud/project/user-admin.html)
-*	[Manage branches]({{ page.baseurl }}/cloud/project/project-webint-branch.html)
-*	[Snapshots and backup management]({{ page.baseurl }}/cloud/project/project-webint-snap.html)

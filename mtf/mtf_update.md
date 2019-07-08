@@ -15,7 +15,7 @@ Use this type of update if the version of the Functional Testing Framework in `<
 {: .bs-callout .bs-callout-info }
 Use this type of update if you want to update dependent software from `composer.json`, or changed `composer.json` dependencies.
 
-### Install a new version of the Functional Testing Framework   {#mtf_update_install}
+### Install a new version of the Functional Testing Framework {#mtf_update_install}
 
 Step 1.    To avoid conflicts with the previous version, remove directory `<magento2_root_dir>/dev/tests/functional/generate`.
 
@@ -23,13 +23,18 @@ Step 1.    To avoid conflicts with the previous version, remove directory `<mage
 Step 2.    Remove file `<magento2_root_dir>/dev/tests/functional/composer.lock`.
 
 {: .bs-callout .bs-callout-info }
-**Why:** {% glossarytooltip d85e2d0a-221f-4d03-aa43-0cda9f50809e %}Composer{% endglossarytooltip %} reads dependencies from `composer.lock` instead of reading `composer.json`. File `composer.lock` currently is not maintained.
+**Why:** [Composer](https://glossary.magento.com/composer) reads dependencies from `composer.lock` instead of reading `composer.json`. File `composer.lock` currently is not maintained.
 
 Step 3.    [Perform and check installation.]({{ page.baseurl }}/mtf/mtf_installation.html#mtf_install_perform)
 
-### Update components from dependencies in `composer.json`   {#mtf_update_depend}
+### Update components from dependencies in <code>composer.json</code> {#mtf_update_depend}
 
 Enter in terminal:
 
-    cd <magento2_root_dir>/dev/tests/functional/
-    composer update
+```bash
+cd <magento2_root_dir>/dev/tests/functional/
+```
+
+```bash
+composer update
+```

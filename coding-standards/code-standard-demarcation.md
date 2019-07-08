@@ -10,16 +10,17 @@ functional_areas:
 ---
 
 <p>Magento core developers must follow the Magento code demarcation standard.</p>
-<p>This standard is recommended for third-party {% glossarytooltip 55774db9-bf9d-40f3-83db-b10cc5ae3b68 %}extension{% endglossarytooltip %} developers.</p>
+<p>This standard is recommended for third-party [extension](https://glossary.magento.com/extension) developers.</p>
 <p>Some parts of Magento code might not comply with the standard, but we are working to gradually improve this.</p>
 <p>The standard was developed in the scope of our efforts to ensure the following:</p>
 <ul>
    <li>Decouple visual (CSS) layer from the functional (JavaScript) layer.</li>
-   <li>Decouple functional (JavaScript) layer from the {% glossarytooltip 8f407f13-4350-449b-9dc5-217dcf01bc42 %}markup{% endglossarytooltip %} (HTML).</li>
-   <li>Reinstate emphasis on using of {% glossarytooltip 5bfa8a8e-6f3e-4fed-a43e-62339916f02e %}jQuery{% endglossarytooltip %} templates.</li>
-   <li>Reinstate emphasis on decoupling HTML, {% glossarytooltip 6c5cb4e9-9197-46f2-ba79-6147d9bfe66d %}CSS{% endglossarytooltip %} and JS from {% glossarytooltip bf703ab1-ca4b-48f9-b2b7-16a81fd46e02 %}PHP{% endglossarytooltip %} classes.</li>
+   <li>Decouple functional (JavaScript) layer from the [markup](https://glossary.magento.com/markup) (HTML).</li>
+   <li>Reinstate emphasis on using of [jQuery](https://glossary.magento.com/jquery) templates.</li>
+   <li>Reinstate emphasis on decoupling HTML, [CSS](https://glossary.magento.com/css) and JS from [PHP](https://glossary.magento.com/php) classes.</li>
 </ul>
-<p>Use <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a> to interpret the "MUST," "MUST NOT," "REQUIRED," "SHALL," "SHALL NOT," "SHOULD," "SHOULD NOT," "RECOMMENDED," "MAY," and "OPTIONAL" keywords.</p>
+
+Use [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt) to interpret the "MUST," "MUST NOT," "REQUIRED," "SHALL," "SHALL NOT," "SHOULD," "SHOULD NOT," "RECOMMENDED," "MAY," and "OPTIONAL" keywords.
 
 ## Semantics
 
@@ -30,16 +31,16 @@ functional_areas:
 </ul>
 
 **Acceptable**
-{% highlight html %}
+```html
 <section id="information-dialog-tree">
    <p> ... </p>
    <p> ... </p>
 </section>
 <a href="#information-dialog-tree">Scroll to text</a></a>
-{% endhighlight %}
+```
 
 **Unacceptable**
-{% highlight html %}
+```html
 <section id="some_id">
    <p> ... </p>
    <p> ... </p>
@@ -49,7 +50,7 @@ functional_areas:
    <p> ... </p>
 </section>
 <a href="#some_id">Scroll to text</a>
-{% endhighlight %}
+```
 
 ### Semantic representation may rely on ID attribute
 
@@ -58,10 +59,11 @@ functional_areas:
    <li>Reduces long-term maintenance efforts.</li>
 </ul>
 
-**Acceptable {% glossarytooltip ae0f1f68-c466-4189-88fd-6cd8b23c804f %}PHTML{% endglossarytooltip %} template**
+**Acceptable [PHTML](https://glossary.magento.com/phtml) template**
 
 <p>The following acceptable example is terse and uses an Accessible Rich Internet Applications (ARIA) approach.</p>
-{% highlight html %}
+
+```html
 <ul>
    <li class="first" type="button" aria-pressed="false" aria-controls="some-id">button 1</li>
    <li type="button" aria-pressed="false" aria-controls="some-id">button 2</li>
@@ -72,32 +74,33 @@ functional_areas:
    <textarea id="some-id"></textarea>
 </div>
 <a href="#some-id">Scroll to text</a>
-{% endhighlight %}
+```
 
 
 **Unacceptable combination of PHTML, JavaScript, and CSS files**
 
 <p>The following unacceptable example replaces a single PHTML file with a combination of a PHTML, JavaScript, and CSS files.</p>
 <p><b>PHTML file</b></p>
-{% highlight html %}
+
+```php?start_inline=1
 <ul id="my-special-menu">
    <li id="buttonId1" class="first" type="button">button 1</li>
    <li id="buttonId2" type="button">button 2</li>
    <li id="buttonId3" type="button">button 3</li>
 </ul>
-{% endhighlight %}
+```
 
 **JavaScript file**
 
-{% highlight javascript %}
+```js
 $('#my-special-menu').on('click','li[id^="button"]', function() { ... })
-{% endhighlight %}
+```
 
 **CSS file**
-{% highlight css %}
+```css
 #my-special-menu { ... }
 #my-special-menu > li { ... }
-{% endhighlight %}
+```
 
 ### You must follow the separation of presentation and content methodology.
 
@@ -125,34 +128,34 @@ The following list will help you make a distinction between the actual meaning o
 
 **Acceptable**:
 
-{%highlight html%}
+```html
 <p>HTML has been created to <strong>semantically</strong> represent documents.</p>
 <p><strong>Warning:</strong> Following the procedure described below may irreparably damage your equipment.</p>
-{%endhighlight%}
+```
 
 **Unacceptable**:
 
-{%highlight html%}
+```html
 <p>HTML has been created to <b>semantically</b> represent documents.</p>
 <p><b>Warning:</b> Following the procedure described below may irreparably damage your equipment.</p>
-{%endhighlight%}
+```
 
 ## Code demarcation
 
 ### Visual representation must rely only on HTML `class` attributes, CSS pseudo-classes and pseudo-elements, HTML tags, and form element's type attribute and form elements state attributes (example: `disabled`, `checked`).
 
-As the first option, you are required to use {% glossarytooltip a2aff425-07dd-4bd6-9671-29b7edefa871 %}HTML{% endglossarytooltip %} class attributes. In case this option is not applicable then it is recommended to use HTML tags and form element's type attribute.
+As the first option, you are required to use [HTML](https://glossary.magento.com/html) class attributes. In case this option is not applicable then it is recommended to use HTML tags and form element's type attribute.
 
 <ul>
    <li>Enforces clean, strict separation between visual and business logic layers.</li>
-   <li>Allows {% glossarytooltip b00459e5-a793-44dd-98d5-852ab33fc344 %}frontend{% endglossarytooltip %} and {% glossarytooltip 74d6d228-34bd-4475-a6f8-0c0f4d6d0d61 %}backend{% endglossarytooltip %} teams to work independently.</li>
+   <li>Allows [frontend](https://glossary.magento.com/frontend) and [backend](https://glossary.magento.com/backend) teams to work independently.</li>
    <li>Allows changing look and feel without affecting business functionality, and vice versa.</li>
    <li>Enables frontend teams to clean up old styles quickly and easily when refactoring.</li>
 </ul>
 
 **Acceptable CSS selectors**
 
-{% highlight css %}
+```css
 .notices-wrapper { ... }
 .page-header:after { ... }
 .payment-list:first-child { ... }
@@ -162,18 +165,18 @@ form input[type="password"] { ... }
 .control-text:focus { ... }
 a:hover { ... }
 nav li._active { ... }
-{% endhighlight %}
+```
 
 **Unacceptable CSS selectors**
 
-{% highlight css %}
+```css
 #header { ... }
 [data-action="delete"] { ... }
 form input[name="password"] { ... }
 section[role="main"] { ... }
 [role="menu] [role="menuitem"] { ... }
 [role="menu] [role="menuitem"].active { ... }
-{% endhighlight %}
+```
 
 ### You must not hard-code CSS styles in JavaScript files
 
@@ -185,8 +188,9 @@ Exception: CSS attributes where values must be calculated beyond the css-topics/
    <li>Reduces long-term maintenance efforts by containing CSS styles in a single place.</li>
 </ul>
 
-**Acceptable {% glossarytooltip 312b4baf-15f7-4968-944e-c814d53de218 %}JavaScript{% endglossarytooltip %} {% glossarytooltip f0dcf847-ce21-4b88-8b45-83e1cbf08100 %}widget{% endglossarytooltip %} file**
-{% highlight javascript %}
+**Acceptable [JavaScript](https://glossary.magento.com/javascript) [widget](https://glossary.magento.com/widget) file**
+
+```js
 ...
    options: {
       hOffset: 0,
@@ -199,11 +203,11 @@ Exception: CSS attributes where values must be calculated beyond the css-topics/
    this.options.hOffset = /* calculation based on dimensions of some DOM elements within a widget */
    this.element.find(this.options.myCustomElement).css({'margin-top', this.options.hOffset + 'px'})
 ...
-{% endhighlight %}
+```
 
 **Unacceptable JavaScript file**
 
-{%highlight js%}
+```js
 this.element.on('click', function() {
    if ($(this).is(':visible')) {
       $(this).css({ visibility: 'hidden' });
@@ -211,7 +215,7 @@ this.element.on('click', function() {
       $(this).css({ visibility: 'visible' });
    }
 });
-{%endhighlight%}
+```
 
 ### You must not use inline CSS styles inside HTML tags
 
@@ -222,15 +226,15 @@ this.element.on('click', function() {
 
 **Acceptable PHTML template**
 
-{% highlight html %}
+```php?start_inline=1
 <div class="no-display"> ... </div>
-{% endhighlight %}
+```
 
 **Unacceptable PHTML template**
 
-{% highlight html %}
+```php?start_inline=1
 <div style="display: none;"> ... </div>
-{% endhighlight %}
+```
 
 ## Business logic and JavaScript
 
@@ -243,14 +247,14 @@ this.element.on('click', function() {
 
 **Acceptable PHTML template**
 
-{% highlight html %}
+```php?start_inline=1
 <div data-action="delete" data-mage-init="{myWidget: [option1: 'string']}"></div>
 <div data-role="tooltip">More details</div>
-{% endhighlight %}
+```
 
 **Acceptable JavaScript file**
 
-{% highlight javascript %}
+```js
 options {
  deleteAction:  '[data-action="delete"]',
  tooltip: '[data-role="tooltip]'
@@ -262,22 +266,22 @@ this.element.on('click', this.options.deleteAction , function() { ... });
 // Globally initialized widgets
 $( this.options.tooltip).tooltip();  // Globally for ALL tooltip elements
 ...
-{% endhighlight %}
+```
 
 **Unacceptable PHTML file**
 
-{% highlight html %}
+```php?start_inline=1
 <div id="my-widget"></div>
-{% endhighlight %}
+```
 
 **Unacceptable JavaScript file**
 
-{% highlight javascript %}
+```js
 $('#my-widget').doSomething();
 $('.parent').on('click', '.button', function() { ... });
 $('form').validate();
 $('[role="menu"]').navigation();
-{% endhighlight %}
+```
 
 ### You must assign HTML helper classes in JavaScript to modify presentation layer.
 
@@ -285,22 +289,22 @@ HTML helper class names added in JavaScript REQUIRE underscore symbol ("_") at t
 
 **Acceptable**
 
-{% highlight html %}
+```html
 <div class="tab-element _active">Content</div>
 <div class="sales-transactions _open">Content</div>
 <div class="billing-agreement _expanded">Content</div>
 <div class="sales-report _hidden">Content</div>
-{% endhighlight %}
+```
 
 
 **Unacceptable**
 
-{% highlight html %}
+```html
 <div class="tab-element active">Content</div>
 <div class="sales-transactions open">Content</div>
 <div class="billing-agreement expanded">Content</div>
 <div class="sales-report hidden">Content</div>
-{% endhighlight %}
+```
 
 ### You must not select DOM elements based on HTML structure
 
@@ -309,17 +313,17 @@ HTML helper class names added in JavaScript REQUIRE underscore symbol ("_") at t
 
 **Acceptable JavaScript file**
 
-{% highlight javascript %}
+```js
 this.element.find('[data-action="edit"]');
 this.elements.closest('[data-container]');
-{% endhighlight %}
+```
 
 **Unacceptable JavaScript file**
 
-{% highlight javascript %}
+```js
 this.element.children().children().html('hello world');
 this.element.parent().find('[data-action="edit"]').data('entity_id');
-{% endhighlight %}
+```
 
 ### You must use jQuery templates to insert recurring markup into DOM structure
 
@@ -336,28 +340,28 @@ this.element.parent().find('[data-action="edit"]').data('entity_id');
 
 **Acceptable PHP file**
 
-{% highlight php startinline=true %}
+```php?start_inline=1
 ...
 public function getSelectorOptions()
 {
     return $selectorOptions;
 }
 ...
-{% endhighlight %}
+```
 
 **Acceptable PHTML template**
 
-{% highlight php startinline=true %}
+```php?start_inline=1
 ...
 <div data-mage-init="{treeSuggest: [<?php echo $this->getSelectorOptions(); ?>]}"></div>
 ...
-{% endhighlight %}
+```
 
 or
 
 **Acceptable PHTML template**
 
-{% highlight php startinline=true %}
+```php?start_inline=1
 ...
 <div data-role="treeSuggest"></div>
 <script type="text/x-magento-init">
@@ -368,11 +372,11 @@ or
 }
 </script>
 ...
-{% endhighlight %}
+```
 
 **Unacceptable PHP file**
 
-{% highlight php startinline=true %}
+```php?start_inline=1
 ...
 public function getAfterElementHtml()
 {
@@ -381,13 +385,13 @@ public function getAfterElementHtml()
 jQuery('#{$htmlId}-suggest').treeSuggest({$selectorOptions});
 </script>
 ...
-{% endhighlight %}
+```
 
 **Unacceptable PHTML template**
 
-{% highlight php startinline=true %}
+```php?start_inline=1
 <?php echo $this->getAfterElementHtml(); ?>
-{% endhighlight %}
+```
 
 ## PHTML templates and PHP files
 
@@ -400,7 +404,7 @@ jQuery('#{$htmlId}-suggest').treeSuggest({$selectorOptions});
 
 **Acceptable PHP file**
 
-{% highlight php startinline=true %}
+```php?start_inline=1
 ...
 $fieldset->addField('new_category_parent', 'text', array(
     'label'    => Mage::helper('Mage_Catalog_Helper_Data')->__('Parent Category'),
@@ -409,11 +413,11 @@ $fieldset->addField('new_category_parent', 'text', array(
     'class'    => 'parent category',
 ));
 ...
-{% endhighlight %}
+```
 
 **Unacceptable PHP file**
 
-{% highlight php startinline=true %}
+```php?start_inline=1
 ...
 $fieldset->addField('new_category_parent', 'text', array(
     'label'    => Mage::helper('Mage_Catalog_Helper_Data')->__('Parent Category'),
@@ -422,7 +426,7 @@ $fieldset->addField('new_category_parent', 'text', array(
     'style'    => 'border: 1px solid #ccc;',
 ));
 ...
-{% endhighlight %}
+```
 
 ### You must not hard-code inline JavaScript in PHP classes
 
@@ -432,26 +436,26 @@ $fieldset->addField('new_category_parent', 'text', array(
 
 **Acceptable PHP file**
 
-{% highlight php startinline=true %}
+```php?start_inline=1
 ...
 public function getSelectorOptions()
 {
     return $selectorOptions;
 }
 ...
-{% endhighlight %}
+```
 
 **Acceptable PHTML template**
 
-{% highlight php startinline=true %}
+```php?start_inline=1
 ...
 <div data-mage-init="{treeSuggest: [<?php echo $this->getSelectorOptions(); ?>]}"></div>
 ...
-{% endhighlight %}
+```
 
 **Unacceptable PHP file**
 
-{% highlight php startinline=true %}
+```php?start_inline=1
 ...
 public function getAfterElementHtml()
 {
@@ -460,12 +464,12 @@ public function getAfterElementHtml()
 jQuery('#{$htmlId}-suggest').treeSuggest({$selectorOptions});
 </script>
 ...
-{% endhighlight %}
+```
 
 **Unacceptable PHTML template**
-{% highlight php startinline=true %}
+```php?start_inline=1
 <?php echo $this->getAfterElementHtml(); ?>
-{% endhighlight %}
+```
 
 ### You must not hard-code HTML markup (used in the `<body>` tag) in PHP classes
 
@@ -474,7 +478,9 @@ jQuery('#{$htmlId}-suggest').treeSuggest({$selectorOptions});
 <li>Reduces the number of files to be modified.</li></ul>
 
 **Acceptable PHP file**
-<pre>
+
+```php?start_inline=1
+...
 public function getAttributeName($element)
 {
     return ($element->getExtType() === 'multiple') ? $element->getId() . '_checkbox' : NULL;
@@ -484,11 +490,12 @@ public function getAttributeId($element)
 {
     return $element->getId();
 }
-</pre>
+...
+```
 
 **Acceptable PHTML template**
 
-{% highlight php startinline=true %}
+```php?start_inline=1
 <span class="attribute-change-checkbox">
 <label>
    <input type="checkbox"
@@ -498,24 +505,23 @@ public function getAttributeId($element)
 </label>
 </span>
 <!-- jQuery.hide() code can be either located in the widget itself OR can ask PHP Block class whether or not 'weight_and_type_switcher' should be visible. Based on this condition CSS can be applied to hide/show those elements. -->
-
-{% endhighlight %}
+```
 
 **Unacceptable PHP file**
 
-{%highlight php%}
+```php?start_inline=1
 ...
- public function getCheckbox($elementName){
+public function getCheckbox($elementName){
     $elementNameTag = $this->getAttributeName($elementName) ? 'name="' . $this->getAttributeName($elementName) . '"' : NULL;
     $tpl = "<input type=\"checkbox\" {$elementNameTag} data-mage-init=\"{customToggleWidget: [elementSelector: \"input[name='someCustomName']\"]}\" />";
     return $tpl;
 }
 ...
-{%endhighlight%}
+```
 
 **Unacceptable PHTML template**
 
-{%highlight php%}
+```php?start_inline=1
 <span class="attribute-change-checkbox">
 	<label>
 		<?php echo $this->getCheckbox($element)?>
@@ -523,5 +529,4 @@ public function getAttributeId($element)
 	</label>
 </span>
 <!-- jQuery.hide() code can be either located in the widget itself OR can ask PHP Block class whether or not 'weight_and_type_switcher' should be visible. Based on this condition CSS can be applied to hide/show those elements. -->
-
-{%endhighlight%}
+```

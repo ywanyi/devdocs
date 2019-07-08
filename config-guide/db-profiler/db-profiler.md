@@ -1,10 +1,6 @@
 ---
 group: configuration-guide
-subgroup: 13_DBProfiler
 title: Configure the database profiler
-menu_title: Configure the database profiler
-menu_order: 1
-menu_node: parent
 contributor_name: Atish Goswami
 contributor_link: http://atishgoswami.com
 functional_areas:
@@ -19,18 +15,18 @@ The Magento database profiler displays all queries executed on a page, including
 
 ## Step 1: Modify the deployment configuration
 
-Modify `<your Magento install dir>/app/etc/env.php` to add the following reference to the [database profiler class]({{ site.mage2bloburl }}/{{ page.guide_version }}/lib/internal/Magento/Framework/DB/Profiler.php){:target="_blank"}:
+Modify `<magento_root>/app/etc/env.php` to add the following reference to the [database profiler class]({{ site.mage2bloburl }}/{{ page.guide_version }}/lib/internal/Magento/Framework/DB/Profiler.php):
 
-{% highlight php startinline=true %}
+```php?start_inline=1
         'profiler' => [
             'class' => '\Magento\Framework\DB\Profiler',
             'enabled' => true,
         ],
-{% endhighlight %}
+```
 
 An example follows:
 
-{% highlight php startinline=true %}
+```php?start_inline=1
  'db' =>
   array (
     'table_prefix' => '',
@@ -53,11 +49,11 @@ An example follows:
       ),
     ),
   ),
-  {% endhighlight %}
+  ```
 
 ## Step 2: Configure the output
 
-Configure the output in your Magento application boostrap file; this might be `<your Magento install dir>/index.php` or it could be located in a web server virtual host configuration.
+Configure the output in your Magento application boostrap file; this might be `<magento_root>/index.php` or it could be located in a web server virtual host configuration.
 
 The following example displays results in a three-column table:
 
@@ -67,7 +63,7 @@ The following example displays results in a three-column table:
 
 To configure the output, add the following after the `$bootstrap->run($app);` line in your bootstrap file:
 
-{% highlight php startinline=true %}
+```php?start_inline=1
 /** @var \Magento\Framework\App\ResourceConnection $res */
 $res = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Framework\App\ResourceConnection');
 /** @var Magento\Framework\DB\Profiler $profiler */
@@ -87,10 +83,10 @@ foreach ($profiler->getQueryProfiles() as $query) {
     echo '</tr>';
 }
 echo "</table>";
-{% endhighlight %}
+```
 
 ## Step 3: View the results
 
-Go to any page in your {% glossarytooltip 1a70d3ac-6bd9-475a-8937-5f80ca785c14 %}storefront{% endglossarytooltip %} or {% glossarytooltip 18b930cf-09cc-47c9-a5e5-905f86c43f81 %}Magento Admin{% endglossarytooltip %} to view the results. A sample follows:
+Go to any page in your [storefront](https://glossary.magento.com/storefront) or [Magento Admin](https://glossary.magento.com/magento-admin) to view the results. A sample follows:
 
 ![Sample database profiler results]({{ site.baseurl }}/common/images/config_db-profiler-results.png){:width="800px"}

@@ -11,21 +11,16 @@ functional_areas:
   - Setup
 ---
 
-**Symptom**: At the last step of installing Magento 2, the following {% glossarytooltip 53da11f1-d0b8-4a7e-b078-1e099462b409 %}exception{% endglossarytooltip %} displays:
+**Symptom**: At the last step of installing Magento 2, the following [exception](https://glossary.magento.com/exception) displays:
 
-{% highlight PHP %} 
+```temrinal
 exception 'Exception' with message 'Warning: SessionHandler::read():
-open(..) failed: No such file or directory (2) ../magento2/lib/internal/Magento/Framework/Session/SaveHandler.php on line 74' 
+open(..) failed: No such file or directory (2) ../magento2/lib/internal/Magento/Framework/Session/SaveHandler.php on line 74'
 in ../magento2/lib/internal/Magento/Framework/App/ErrorHandler.php:67
-{% endhighlight %} 
+```
 
-<div class="bs-callout bs-callout-info" id="info" markdown="1">
-This error occurs only in code versions earlier than September 28, 2015. If you installed code dated September 29 or later, this error should not occur.
-
-For more information about configuration options for Redis, see [Configure Redis]({{ page.baseurl }}/config-guide/redis/config-redis.html).
-
-For more information about specifying Redis using the command-line installer, see the [installation topic]({{ page.baseurl }}/install-gde/install/cli/install-cli-install.html) or the [deployment configuration topic]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-deployment.html#instgde-cli-subcommands-configphp).
-</div>
+{:.bs-callout .bs-callout-info}
+This error occurs only in code versions earlier than September 28, 2015. If you installed code dated September 29 or later, this error should not occur. For more information about configuration options for Redis, see [Configure Redis]({{ page.baseurl }}/config-guide/redis/config-redis.html). For more information about specifying Redis using the command-line installer, see the [installation topic]({{ page.baseurl }}/install-gde/install/cli/install-cli-install.html) or the [deployment configuration]({{ page.baseurl }}/install-gde/install/cli/install-cli-subcommands-deployment.html#instgde-cli-subcommands-configphp) topic.
 
 ### Solution:
 
@@ -33,7 +28,7 @@ This happens when your `session.save_handler` PHP parameter is set to some anoth
 
 Solutions:
 
-*	<a href="{{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-magento-update">Upgrade your Magento 2 code</a>
+*	[Upgrade your Magento 2 code]({{ page.baseurl }}/install-gde/install/cli/install-cli-uninstall.html#instgde-install-magento-update)
 *	Use the following workaround with existing code.
 
 ### Locate `php.ini`
@@ -56,9 +51,7 @@ Typical locations follow:
 	*	To comment it out:
 
 			;session.save_path = <path>
-		
+
 	*	To set it to a file system path:
-		
+
 			session.save_handler = files
-
-

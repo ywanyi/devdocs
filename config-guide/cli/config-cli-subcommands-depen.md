@@ -1,10 +1,6 @@
 ---
 group: configuration-guide
-subgroup: 04_CLI
 title: Dependency reports
-menu_title: Dependency reports
-menu_node:
-menu_order: 225
 functional_areas:
   - Configuration
   - System
@@ -17,7 +13,7 @@ functional_areas:
 
 You can run the following types of reports:
 
--   {% glossarytooltip c1e4242b-1f1a-44c3-9d72-1d5b1435e142 %}**Module**{% endglossarytooltip %} dependencies: Shows the total number of dependencies between modules and whether the dependencies are hard or soft.
+-   [**Module**](https://glossary.magento.com/**Module**) dependencies: Shows the total number of dependencies between modules and whether the dependencies are hard or soft.
 -   **Circular dependencies:** Shows the total number of dependency chains and the number and list of circular dependencies for each module.
 -   **Framework dependencies:** Shows the total number of dependencies on the Magento framework by module (including the total number of framework entries for each library).
 
@@ -31,72 +27,23 @@ Command options:
 
 The following table explains this command's options, parameters, and values.
 
-<table>
-	<col width="25%" />
-	<col width="65%" />
-	<col width="10%" />
-	<tbody>
-		<tr>
-			<th>Parameter</th>
-			<th>Value</th>
-			<th>Required?</th>
-		</tr>
-	<tr>
-		<td><p>show-modules</p></td>
-		<td><p>Module dependencies report.</p></td>
-		<td><p>Yes</p></td>
-	</tr>
-	<tr>
-		<td><p>show-modules-circular</p></td>
-		<td><p>Circular dependencies report.</p></td>
-		<td><p>Yes</p></td>
-	</tr>
-	<tr>
-		<td><p>show-framework</p></td>
-		<td><p>Framework dependencies report.</p></td>
-		<td><p>Yes</p></td>
-	</tr>
-	<tr>
-		<td><p>-d|--directory</p></td>
-		<td><p>Path to the base directory to start searching for report data.</p></td>
-		<td><p>No</p></td>
-	</tr>
-	<tr>
-		<td><p>-o|--output</p></td>
-		<td><p>Specifies the absolute file system path and file name of the comma-separated value (csv) output file for the report.</p>
-		</td>
-		<td>
-			<p>No</p>
-		</td>
-	</tr>
-	</tbody>
-</table>
+| Parameter               | Value                                                                                                                | Required? |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------- | --------- |
+| `show-modules`          | Module dependencies report.                                                                                          | Yes       |
+| `show-modules-circular` | Circular dependencies report.                                                                                        | Yes       |
+| `show-framework`        | Framework dependencies report.                                                                                       | Yes       |
+| `-d --directory`        | Path to the base directory to start searching for report data.                                                       | No        |
+| `-o --output`           | Specifies the absolute file system path and file name of the comma-separated value (csv) output file for the report. | No        |
+
 
 If no directory or filename is passed as an argument, the following application root is used as the default directory, and the following default filenames are used:
 
-<table>
-	<col width="50%" />
-	<col width="50%" />
-	<tbody>
-		<tr>
-			<th>Command</th>
-			<th>Filename</th>
-		</tr>
-		<tr>
-			<td>bin/magento info:dependencies:show-modules</td>
-			<td>modules-dependencies.csv</td>
-		</tr>
-		<tr>
-			<td>bin/magento info:dependencies:show-modules-circular</td>
-			<td>modules-circular-dependencies.csv</td>
-		</tr>
-		<tr>
-			<td>bin/magento info:dependencies:show-framework</td>
-			<td>framework-dependencies.csv</td>
-		</tr>
-	</tbody>
-</table>
-	
+| Command                                           | Filename                            |
+| ------------------------------------------------- | ----------------------------------- |
+| `magento info:dependencies:show-modules`          | `modules-dependencies.csv`          |
+| `magento info:dependencies:show-modules-circular` | `modules-circular-dependencies.csv` |
+| `magento info:dependencies:show-framework`        | `framework-dependencies.csv`        |
+
 
 ### Sample module dependencies report
 
@@ -167,18 +114,3 @@ The following is a portion of the output for a sample framework dependencies rep
 
 	"Magento\Reports","1"
 	" -- Magento\Framework","553"
-
-#### Related topics
-
--   [Manage the cache]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-cache.html)
--   [Manage the indexers]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-index.html)
--   [Configure and run cron]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-cron.html)
--   [Code compiler]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-compiler.html)
--   [Set the Magento mode]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-mode.html)
--   [URN highlighter]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-urn.html)
--   [Translation dictionaries and language packages]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-i18n.html)
--   [Deploy static view files]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-static-view.html)
--   [Create symlinks to LESS files]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-less-sass.html)
--   [Run unit tests]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-test.html)
--   [Convert layout XML files]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-layout-xml.html)
--   [Generate data for performance testing]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-perf-data.html)

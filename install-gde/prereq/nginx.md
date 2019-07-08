@@ -14,8 +14,8 @@ Magento supports nginx 1.8 (or the [latest mainline version](http://nginx.org/en
 
 Installation instructions vary based on which operating system you're using:
 
-*   [Ubuntu 16]({{ page.baseurl }}/install-gde/prereq/nginx.html#ubuntu-16)
-*   [CentOS 7]({{ page.baseurl }}/install-gde/prereq/nginx.html#centos-7)
+*	[Ubuntu 16]({{ page.baseurl }}/install-gde/prereq/nginx.html#ubuntu-16)
+*	[CentOS 7]({{ page.baseurl }}/install-gde/prereq/nginx.html#centos-7)
 
 ## Help if you're just starting out {#apache-help-beginner}
 
@@ -57,9 +57,8 @@ To install and configure `php-fpm`:
 		max_execution_time = 1800
 		zlib.output_compression = On
 
-    <div class="bs-callout bs-callout-info" markdown="1">
-We recommend setting the memory limit to 2G when testing Magento. Refer to [Required PHP settings]({{ page.baseurl }}/install-gde/prereq/php-settings.html) for more information.
-    </div>
+    {:.bs-callout .bs-callout-info}
+    We recommend setting the memory limit to 2G when testing Magento. Refer to [Required PHP settings]({{ page.baseurl }}/install-gde/prereq/php-settings.html) for more information.
 
 4. Save and exit the editor.
 
@@ -75,58 +74,76 @@ Refer to [MySQL]({{ page.baseurl }}/install-gde/prereq/mysql.html) for more info
 
 There are several ways to download the Magento software, including:
 
-*   [Download an archive]({{ page.baseurl }}/install-gde/prereq/zip_install.html)
+*	[Get the Composer metapackage]({{ page.baseurl }}/install-gde/composer.html)
 
-*   [Get the Composer metapackage]({{ page.baseurl }}/install-gde/prereq/integrator_install.html)
+*	[Download an archive]({{ page.baseurl }}/install-gde/prereq/zip_install.html)
 
-*   [Clone the git repository]({{ page.baseurl }}/install-gde/prereq/dev_install.html)
+*	[Clone the Git repository]({{ page.baseurl }}/install-gde/prereq/dev_install.html)
 
-For this example, we'll download and extract an archive.
+For this example, we'll install using Composer and the command line.
 
-2. Change to the web server docroot directory, or to a directory you’ve configured as a virtual host docroot. For this example, we're using the Ubuntu default `/var/www/html`.
+{:.bs-callout .bs-callout-info}
+You cannot use the Web Setup Wizard when installing Magento on nginx. You must use the command line.
+
+1.  As the [Magento file system owner]({{page.baseurl}}/install-gde/prereq/file-sys-perms-over.html), log in to your Magento server.
+
+1.  Change to the web server docroot directory or a directory that you have configured as a virtual host docroot. For this example, we're using the Ubuntu default `/var/www/html`.
 
 		cd /var/www/html
 
-3. Download the Magento archive, extract it, and rename the folder `magento2/`:
-
-		wget https://github.com/magento/magento2/archive/2.0.tar.gz
-		tar -xzvf 2.0.tar.gz
-		mv magento2-2.0/ magento2/
-
-5. [Set directory ownership and file permissions]({{ page.baseurl }}/install-gde/prereq/file-system-perms.html).
-
-		cd /var/www/html/magento2
-		find var vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
-		find var vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
-		chown -R :www-data .
-		chmod u+x bin/magento
-
-5. Install Composer globally. You'll need Composer to update dependencies before installing Magento:
+1.  Install Composer globally. You'll need Composer to update dependencies before installing Magento:
 
 		curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/bin --filename=composer
 
-6. Update Magento dependencies:
+1. Create a new Composer project using the {{site.data.var.ce}} or {{site.data.var.ee}} metapackage.
 
-		cd /var/www/html/magento2
-		composer install -v
+    **{{site.data.var.ce}}**
+    ```bash
+    composer create-project --repository=https://repo.magento.com/ magento/project-community-edition <install-directory-name>
+    ```
 
-7. If prompted, enter your [Magento authentication keys]({{ page.baseurl }}/install-gde/prereq/connect-auth.html).
+    **{{site.data.var.ee}}**
+    ```bash
+    composer create-project --repository=https://repo.magento.com/ magento/project-enterprise-edition <install-directory-name>
+    ```
 
-8. Install Magento from the [command line]({{ page.baseurl }}/install-gde/install/cli/install-cli.html).
+    When prompted, enter your [Magento authentication keys]({{ page.baseurl }}/install-gde/prereq/connect-auth.html). Your _public key_ is your username; your _private key_ is your password.
+
+1. Set read-write permissions for the web server group before you install the Magento software. This is necessary so that the Setup Wizard and command line can write files to the Magento file system.
+
+    ```terminal
+    cd /var/www/html/<magento install directory>
+    find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
+    find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
+    chown -R :www-data . # Ubuntu
+    chmod u+x bin/magento
+    ```
+
+1. Install Magento from the [command line]({{ page.baseurl }}/install-gde/install/cli/install-cli.html). This example assumes that the Magento install directory is named `magento2ee`, the `db-host` is on the same machine (`localhost`), and that the `db-name`, `db-user`, and `db-password` are all `magento`:
+
+    ```bash
+    bin/magento setup:install \
+    --base-url=http://localhost/magento2ee \
+    --db-host=localhost \
+    --db-name=magento \
+    --db-user=magento \
+    --db-password=magento \
+    --backend-frontname=admin \
+    --admin-firstname=admin \
+    --admin-lastname=admin \
+    --admin-email=admin@admin.com \
+    --admin-user=admin \
+    --admin-password=admin123 \
+    --language=en_US \
+    --currency=USD \
+    --timezone=America/Chicago \
+    --use-rewrites=1
+    ```
+
+1. Switch to developer mode:
 
 		cd /var/www/html/magento2/bin
-		./magento setup:install --base-url=http://www.magento-dev.com/ --db-host=localhost --db-name=magento --db-user=magento --db-password=magento --admin-firstname=admin --admin-lastname=admin --admin-email=admin@admin.com --admin-user=admin --admin-password=admin123 --language=en_US --currency=USD --timezone=America/Chicago --use-rewrites=1
-
-    Replace `http://www.magento-dev.com` with your domain name.
-
-    <div class="bs-callout bs-callout-info" markdown="1">
-You cannot use the Web Setup Wizard when installing Magento on nginx. You must use the command line.
-    </div>
-
-9. Switch to developer mode:
-
-		cd /var/www/html/magento2/bin
-		./magento deploy:mode:set developer
+    ./magento deploy:mode:set developer
 
 ### Configure nginx {#configure-nginx-ubuntu}
 
@@ -141,7 +158,7 @@ These instructions assume you're using the Ubuntu default location for the nginx
 2. Add the following configuration:
 
 		upstream fastcgi_backend {
-			server  unix:/run/php/php7.0-fpm.sock;
+			server unix:/run/php/php7.0-fpm.sock;
 		}
 
 		server {
@@ -152,9 +169,8 @@ These instructions assume you're using the Ubuntu default location for the nginx
 			include /var/www/html/magento2/nginx.conf.sample;
 		}
 
-    <div class="bs-callout bs-callout-info" id="info" markdown="1">
-The `include` directive must point to the sample nginx configuration file in your Magento installation directory.
-    </div>
+    {:.bs-callout .bs-callout-info}
+    The `include` directive must point to the sample nginx configuration file in your Magento installation directory.
 
 3. Replace `www.magento-dev.com` with your domain name. This must match the base URL you specified when installing Magento.
 
@@ -190,7 +206,7 @@ After installation is complete, start nginx and configure it to start at boot ti
 	systemctl start nginx
 	systemctl enable nginx
 
-After completing the following sections and [installing Magento]({{ page.baseurl }}/install-gde/prereq/nginx.html#install-and-configure-magento2-centos), we'll use a sample configuration file to [configure nginx]({{ page.baseurl }}/install-gde/prereq/nginx.html#configure-nginx-centos).
+After completing the following sections and [installing Magento]({{ page.baseurl }}/install-gde/prereq/nginx.html#install-magento2-centos), we'll use a sample configuration file to [configure nginx]({{ page.baseurl }}/install-gde/prereq/nginx.html#configure-nginx-centos).
 
 ### Install and configure php-fpm
 
@@ -210,9 +226,8 @@ Magento requires several [PHP extensions]({{ page.baseurl }}/install-gde/prereq/
 		max_execution_time = 1800
 		zlib.output_compression = On
 
-    <div class="bs-callout bs-callout-info" markdown="1">
-We recommend setting the memory limit to 2G when testing Magento. Refer to [Required PHP settings]({{ page.baseurl }}/install-gde/prereq/php-settings.html) for more information.
-    </div>
+    {:.bs-callout .bs-callout-info}
+    We recommend setting the memory limit to 2G when testing Magento. Refer to [Required PHP settings]({{ page.baseurl }}/install-gde/prereq/php-settings.html) for more information.
 
 5. Uncomment the session path directory and set the path:
 
@@ -268,11 +283,11 @@ Refer to [MySQL]({{ page.baseurl }}/install-gde/prereq/mysql.html) for more info
 
 There are several ways to download the Magento software, including:
 
-*   [Download an archive]({{ page.baseurl }}/install-gde/prereq/zip_install.html)
+*	[Download an archive]({{ page.baseurl }}/install-gde/prereq/zip_install.html)
 
-*   [Get the Composer metapackage]({{ page.baseurl }}/install-gde/prereq/integrator_install.html)
+*	[Get the Composer metapackage]({{ page.baseurl }}/install-gde/composer.html)
 
-*   [Clone the git repository]({{ page.baseurl }}/install-gde/prereq/dev_install.html)
+*	[Clone the Git repository]({{ page.baseurl }}/install-gde/prereq/dev_install.html)
 
 For this example, we'll download and extract an archive.
 
@@ -282,9 +297,9 @@ For this example, we'll download and extract an archive.
 
 2. Download the Magento archive, extract it, and rename the folder `magento2/`:
 
-		wget https://github.com/magento/magento2/archive/2.0.tar.gz
-		tar -xzvf 2.0.tar.gz
-		mv magento2-2.0/ magento2/
+		wget https://github.com/magento/magento2/archive/2.1.tar.gz
+		tar -xzvf 2.1.tar.gz
+		mv magento2-2.1/ magento2/
 
 3. [Set directory ownership and file permissions]({{ page.baseurl }}/install-gde/prereq/file-system-perms.html).
 
@@ -316,9 +331,8 @@ For this example, we'll download and extract an archive.
 
     Replace `http://www.magento-dev.com` with your domain name.
 
-    <div class="bs-callout bs-callout-info" markdown="1">
-You cannot use the Web Setup Wizard when installing Magento on nginx. You must use the command line.
-    </div>
+    {:.bs-callout .bs-callout-info}
+    You cannot use the Web Setup Wizard when installing Magento on nginx. You must use the command line.
 
 8. Switch Magento to developer mode:
 
@@ -338,7 +352,7 @@ These instructions assume you're using the CentOS default location for the nginx
 2. Add the following configuration:
 
 		upstream fastcgi_backend {
-			server  unix:/run/php-fpm/php-fpm.sock;
+			server unix:/run/php-fpm/php-fpm.sock;
 		}
 
 		server {
@@ -349,9 +363,8 @@ These instructions assume you're using the CentOS default location for the nginx
 			include /usr/share/nginx/html/magento2/nginx.conf.sample;
 		}
 
-    <div class="bs-callout bs-callout-info" id="info" markdown="1">
-The `include` directive must point to the sample nginx configuration file in your Magento installation directory.
-    </div>
+    {:.bs-callout .bs-callout-info}
+    The `include` directive must point to the sample nginx configuration file in your Magento installation directory.
 
 3. Replace `www.magento-dev.com` with your domain name.
 
@@ -378,7 +391,6 @@ To configure SELinux and firewalld:
 		yum -y install policycoreutils-python
 
 2. Run the following commands to change the security context for the Magento installation directory:
-
 
 		semanage fcontext -a -t httpd_sys_rw_content_t '/usr/share/nginx/html/magento2/app/etc(/.*)?'
 		semanage fcontext -a -t httpd_sys_rw_content_t '/usr/share/nginx/html/magento2/var(/.*)?'
@@ -410,6 +422,6 @@ Open a web browser and navigate to your site's base URL to [verify the installat
 *	[PHP 5.5, 5.6, or 7.0&mdash;Ubuntu]({{ page.baseurl }}/install-gde/prereq/php-ubuntu.html)
 *	[PHP 5.5, 5.6, or 7.0&mdash;CentOS]({{ page.baseurl }}/install-gde/prereq/php-centos.html)
 *	[MySQL]({{ page.baseurl }}/install-gde/prereq/mysql.html)
-* [Configuring security options]({{ page.baseurl }}/install-gde/prereq/security.html)
+*	[Configuring security options]({{ page.baseurl }}/install-gde/prereq/security.html)
 *	[Installing optional software]({{ page.baseurl }}/install-gde/prereq/optional.html)
 *	[Determine your installation or upgrade path]({{ page.baseurl }}/install-gde/bk-install-guide.html)

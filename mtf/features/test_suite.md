@@ -18,7 +18,7 @@ The rules for a test case are defined in a separate `.xml` file. (Recommended na
 
 The example of the default test suite:
 
-```xml 
+```xml
 
 <?xml version="1.0"?>
 <!--
@@ -65,7 +65,7 @@ Learn more details in next topics.
 
 Define the test suite to be run in the `<magento2_root_dir>dev/tests/functional/phpunit.xml`:
 
-```xml 
+```xml
 <env name = "testsuite_rule" value = <test_suite_name> />
 <env name = "testsuite_rule_path" value = <test_suite_directory> />
 ```
@@ -74,7 +74,7 @@ The default test suite is `<magento2_root_dir>/dev/tests/functional/testsuites/M
 
 In `phpunit.xml`:
 
-```xml 
+```xml
 <env name="testsuite_rule" value="basic" />
 <env name="testsuite_rule_path" value="Magento/Mtf/TestSuite/InjectableTests" />
 ```
@@ -83,8 +83,11 @@ In `phpunit.xml`:
 
 To run a test suite enter the following commands from your terminal:
 
-```bash 
+```bash
 cd <magento2_root_dir>/dev/tests/functional
+```
+
+```bash
 vendor/bin/phpunit testsuites/Magento/Mtf/TestSuite/InjectableTests.php
 ```
 
@@ -109,9 +112,9 @@ This scope enables you to filter functional tests using the following criteria:
 | `<module>` | Apply a rule to all test cases from the specified module. Some test cases may refer to other modules using merging functionality of variations, fixtures etc. You can restrict such reference to other modules adding the `strict="1"` argument. The default value is `strict="0"`. |multiple|`<module value = "Magento_Tax" strict="1" />`
 | `<namespace>` | Apply a rule to all test cases with the specified namespace. | multiple | `<namespace value = "Magento\Catalog\Test\TestCase\Product" />`
 
-The {% glossarytooltip 621ef86b-7314-4fbc-a80d-ab7fa45a27cb %}namespace{% endglossarytooltip %} filter example:
+The [namespace](https://glossary.magento.com/namespace) filter example:
 
-```xml 
+```xml
 <?xml version="1.0"?>
 <!--
 /**
@@ -129,9 +132,9 @@ The {% glossarytooltip 621ef86b-7314-4fbc-a80d-ab7fa45a27cb %}namespace{% endglo
 </config>
 ```
 
-The {% glossarytooltip c1e4242b-1f1a-44c3-9d72-1d5b1435e142 %}module{% endglossarytooltip %} filter example:
+The [module](https://glossary.magento.com/module) filter example:
 
-```xml 
+```xml
 <?xml version="1.0"?>
 <!--
 /**
@@ -153,7 +156,7 @@ The {% glossarytooltip c1e4242b-1f1a-44c3-9d72-1d5b1435e142 %}module{% endglossa
 
 The class filter example:
 
-```xml 
+```xml
 
 <?xml version="1.0"?>
 <!--
@@ -183,7 +186,7 @@ You can use `group` and `value` parameters in the test case scope. In a test cas
 
 - Any tags that are used in the test case should be added to the beginning of a class definition:
 
-``` php?start_inline=1
+```php
 
 /* tags */
 const TEST_TYPE = '3rd_party_test_deprecated';
@@ -193,7 +196,7 @@ const TEST_TYPE = '3rd_party_test_deprecated';
 
 - The tag in the rule:
 
-```xml 
+```xml
 
 <rule scope="testcase">
     <deny>
@@ -205,7 +208,7 @@ const TEST_TYPE = '3rd_party_test_deprecated';
 
 A test case can contain multiple tag groups, and a group can have multiple values. For example:
 
-``` php?start_inline=1
+```php
 
 /* tags */
 const MVP = 'yes';
@@ -221,7 +224,7 @@ You can assign a `tag` node to a [data set][] variation. This enables you to use
 
 You can use `group` and `value` parameters in the variation scope. In a variation, they are provided in the following format:
 
-```xml 
+```xml
 
 <variation ...>
     <data name="tag" xsi:type="string">group_1:value, group_2:value</data>
@@ -231,7 +234,7 @@ You can use `group` and `value` parameters in the variation scope. In a variatio
 
 For example, you have a data set with the following variation:
 
-```xml 
+```xml
 <variation name="CreateSimpleProductEntityTestVariation3" summary="Create product with special price and custom options(fixed price)">
     <data name="tag" xsi:type="string">test_type:extended_acceptance_test</data>
     <data name="product/data/url_key" xsi:type="string">simple-product-%isolation%</data>
@@ -244,7 +247,7 @@ For example, you have a data set with the following variation:
 
 By using the `<allow>` element, you can create a rule to use only the `CreateSimpleProductEntityTestVariation3` variation:
 
-```xml 
+```xml
 <rule scope="variation">
     <allow>
         <tag group="test_type" value="extended_acceptance_test" />
@@ -254,7 +257,7 @@ By using the `<allow>` element, you can create a rule to use only the `CreateSim
 
 or use all variations except the `CreateSimpleProductEntityTestVariation3` variation:
 
-```xml 
+```xml
 <rule scope="variation">
     <deny>
         <tag group="test_type" value="extended_acceptance_test" />
@@ -270,7 +273,7 @@ A tag has two parameters: `group` and `value`. In a constraint, they are provide
 
 - Any tags that are used in the constraint should be added to the beginning of a class definition:
 
-``` php?start_inline=1
+```php
 
 class AssertProductView extends AbstractConstraint
 {
@@ -285,7 +288,7 @@ class AssertProductView extends AbstractConstraint
 
 - The rule that allows constraints with this tag only:
 
-```xml 
+```xml
 <rule scope="testcase">
     <allow>
         <tag group="severity" value="low" />
@@ -295,7 +298,7 @@ class AssertProductView extends AbstractConstraint
 
 - The rule that allows all constraints except those having this tag:
 
-```xml 
+```xml
 <rule scope="testcase">
     <deny>
         <tag group="severity" value="low" />

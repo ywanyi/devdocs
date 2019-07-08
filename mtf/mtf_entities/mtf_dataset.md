@@ -46,8 +46,8 @@ This is a data set that:
 - corresponds to the XSD schema `<magento2_root_dir>/dev/tests/functional/vendor/magento/mtf/etc/variations.xsd`
 - relates to the `Magento\Catalog\Test\TestCase\Product\CreateSimpleProductEntityTest` test case (performs creation of the simple product)
 - relates to the ticket `MAGETWO-23414` in Jira
-- contains variation `CreateSimpleProductEntityTestVariation1` that 
-  - contains data to create product with fixed price (see descriptions in the following table) 
+- contains variation `CreateSimpleProductEntityTestVariation1` that
+  - contains data to create product with fixed price (see descriptions in the following table)
   - defines tag that can be used to customize the test suite run
   - defines [constraints][constraint] that will be performed after the test flow in the order they are presented in the data set
 
@@ -105,7 +105,7 @@ The `CreateSimpleProductEntityTestVariation1` variation contains the following `
 
 ## Data set structure {#structure}
 
-A data set is an {% glossarytooltip 8c0645c5-aa6b-4a52-8266-5659a8b9d079 %}XML{% endglossarytooltip %} file that contains test variations for a test case.
+A data set is an [XML](https://glossary.magento.com/xml) file that contains test variations for a test case.
 
 Each variation includes:
 
@@ -122,7 +122,7 @@ The following table shows structure of the data set:
 <tr><th>Node </th><th>Semantics </th><th>Attributes </th></tr>
 <tr>
 <td><code>config</code> </td>
-<td>The root element that defines an XML {% glossarytooltip 621ef86b-7314-4fbc-a80d-ab7fa45a27cb %}namespace{% endglossarytooltip %} and an XML Schema. </td>
+<td>The root element that defines an XML [namespace](https://glossary.magento.com/namespace) and an XML Schema. </td>
 <td><ul>
 <li><code> xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"</code></li>
 <li><code>xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd"</code></li>
@@ -142,6 +142,7 @@ The following table shows structure of the data set:
 <td>Contains variation description in attributes and data with constraints in child elements.</td>
 <td><ul>
 <li><code>name</code> - a variation name. Required.</li>
+<li><code>replace</code> - a name of variation to be used instead of a variation indicated in <code>name</code>. Optional.</li>
 <li><code>firstConstraint</code> - a full name of constraint that is performed first. Optional.</li>
 <li><code>method</code> - a name of the test method from the test class. Optional.</li>
 <li><code>summary</code> - description of the variation. Optional.</li>
@@ -153,7 +154,7 @@ The following table shows structure of the data set:
 <td>Data to be used by a test case. </td>
 <td><ul>
 <li><code>name</code> - a name of variable with extra data. <a href="#data_node">More details.</a> Required.</li>
-<li><code>xsi:type</code> - a type of the value. 
+<li><code>xsi:type</code> - a type of the value.
 The following data types are available:
 <ul>
 <li><code>array</code></li>
@@ -176,24 +177,23 @@ The following data types are available:
 </table>
 
 {: .bs-callout .bs-callout-warning }
-A variation should contain only data that is required for its flow and constraints.
-
+   A variation should contain only data that is required for its flow and constraints.
 
 A data set should be placed in the same directory with a corresponding test case.
 
 ## Data set merging {#merge}
 
-The FTF enables you to merge data sets from different modules. For example, if you create a new {% glossarytooltip c1e4242b-1f1a-44c3-9d72-1d5b1435e142 %}module{% endglossarytooltip %} that adds a menu option to an existing module, the FTF allows you to merge the new data with the existing data sets. As a result, you don't have to edit the existing module to include the new information, and your tests continue to work. If you decide to later remove the same new module, you don't need to clean the data sets in other modules.
-   
+The FTF enables you to merge data sets from different modules. For example, if you create a new [module](https://glossary.magento.com/module) that adds a menu option to an existing module, the FTF allows you to merge the new data with the existing data sets. As a result, you don't have to edit the existing module to include the new information, and your tests continue to work. If you decide to later remove the same new module, you don't need to clean the data sets in other modules.
+
 There are two options to merge data sets in the FTF:
- 
+
 - [add a new variation]
 - [extend an existing variation]
 
 ## HowTos {#howtos}
 
-A data set is a flexible FTF {% glossarytooltip a9027f5d-efab-4662-96aa-c2999b5ab259 %}entity{% endglossarytooltip %} that allows to perform different tasks. Learn their descriptions in the following sections.
- 
+A data set is a flexible FTF [entity](https://glossary.magento.com/entity) that allows to perform different tasks. Learn their descriptions in the following sections.
+
 ### Define `name` in the `<data>` node {#data_node}
 
 As you can see in the [structure table](#dataset_struct_table), the `name` data has a specific structure. Why? To make your test more flexible.
@@ -216,7 +216,7 @@ If a variable is assigned more than one value:
 
 the value is processed as an array:
 
-``` php?start_inline=1
+```php
 $price = [
     'data' => [
         'shopping_cart' => [
@@ -225,7 +225,7 @@ $price = [
         'product_page' => [
             'special_price' => [
                 'excluding_tax' => '6'
-            ]   
+            ]
         ]
     ]
 ]
@@ -249,11 +249,13 @@ Also, in similar cases you can use array type in a data set, like:
 
 For example, if a [test case] or constraint has an argument `$price`, then the test case takes from the data set all the `<data>` nodes with a name `price`. Assume a method with the `$price` argument.
 
-```php?start_inline=1
+```php
+<?php
 public function testCreate($price)
 {
     //
 }
+?>
 ```
 
 To assign it with `10` in one of the variations, add the following field to a variation of the corresponding data set:
@@ -266,11 +268,13 @@ To assign it with `10` in one of the variations, add the following field to a va
 
 In your test you often need to use injectable [fixture] instances. For example:
 
-```php?start_inline=1
+```php
+<?php
 public function testCreate(\Magento\Catalog\Test\Fixture\CatalogProductSimple $product)
 {
     //
 }
+?>
 ```
 
 In this case, the ObjectManager sends data to the [InjectableFixture] constructor. It declares that your data can be passed to the fixture in `$data` variable as an array. For example, to assign the existing fixture field `weight` with `50` you can use the following notation:
@@ -290,7 +294,7 @@ The [InjectableFixture] class enables you to use a [fixture repository][reposito
 ### Set data to a fixture field from a repository {#fixture_field_repository}
 
 You can assign data to a [fixture field from its repository].
- 
+
 Let's see an example:
 
 ```xml
@@ -312,7 +316,7 @@ The `checkout_data` doesn't contain source and is assigned with values from the 
 ### Add a new variation {#add_variation}
 
 To add a new variation using [merging], you should simply use the name of a [test case] that you want to merge with. For example, you want to add a new variations from the Magento_ProductVideo module to the `Magento\Catalog\Test\TestCase\Product\UpdateSimpleProductEntityTest` that is placed in the Magento_Catalog module. You can create data set in the Magento_ProductVideo module, containing variations you need, and paste the test case name that you want to merge with:
- 
+
  * Create `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/ProductVideo/Test/TestCase/Product/UpdateSimpleProductEntityTest.xml` with the following code:
 
 ```xml
@@ -352,24 +356,36 @@ Variations `DeleteVideoFromPCFTestVariation1` and `DeleteVideoFromPCFTestVariati
 ### Extend a variation with data {#extend_variation}
 
 If you want to extend variation in another module using [merging], you should use a [test case] name that you want to merge with and a variation name that you want to extend.
- 
+
 For example, see how in `Magento/Catalog/Test/TestCase/Product/ValidateOrderOfProductTypeTest.xml`
 
+ ```xml
+ {%remote_markdown https://raw.githubusercontent.com/magento/magento2/2.1/dev/tests/functional/tests/app/Magento/Catalog/Test/TestCase/Product/ValidateOrderOfProductTypeTest.xml%}
+ ```
+
+ the variation `ValidateOrderOfProductTypeTestVariation1` is extended by the Magento_Bundle module:
+
+ ```xml
+ {%remote_markdown https://raw.githubusercontent.com/magento/magento2/2.1/dev/tests/functional/tests/app/Magento/Bundle/Test/TestCase/ValidateOrderOfProductTypeTest.xml%}
+  ```
+
+### Replace a variation {#replace_variation}
+
+You can replace one variation with another using a `replace` attribute in the `variation` node. The `replace` attribute contains variation that must be replaced by a variation from a `name` attribute.
+
 ```xml
-{%remote_markdown https://raw.githubusercontent.com/magento/magento2/2.0/dev/tests/functional/tests/app/Magento/Catalog/Test/TestCase/Product/ValidateOrderOfProductTypeTest.xml%}
+
+<variation name="CreateSuperNewCustomerBackendEntityTestVariation1" replace="CreateCustomerBackendEntityTestVariation1" summary="Variation that replaces default CreateCustomerBackendEntityTestVariation1">
+
 ```
 
-the variation `ValidateOrderOfProductTypeTestVariation1` is extended by the Magento_Bundle module:
-
-```xml
-{%remote_markdown https://raw.githubusercontent.com/magento/magento2/2.0/dev/tests/functional/tests/app/Magento/Bundle/Test/TestCase/ValidateOrderOfProductTypeTest.xml%}
-```
+After a merge of a data set with the variation that is mentioned, a test will use `CreateSuperNewCustomerBackendEntityTestVariation1` instead of `CreateCustomerBackendEntityTestVariation1`.
 
 <!-- LINK DEFINITIONS -->
 
 [add a new variation]: #add_variation
 [extend an existing variation]: #extend_variation
-[merging]: #merge 
+[merging]: #merge
 
 [constraint]: {{ page.baseurl }}/mtf/mtf_entities/mtf_constraint.html
 [data source]: {{ page.baseurl }}/mtf/mtf_entities/mtf_fixture.html#mtf_fixture_source

@@ -1,0 +1,31 @@
+# OS generated files #
+######################
+/*.db
+.DS_Store
+.vscode
+
+# Config and output files #
+###########################
+
+/_site/
+
+_config.local.yml
+.jekyll-metadata
+.whatsup.yml
+
+*.bat
+/tmp/
+/vendor/
+/node_modules/
+
+_algolia_api_key
+
+# Docs from different repositories #
+###################################
+
+/mbi/
+/page-builder/
+/page-builder-migration/
+/guides/m1x/
+/mftf/
+/guides/

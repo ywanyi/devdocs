@@ -32,4 +32,4 @@ If you haven't already installed optional sample data, you can [install it now](
 
 ### Configure
 
-[Configure the Magento application]({{ page.baseurl }}/install-gde/install/post-install-config.html).
+[Configure the Magento application]({{ page.baseurl }}/install-gde/install/post-install-config.html)

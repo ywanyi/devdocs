@@ -10,7 +10,7 @@ functional_areas:
 
 Running tests in PhpStorm requires following steps to setup the system.
 
-1. Configuring the {% glossarytooltip bf703ab1-ca4b-48f9-b2b7-16a81fd46e02 %}PHP{% endglossarytooltip %} interpreter
+1. Configuring the [PHP](https://glossary.magento.com/php) interpreter
 2. Configuring PHPUnit
 3. Creating a run configuration
 
@@ -18,25 +18,28 @@ Running tests in PhpStorm requires following steps to setup the system.
 
 In the PhpStorm preferences, select the PHP interpreter PhpStorm should use to run tests with.  
 
-![PhpStorm PHP preference panel]({{ site.baseurl }}/common/images/phpstorm_php_language_preferences.png){:width="600px"}
+![PhpStorm PHP preference panel]({{ site.baseurl }}/common/images/phpstorm_php_language_preferences.png){: width="600px"}
+
 
 If you can not select a PHP interpreter because the dropdown is empty, you can add a one by clicking on the button with the three dots beside the dropdown.  
 
 Then, click the **+** (add) button in the top right to select the desired PHP binary on your file system.
 
-![Adding a PHP interpreter to PhpStorm]({{ site.baseurl }}/common/images/phpstorm_add_php_interpreter_dialogue.png){:width="600px"}
+![Adding a PHP interpreter to PhpStorm]({{ site.baseurl }}/common/images/phpstorm_add_php_interpreter_dialogue.png){: width="600px"}
+
 
 Please refer to the PhpStorm documentation for further information on [how to configure a local PHP interpreter](https://www.jetbrains.com/help/phpstorm/2016.1/configuring-local-php-interpreters.html?origin=old_help).
 
-It is also possible to [configure a remote PHP interpreter](https://www.jetbrains.com/help/phpstorm/2016.1/configuring-remote-php-interpreters.html?origin=old_help), which is a common setup when working with Vagrant or {% glossarytooltip 57f1b0dc-1341-466d-a685-e0dbf5a3b713 %}Docker{% endglossarytooltip %} based development environments.
+It is also possible to [configure a remote PHP interpreter](https://www.jetbrains.com/help/phpstorm/2016.1/configuring-remote-php-interpreters.html?origin=old_help), which is a common setup when working with Vagrant or [Docker](https://glossary.magento.com/docker) based development environments.
 
 Please be aware that the details on configuring the PHP interpreter might vary between PhpStorm versions.
 
 ### Configuring PHPUnit
 
-After configuring the interpreter, the next step is to set up the PhpStorm preferences for how to execute PHPUnit.
+After configuring the interpreter, the next step is to set up the PHPStorm preferences for how to execute PHPUnit.
 
-![PhpStorm PHPUnit preference panel]({{ site.baseurl }}/common/images/phpstorm_phpunit_preferences_dialogue.png){:width="600px"}
+![PhpStorm PHPUnit preference panel]({{ site.baseurl }}/common/images/phpstorm_phpunit_preferences_dialogue.png){: width="600px"}
+
 
 1.	Click the **Use custom autoloader** option.
 2.	Select the `vendor/autoload.php` file in your Magento 2 installation.
@@ -65,7 +68,8 @@ Depending on what tests should be included in the run configuration, the next st
 4.	Select the file `dev/tests/unit/phpunit.xml.dist`
 5.	Click **OK**.
 
-![All Unit Tests run configuration]({{ site.baseurl }}/common/images/phpstorm_run_config_all_unit_tests.png){:width="600px"}
+![All Unit Tests run configuration]({{ site.baseurl }}/common/images/phpstorm_run_config_all_unit_tests.png){: width="600px"}
+
 
 #### Running the tests of one module
 
@@ -74,7 +78,8 @@ Depending on what tests should be included in the run configuration, the next st
 3.	Select the directory containing the modules unit tests. PHPUnit will run every file ending with `Test.php` in the selected directory branch.
 3.	Click **OK**.
 
-![Module Unit Tests run configuration]({{ site.baseurl }}/common/images/phpstorm_run_config_module_unit_tests.png){:width="600px"}
+![Module Unit Tests run configuration]({{ site.baseurl }}/common/images/phpstorm_run_config_module_unit_tests.png){: width="600px"}
+
 
 #### Running the tests in a class
 
@@ -84,7 +89,8 @@ Depending on what tests should be included in the run configuration, the next st
 4.	File: select the file containing the test class.
 5.	Click **OK**.
 
-![Test Class run configuration]({{ site.baseurl }}/common/images/phpstorm_run_config_class_unit_tests.png){:width="600px"}
+![Test Class run configuration]({{ site.baseurl }}/common/images/phpstorm_run_config_class_unit_tests.png){: width="600px"}
+
 
 A more convenient way to create a run configuration for a test class is to open the class in PhpStorm, and then right-clicking into the class and selecting **Create 'TestClassName'** or **Run 'TestClassName'**.  
 
@@ -94,6 +100,6 @@ Note that the test class has to inherit from `\PHPUnit_Framework_TestCase` for P
 
 First select the run configuration to execute in the run configuration drop-down menu above the main editor window, then click the **Play** icon beside it.  
 
-By clicking the **Debug** icon (of a bug) next to the **Play** icon, it is possible to step-debug code during test execution, if the xdebug PHP {% glossarytooltip 55774db9-bf9d-40f3-83db-b10cc5ae3b68 %}extension{% endglossarytooltip %} is installed.
+By clicking the **Debug** icon (of a bug) next to the **Play** icon, it is possible to step-debug code during test execution, if the xdebug PHP [extension](https://glossary.magento.com/extension) is installed.
 
 

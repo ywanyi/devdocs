@@ -1,16 +1,16 @@
 ---
 group: rest-api
 subgroup: A_rest
-title: List of REST APIs by module
-menu_title: List of REST APIs by module
+title: List of REST endpoints by module
+menu_title: List of REST endpoints by module
 menu_order: 3
 functional_areas:
   - Integration
 ---
 
-## List of REST APIs for {{site.data.var.ee}} {#listee}
+## List of REST endpoints for {{site.data.var.ee}} {#listee}
 
-The REST APIs for {{site.data.var.ee}} are available on Commerce installations only. Commerce installations automatically have access to all {{site.data.var.ce}} REST APIs.
+The REST endpoints for {{site.data.var.ee}} are available on Commerce installations only. Commerce installations automatically have access to all {{site.data.var.ce}} REST APIs.
 
 Additions since 2.0 are marked with asterisks (*).
 
@@ -22,7 +22,9 @@ Additions since 2.0 are marked with asterisks (*).
 
     GET    /V1/carts/:quoteId/giftCards
     PUT    /V1/carts/:cartId/giftCards
-    DELETE /V1/carts/:quoteId/giftCards/:giftCardCode
+    DELETE /V1/carts/:cartId/giftCards/:giftCardCode
+    * DELETE /V1/carts/guest-carts/:cartId/giftCards/:giftCardCode
+    * DELETE /V1/carts/mine/giftCards/:giftCardCode
     POST   /V1/carts/mine/giftCards
     POST   /V1/carts/guest-carts/:cartId/giftCards
     GET    /V1/carts/guest-carts/:cartId/checkGiftCard/:giftCardCode
@@ -63,11 +65,15 @@ Additions since 2.0 are marked with asterisks (*).
     GET    /V1/returns/:id/tracking-numbers
     GET    /V1/returns/:id/labels
 
+### Worldpay
+
+    * POST   /V1/worldpay-guest-carts/:cartId/payment-information
+
 ## List of REST APIs for {{site.data.var.ce}} {#list}
 
-    The {{site.data.var.ee}} REST APIs are available on all installations.
+The {{site.data.var.ce}} REST APIs are available on all installations.
 
-    Additions since 2.0 are marked with asterisks (*).
+Additions since 2.0 are marked with asterisks (*). Additions since 2.2 are marked with hash characters (#).
 
 ### Backend
 
@@ -233,6 +239,7 @@ Additions since 2.0 are marked with asterisks (*).
     PUT    /V1/customers/me/password
     GET    /V1/customers/:customerId/password/resetLinkToken/:resetPasswordLinkToken
     PUT    /V1/customers/password
+    #POST  /V1/customers/resetPassword
     GET    /V1/customers/:customerId/confirm
     POST   /V1/customers/confirm
     PUT    /V1/customers/validate
@@ -303,24 +310,24 @@ Additions since 2.0 are marked with asterisks (*).
     * PUT    /V1/carts/mine
     PUT    /V1/carts/mine/order
     GET    /V1/guest-carts/:cartId
-    * POST   /V1/guest-carts
-    * PUT    /V1/guest-carts/:cartId
+    POST   /V1/guest-carts
+    PUT    /V1/guest-carts/:cartId
     PUT    /V1/guest-carts/:cartId/order
     GET    /V1/carts/:cartId/shipping-methods
-    POST   /V1/carts/:cartId/estimate-shipping-methods
-    POST   /V1/carts/:cartId/estimate-shipping-methods-by-address-id
+    * POST   /V1/carts/:cartId/estimate-shipping-methods
+    * POST   /V1/carts/:cartId/estimate-shipping-methods-by-address-id
     GET    /V1/carts/mine/shipping-methods
     POST   /V1/carts/mine/estimate-shipping-methods
     POST   /V1/carts/mine/estimate-shipping-methods-by-address-id
     GET    /V1/guest-carts/:cartId/shipping-methods
     POST   /V1/guest-carts/:cartId/estimate-shipping-methods
     GET    /V1/carts/:cartId/items
-    POST   /V1/carts/:quoteId/items
-    PUT    /V1/carts/:cartId/items/:itemId
+    * POST   /V1/carts/:quoteId/items
+    * PUT    /V1/carts/:cartId/items/:itemId
     DELETE /V1/carts/:cartId/items/:itemId
     GET    /V1/guest-carts/:cartId/items
-    POST   /V1/guest-carts/:cartId/items
-    PUT    /V1/guest-carts/:cartId/items/:itemId
+    * POST   /V1/guest-carts/:cartId/items
+    * PUT    /V1/guest-carts/:cartId/items/:itemId
     DELETE /V1/guest-carts/:cartId/items/:itemId
     GET    /V1/carts/mine/items
     POST   /V1/carts/mine/items
@@ -370,8 +377,8 @@ Additions since 2.0 are marked with asterisks (*).
     GET    /V1/orders/:id/comments
     PUT    /V1/orders/create
     PUT    /V1/orders/:parent_id
-    * GET    /V1/orders/items/:id
-    * GET    /V1/orders/items
+    GET    * /V1/orders/items/:id
+    GET    * /V1/orders/items
     GET    /V1/invoices/:id
     GET    /V1/invoices
     GET    /V1/invoices/:id/comments
@@ -385,6 +392,7 @@ Additions since 2.0 are marked with asterisks (*).
     GET    /V1/creditmemo/:id
     PUT    /V1/creditmemo/:id
     POST   /V1/creditmemo/:id/emails
+    * POST   /V1/creditmemo/refund
     POST   /V1/creditmemo/:id/comments
     POST   /V1/creditmemo
     GET    /V1/shipment/:id
@@ -402,7 +410,7 @@ Additions since 2.0 are marked with asterisks (*).
     * POST /V1/order/:orderId/invoice
     * POST /V1/order/:orderId/ship
     * POST /V1/invoice/:invoiceId/refund
- +  * POST /V1/order/:orderId/refund
+    * POST /V1/order/:orderId/refund
 
 ### SalesRule
 

@@ -1,9 +1,6 @@
 ---
 group: configuration-guide
-subgroup: Optimization
 title: Magento Optimization Guide
-menu_title: Magento Optimization Guide
-menu_order: 100
 functional_areas:
   - Configuration
   - System
@@ -24,7 +21,7 @@ The following is a list of recommended software for production instances in orde
 
 * [Varnish cache][config-varnish]
 * PHP 7
-* (Enterprise only) Use the [Solr & Solr Search Adapter][solr]
+* (Enterprise only) Use the [Elasticsearch & Elasticsearch Search Adapter][elasticsearch]
 *	Nginx and [PHP-FPM][php-fpm]
 
 For multi-server deployments or for merchants planning on scaling their business we recommend the following:
@@ -90,8 +87,8 @@ Go to the Admin in default of developer mode and change the following settings f
 | ------------------- | -------------------------- | ------ |
 | Grid Settings       | Asynchronous indexing      | Enable |
 | CSS Settings        | Minify CSS Files           | Yes    |
-| Javascript Settings | Minify JavaScript Files    | Yes    |
-| Javascript Settings | Enable JavaScript Bundling | Yes    |
+| JavaScript Settings | Minify JavaScript Files    | Yes    |
+| JavaScript Settings | Enable JavaScript Bundling | Yes    |
 | Template Settings   | Minify HTML                | Yes    |
 
 #### Stores -> Configuration -> Sales -> Sales Emails
@@ -100,9 +97,9 @@ Go to the Admin in default of developer mode and change the following settings f
 | ---------------- | -------------------- | ------ |
 | General Settings | Asynchronous Sending | Enable |
 
-#### Stores -> Index Management
+#### System -> Index Management
 
-Set all indexers to "Update on Schedule" mode.
+Set all indexers to "Update by Schedule" mode.
 
 ### Production Mode
 
@@ -110,14 +107,14 @@ Switching to production mode improves storefront responsiveness and prevents lon
 
 Run the following commands to switch to production mode:
 
-~~~
+```bash
 bin/magento deploy:mode:set production
-~~~
+```
 
-[composer-install]: {{ page.baseurl }}/install-gde/prereq/integrator_install.html
+[composer-install]: {{ page.baseurl }}/install-gde/composer.html
 [zip-install]: {{ page.baseurl }}/install-gde/prereq/zip_install.html
 [config-varnish]: {{ page.baseurl }}/config-guide/varnish/config-varnish.html
-[solr]: {{ page.baseurl }}/config-guide/solr/solr-overview.html
+[elasticsearch]: {{ page.baseurl }}/config-guide/elasticsearch/es-overview.html
 [php-fpm]: https://php-fpm.org/
 [redis-session]: {{ page.baseurl }}/config-guide/redis/redis-session.html
 [redis-default-cache]: {{ page.baseurl }}/config-guide/redis/redis-pg-cache.html

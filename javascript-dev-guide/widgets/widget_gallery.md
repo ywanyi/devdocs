@@ -2,29 +2,27 @@
 group: javascript-developer-guide
 subgroup: 3_Widgets
 title: Gallery widget
-menu_order: 7
-menu_title: Gallery widget
 ---
 
 ## Overview
 
-The gallery {% glossarytooltip 5bfa8a8e-6f3e-4fed-a43e-62339916f02e %}jQuery{% endglossarytooltip %} {% glossarytooltip f0dcf847-ce21-4b88-8b45-83e1cbf08100 %}widget{% endglossarytooltip %} implements a content area with images organized into preview and thumbnails blocks.
+The gallery jQuery widget implements a content area with images organized into preview and thumbnails blocks.
 
 The following picture is an illustration of image displaying on the product page using the gallery widget:
 
-![A product page with preview and thumbnails]({{ site.baseurl }}/common/images/gallery_scr.png){: width="650px"}
+![A product page with preview and thumbnails]({{site.baseurl}}/common/images/gallery_scr21.png){:width="650px"}
 
 In addition, the [magnifier widget]({{ page.baseurl }}/javascript-dev-guide/widgets/widget_gallery_mg.html) can be used to demonstrate images in 100% scaled size in separate dedicated layer, and the gallery fullscreen mode can be used to navigate the entire full sized photo.
 
 Gallery is displayed consistently across all supported browsers and is responsive &mdash; it sizes correctly on mobile devices and desktops.
 
-The gallery widget uses the [Fotorama widget](http://fotorama.io/).
+The gallery widget uses the [Fotorama widget].
 
-The important feature of the gallery widget implementation is the possibility to configure the widget options in the `view.xml` configuration file of a {% glossarytooltip d2093e4a-2b71-48a3-99b7-b32af7158019 %}theme{% endglossarytooltip %}.
+The important feature of the gallery widget implementation is the possibility to configure the widget options in the `view.xml` configuration file of a theme.
 
-The gallery widget source code is [lib/web/mage/gallery/gallery.js]({{ site.mage2bloburl }}/{{ page.guide_version }}/lib/web/mage/gallery/gallery.js)
+The gallery widget source code is [lib/web/mage/gallery/gallery.js].
 
-The gallery magnifier source is [ lib/web/magnifier/magnify.js]({{ site.mage2bloburl }}/{{ page.guide_version }}/lib/web/magnifier/magnify.js).
+The gallery magnifier source is [lib/web/magnifier/magnify.js].
 
 ### Contents
 
@@ -34,12 +32,13 @@ The gallery widget is initialized as described in [JavaScript initialization]({{
 
 Example of declarative initialization:
 
- `<Magento_Catalog_module_dir>/view/frontend/templates/product/view/gallery.phtml`
+```xml
+<Magento_Catalog_module_dir>/view/frontend/templates/product/view/gallery.phtml
+```
 
-{%highlight js%}
+```javascript
 <script type="text/x-magento-init">
     {
-         {
         "<element_selector>": {
             "mage/gallery/gallery": {
                 "data": [{
@@ -71,6 +70,8 @@ Example of declarative initialization:
                     "nav": "<false/thumbs/dots>",
                     "loop": <true/false>,
                     "navdir": "<horizontal/vertical>",
+                    "navarrows": <true/false>,
+                    "navtype": "<slides/thumbs>",
                     "arrows": <true/false>,
                     "showCaption": <true/false>,
                     "transitionduration": <number>,
@@ -88,8 +89,7 @@ Example of declarative initialization:
         }
     }
 </script>
-
-{%endhighlight%}
+```
 
 ## Options {#gallery_options}
 
@@ -108,7 +108,7 @@ Array of images to display.
 
 Where `image` is an object with keys:
 
-{%highlight js%}
+```javascript
 {
     "thumb": "<small_image_url>",
     "img": "<small_image_url>",
@@ -116,7 +116,7 @@ Where `image` is an object with keys:
     "caption": "<message>",
     "isMain": "<true/false>"
 }
-{%endhighlight%}
+```
 
 The `thumb`, `img`, and `full` are full paths to proper image files.
 
@@ -125,7 +125,7 @@ The `thumb`, `img`, and `full` are full paths to proper image files.
 Set the caption for a specific image in the `data` field.
 Example of the runtime initialization with the `caption` option specified:
 
-{%highlight js%}
+```javascript
 galleryInstance({
     data: [
         {
@@ -135,7 +135,7 @@ galleryInstance({
         }
     ]
 });
-{%endhighlight%}
+```
 
 ### `options` {#options}
 Set of options available for the Preview region.
@@ -174,7 +174,6 @@ Define whether images are displayed in a loop.
 **Type**: Boolean
 
 **Default value**: `false`
-
 
 #### `options/maxheight` {#gallery_maxheight}
 
@@ -233,7 +232,6 @@ Sliding direction of thumbnails.
 
 Display navigation arrows for thumbnails.
 
-
 **Type**: Boolean
 
 #### `options/navtype` {#gallery_navtype}
@@ -287,7 +285,6 @@ Height of thumbnails.
 
 **Type**: Number, String
 
-
 #### `options/transition` {#gallery_transitioneffect}
 
 Sets the transition effect for slides changing.
@@ -324,7 +321,7 @@ Display navigation arrows on the sides of previews in the fullscreen view.
 **Type**: Boolean
 
 #### `fullscreen/caption` {#full_caption}
-Display {% glossarytooltip 9122e7d4-7db9-48b2-ad27-1af26bad1215 %}alt text{% endglossarytooltip %} as image title in the fullscreen view.
+Display [alt text](https://glossary.magento.com/alt-text) as image title in the fullscreen view.
 
 **Type**: Boolean
 
@@ -333,7 +330,6 @@ Display {% glossarytooltip 9122e7d4-7db9-48b2-ad27-1af26bad1215 %}alt text{% end
 Switch on/off the keyboard navigation in the fullscreen mode.
 
 **Type**: Boolean
-
 
 #### `fullscreen/loop` {#full_loop}
 
@@ -362,6 +358,25 @@ Sliding direction of thumbnails in the fullscreen view.
 - `vertical`
 - `horizontal`
 
+#### `fullscreen/navarrows` {#full_navarrows}
+
+Show/hide arrows in thumb navigation.
+
+**Type**: Boolean
+
+**Default value**: `true`
+
+#### `fullscreen/navtype` {#full_navtype}
+
+Type of navigation.
+
+**Possible values**:
+
+- `thumbs`
+- `slides`
+
+**Default value**: `thumbs`
+
 #### `fullscreen/navigation_carousel` {#full_carousel}
 
 Display navigation thumbnails as carousel in the fullscreen view.
@@ -371,7 +386,6 @@ Display navigation thumbnails as carousel in the fullscreen view.
 #### `fullscreen/showCaption` {#full_showcaption}
 
 Enable view of caption in the fullscreen mode. Can be for initialized for specific image. Can work globally.
-
 
 **Type**: Boolean
 
@@ -402,13 +416,12 @@ Sets transition duration in milliseconds in the fullscreen view.
 
 **Type**: Number
 
-
 ### `breakpoints` {#breakpoints}
 Set of options that could be dynamically set while page is resizing.
 
 Set as follows:
 
-{%highlight js%}
+```javascript
 "breakpoints": {
     "%breakpoint_name%": {
         "conditions": {
@@ -417,7 +430,7 @@ Set as follows:
         "options": {...}
     }
 }
-{%endhighlight%}
+```
 
 Where the options are as follows:
 
@@ -430,20 +443,17 @@ Gallery and magnifier options can be set in the `view.xml` configuration file of
 
 The general gallery options are set as follows:
 
-{%highlight xml%}
-
+```xml
 <var name="gallery">
     <var name="%option1%">%option1_value%</var>
     <var name="%option2%">%option2_value%</var>
 ...
 </var>
-
-{%endhighlight%}
+```
 
 The fullscreen and breakpoints options are set in a similar way:
 
-{%highlight xml%}
-
+```xml
 <var name="fullscreen">
     <var name="%fullscreen_option1%">%option1_value%</var>
     <var name="%fullscreen_option2%">%option2_value%</var>
@@ -454,8 +464,7 @@ The fullscreen and breakpoints options are set in a similar way:
     <var name="%breakpoints_option2%">%option2_value%</var>
 ...
 </var>
-
-{%endhighlight%}
+```
 
 For illustration of setting gallery option in `view.xml`, you can reference to the [view.xml of the Blank theme]({{ site.mage2bloburl }}/{{ page.guide_version }}/app/design/frontend/Magento/blank/etc/view.xml#L184).
 
@@ -463,34 +472,30 @@ For illustration of setting gallery option in `view.xml`, you can reference to t
 
 Gallery methods are placed in data storage of the `gallery` object. To initialize the API, on the gallery object, call the `data` method with `gallery` as argument. The illustration follows:
 
-{% highlight php%}
+```javascript
 var api = $(element).data('gallery');
 
 //or
 
 var api = $('[data-gallery-role="gallery"]').data('gallery');
+```
 
-{% endhighlight %}
+This method returns JS object that contains [API](https://glossary.magento.com/api) functions.
 
-This method returns JS object that contains {% glossarytooltip 786086f2-622b-4007-97fe-2c19e5283035 %}API{% endglossarytooltip %} functions.
+To ensure that the gallery is fully formed, wrap your code with [event](https://glossary.magento.com/event) handler function and add it to the `gallery:loaded` event:
 
-
-To ensure that the gallery is fully formed, wrap your code with {% glossarytooltip c57aef7c-97b4-4b2b-a999-8001accef1fe %}event{% endglossarytooltip %} handler function and add it to the `gallery:loaded` event:
-
-{% highlight php %}
-
-    $(element).on('gallery:loaded', function () {
-        var api = $(element).data('gallery');
-        /* api methods calls */
-    });
-
-{% endhighlight php%}
+```javascript
+$(element).on('gallery:loaded', function () {
+    var api = $(element).data('gallery');
+    /* api methods calls */
+});
+```
 
 Then to call a method, use the following notation:
 
-{% highlight php %}
-    api.%method_name%();
-{% endhighlight php%}
+```php
+api.%method_name%();
+```
 
 All available methods are listed in the following paragraph.
 
@@ -543,30 +548,29 @@ Behavior:
 * `seek(-1)` displays the last image.
 * If the argument is a number bigger than the number of items, or less than "-(number of items)" the gallery shows the modulus of the following division: total images number divided by the argument number.  
 
-
 #### `updateData()` {#gallery_updateData}
 
 Add new items to the gallery.
 
 Example:
-
-{% highlight php %}
+```php
 api.updateData([{
     img: 'image1.jpg',
     thumb: 'thumb1.jpg',
     caption: 'caption'
 }]);
-{% endhighlight php %}
+```
 
 #### `updateOptions()` {#gallery_updateOptions}
 Updates options of active breakpoint or default gallery options, if there is no active breakpoint.
 
 Example:
-
-{% highlight php%}
-
+```php
 api.updateOptions([{
     nav: 'dots'
 }]);
+```
 
-{% endhighlight %}
+[Fotorama widget]: http://fotorama.io/
+[lib/web/mage/gallery/gallery.js]: {{ site.mage2bloburl }}/{{ page.guide_version }}/lib/web/mage/gallery/gallery.js
+[lib/web/magnifier/magnify.js]: {{ site.mage2bloburl }}/{{ page.guide_version }}/lib/web/magnifier/magnify.js

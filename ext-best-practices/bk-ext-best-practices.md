@@ -7,11 +7,11 @@ functional_areas:
 
 {:.bs-callout .bs-callout-info}
 DRAFT/PROPOSAL: This Best Practices Guide is a first draft! The guide combines Best Practices that we have heard the community ask for, along with guidelines that our Magento UX, Engineering, and Product teams are working on.
-We want your feedback; please do a pull request on [feedback-placement-and-design.md](https://github.com/magento/devdocs/tree/develop/guides/v2.0/ext-best-practices/admin/feedback-placement-and-design.md){: target="_blank"} and let us know what your best practices are, your challenges, and how you would like Magento to help standardize (where needed).
+We want your feedback; please do a pull request on [feedback-placement-and-design.md]({{ page.baseurl }}/ext-best-practices/admin/feedback-placement-and-design.html) and let us know what your best practices are, your challenges, and how you would like Magento to help standardize (where needed).
 
 Magento consists of the core product code plus optional components that enhance or replace the core product code. There are over 100 out-of-the-box components in the form of modules, themes, and language packages available for Magento 2.
 
-Magento's architecture allows for enhancements by letting you develop your own component. Keep in mind that in addition to Magento's own modules, your {% glossarytooltip 55774db9-bf9d-40f3-83db-b10cc5ae3b68 %}extension{% endglossarytooltip %} will be running alongside components from other developers. For this reason, it is important that your component behaves correctly in Magento's modular environment.
+Magento's architecture allows for enhancements by letting you develop your own component. Keep in mind that in addition to Magento's own modules, your [extension](https://glossary.magento.com/extension) will be running alongside components from other developers. For this reason, it is important that your component behaves correctly in Magento's modular environment.
 
 The table below is data from a recent poll that shows the distribution of the amount of extensions installed on a Magento instance for each edition. So for example, 32% of merchants on EE have over 50 different extensions installed!
 

@@ -1,10 +1,6 @@
 ---
 group: configuration-guide
-subgroup: 04_CLI
 title: Configure and run cron
-menu_title: Configure and run cron
-menu_node:
-menu_order: 100
 functional_areas:
   - Configuration
   - System
@@ -26,7 +22,7 @@ Where `--group` specifies the cron group to run. Omit this option to run cron fo
 
 To set up custom cron jobs and groups, see [Configure custom cron jobs and cron groups]({{ page.baseurl }}/config-guide/cron/custom-cron.html).
 
-{: .bs-callout .bs-callout-info }
+{:.bs-callout .bs-callout-info}
 You must run cron twice: the first time to discover tasks to run and the second time to run the tasks themselves. The second cron run must occur on or after the `scheduled_at` time for every task.
 
 ## Run cron in the background {#config-cli-cron-bkg}
@@ -36,18 +32,3 @@ This section discusses how to run all Magento cron jobs every minute, which is t
 Run Magento cron jobs as the [Magento file system owner]({{ page.baseurl }}/install-gde/prereq/file-sys-perms-over.html).
 
 {% include config/setup-cron.md %}
-
-#### Related topics
-
--   [Manage the cache]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-cache.html)
--   [Manage the indexers]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-index.html)
--   [Code compiler]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-compiler.html)
--   [Set the Magento mode]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-mode.html)
--   [URN highlighter]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-urn.html)
--   [Dependency reports]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-depen.html)
--   [Translation dictionaries and language packages]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-i18n.html)
--   [Deploy static view files]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-static-view.html)
--   [Create symlinks to LESS files]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-less-sass.html)
--   [Run unit tests]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-test.html)
--   [Convert layout XML files]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-layout-xml.html)
--   [Generate data for performance testing]({{ page.baseurl }}/config-guide/cli/config-cli-subcommands-perf-data.html)

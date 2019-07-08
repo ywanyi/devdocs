@@ -6,7 +6,8 @@ menu_title: Manage branches with the Interface
 menu_order: 20
 menu_node:
 redirect_from:
-  - /guides/v2.0/cloud/project/project-priv-repos.html
+  - /guides/v2.1/cloud/project/project-priv-repos.html
+  - /guides/v2.2/cloud/project/project-priv-repos.html
 functional_areas:
   - Cloud
   - Configuration
@@ -22,7 +23,7 @@ This topic discusses how to use the Project Web Interface to:
 *	Sync (`git pull`) from the environment's parent
 *	Merge (`git push`) to the environment's parent
 
-{: .bs-callout .bs-callout-info }
+{:.bs-callout .bs-callout-info}
 You cannot create branches from Pro plan Staging and Production `master`. These environments include `master` branches that you deploy updated Git code to from Integration `master`.
 
 {% include cloud/wings-management.md %}
@@ -44,20 +45,19 @@ If you need additional environments for development, enter a [Support ticket]({{
 
 To add a branch:
 
-1. [Log in to your project]({{ page.baseurl }}/cloud/project/project-webint-basic.html#project-access).
-2. In the left navigation bar, click the name of the parent environment.
+1.	[Log in to your project]({{ page.baseurl }}/cloud/project/project-webint-basic.html#project-access).
+2.	In the left navigation bar, click the name of the parent environment.
 
-   Your new branch is cloned from this environment. Choose a parent environment that is similar to the environment you're about to create.
-3. Click ![Create a branch]({{ site.baseurl }}/common/images/cloud_branch-icon.png){:width="30px"}.
-4. In the provided field, enter a branch name. In many cases, the environment name is the same as its ID.
+	Your new branch is cloned from this environment. Choose a parent environment that is similar to the environment you're about to create.
+3.	Click ![Create a branch]({{ site.baseurl }}/common/images/cloud_branch-icon.png){:width="30px"}.
+4.	In the provided field, enter a branch name. In many cases, the environment name is the same as its ID.
 
-   <div class="bs-callout bs-callout-info" id="info" markdown="1">
-	 The environment *name* is different from the environment *ID* only if you use spaces or capital letters in the environment name. An environment ID consists of all lowercase letters, numbers, and allowed symbols. Capital letters in an environment name are converted to lowercase in the ID; spaces in an environment name are converted to dashes.
+    The environment _name_ is different from the environment _ID_ only if you use spaces or capital letters in the environment name. An environment ID consists of all lowercase letters, numbers, and allowed symbols. Capital letters in an environment name are converted to lowercase in the ID; spaces in an environment name are converted to dashes.
 
-	 An environment name *cannot* include characters reserved for your Linux shell or for regular expressions. Forbidden characters include curly braces (`{ }`), parentheses, asterisk (`*`), angle brackets (`< >`), ampersand (`&`), percent (`%`), and other characters.
-	 </div>
-5. Click **Branch**.
-6. Wait while the environment deploys.
+    An environment name **cannot** include characters reserved for your Linux shell or for regular expressions. Forbidden characters include curly braces (`{ }`), parentheses, asterisk (`*`), angle brackets (`>`), ampersand (`&`), percent (<code>%</code>), and other characters.
+
+5.	Click **Branch**.
+6.	Wait while the environment deploys.
 
 	During deployment, its status is **In process**, as the following figure shows.
 
@@ -138,17 +138,17 @@ If you do not see your Pro plan Staging and Production environments in the Proje
 
 ## Pull code from a private Git repository {#private}
 
-Your {{site.data.var.ece}} project can include code located in a private Git repository. For example, a you may have code for a custom module or theme in a private repo. To do so, you must add your project's public SSH key to your private Git repository and update your project's `composer.json`.
+Your {{site.data.var.ece}} project can include code located in a private Git repository. For example, you may have code for a custom module or theme in a private repo. To do so, you must add your project's public SSH key to your private Git repository and update your project's `composer.json`.
 
 To add a deployment key to your private GitHub repository, you must be the administrator of that repository. GitHub allows you to use a deploy key for one repository only.
 
 If your project needs to access multiple repositories, you can choose to
 attach an SSH key to an automated user account. Because this account won't
-be used by a human, it's referred to as a [*machine user*](https://developer.github.com/guides/managing-deploy-keys/){:target="_blank"}. You can then add the
+be used by a human, it's referred to as a [*machine user*](https://developer.github.com/guides/managing-deploy-keys/). You can then add the
 machine account as collaborator or add the machine user to a team with
 access to the repositories it needs to manipulate.
 
-{: .bs-callout .bs-callout-info }
+{:.bs-callout .bs-callout-info}
 We highly recommend adding and merging this code to your project Git repositories. If you do not configure the connection, you will have build issues.
 
 ### Find your deploy key {#ssh}
@@ -172,21 +172,20 @@ On GitHub, deploy keys are read-only by default. Your Magento project won't push
 
 To enter your project's public key as a GitHub deploy key:
 
-1. Log in to your GitHub repository as its administrator.
-2. Click **Settings** as the following figure shows.
+1.	Log in to your GitHub repository as its administrator.
+2.	Click **Settings** as the following figure shows.
 
-   ![GitHub settings]({{ site.baseurl }}/common/images/cloud_gh-settings.png){:width="650px"}
+	![GitHub settings]({{ site.baseurl }}/common/images/cloud_gh-settings.png){:width="650px"}
 
-	 <div class="bs-callout bs-callout-info" id="info" markdown="1">
-	 If you don't see this option, you're not the repository administrator and you cannot complete this task. Ask your GitHub project administrator to do this.
-	 </div>
+    {:.bs-callout .bs-callout-info}
+    If you do not see this option, you are not the repository administrator and you cannot complete this task. Ask your GitHub project administrator to do this.
 
-3. On the Settings page, in the left navigation bar, click **Deploy Keys** as the following figure shows.
+3.	On the Settings page, in the left navigation bar, click **Deploy Keys** as the following figure shows.
 
-	 ![GitHub deploy key]({{ site.baseurl }}/common/images/cloud_gh-deploy-key.png){:width="200px"}
+	![GitHub deploy key]({{ site.baseurl }}/common/images/cloud_gh-deploy-key.png){:width="200px"}
 
-4. Click **Add deploy key**.
-5. Follow the prompts on your screen to complete the task.
+4.	Click **Add deploy key**.
+5.	Follow the prompts on your screen to complete the task.
 
 In `composer.json`, use the `<user>@<host>:<.git</code>` format, or `ssh://<user>@<host>:<port>/<path>.git` if using a non-standard port.
 
@@ -228,9 +227,3 @@ The branch redeploys to update the environment security and settings.
 To secure Pro plan Staging environment, enter a [Support ticket]({{ page.baseurl }}/cloud/trouble/trouble.html). Provide the user credentials and/or IP addresses to allow or deny. If you have security settings entered for an existing Integration environment, in the ticket ask to have the secure settings copied to Staging.
 
 We recommend testing your environments after completing security settings.
-
-#### Related topics
-
-*	[Basic project information]({{ page.baseurl }}/cloud/project/project-webint-basic.html)
-*	[Project backup and restore (snapshot)]({{ page.baseurl }}/cloud/project/project-webint-snap.html)
-*	[Get started with a project]({{ page.baseurl }}/cloud/project/project-start.html)

@@ -17,7 +17,7 @@ The following diagram shows Web API component dependencies.
 
 ### High-level Architecture
 
-The following image provides an overview of how Web APIs are processed.
+The following image provides an overview of how Web API requests are processed.
 
 ![Web API request processing overview]({{ site.baseurl }}/common/images/coding-standards/webapi-request-processing-high-level-overview.png)
 
@@ -27,10 +27,10 @@ The following image provides an overview of how Web APIs are processed.
 
 Any [service contract]({{ page.baseurl }}/extension-dev-guide/service-contracts/service-contracts.html) can be [exposed as REST and SOAP]({{ page.baseurl }}/extension-dev-guide/service-contracts/service-to-web-service.html) endpoints via configuration in a module's `webapi.xml` file.
 
-#### Declare a new GraphQL query
+#### Declare a new GraphQL query/mutation
 
 1. Create custom resolvers.
-1. Declare a custom query and all necessary types in `graphql.xml`
+1. Declare a custom query/mutation and all necessary types in `schema.graphqls`.
 
 If the target module is called `MyModule`, then create the resolvers and configuration files in a new module called `MyModuleGraphQl`.
 
@@ -62,9 +62,9 @@ To extend an interface, use [extension attributes]({{ page.baseurl }}/extension-
 
 #### Modify the schema of an existing GraphQL query
 
-1. Add a `graphql.xml` file to the `<ModuleName>GraphQl` module. Magento merges this file with configurations from other modules using the same merge rules as other types of configuration.
+1. Add a `schema.graphqls` file to the `<ModuleName>GraphQl` module. Magento merges this file with configurations from other modules using the same merge rules as other types of configuration.
 
-2. Write any necessary plugins for existing resolvers related to the query, or create a custom resolver and enable it via override in `graphql.xml`
+2. Write any necessary plugins for existing resolvers related to the query, or create a custom resolver and enable it via override in `schema.graphqls`
 
 ### Model Consistency Constraints
 
@@ -91,7 +91,7 @@ Any new design related to Web API must satisfy the following constraints to keep
 1. Unlimited nesting should be supported during requests for related entities. (For example, get Order => Order Items => Products => Related Products)
 1. Field filtration must be performed with SQL queries. Do not filter on the application layer after you've fetched all possible fields.
 1. Third-party customizations must be done separately for Service Contracts and for GraphQL
-1. For modularity purposes, GraphQL configuration must be declared in a separate module. For example, to expose GraphQL for the module `MyModule`, you must create the `graphql.xml` file in the `MyModuleGraphQl` module.
+1. For modularity purposes, GraphQL configuration must be declared in a separate module. For example, to expose GraphQL for the module `MyModule`, you must create the `schema.graphqls` file in the `MyModuleGraphQl` module.
 1. GraphQL is primarily designed for store-front one-page apps and mobile applications. It supports token and cookie authentication, as well as guest access to public queries
 1. All queries must return the 200 HTTP status code. If an error occurs, return the error in the response body. A 500 status code is allowed when an exception occurs when generating a schema, but not during requests.
 1. The Store code should be passed via headers.

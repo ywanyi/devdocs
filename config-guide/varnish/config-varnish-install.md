@@ -1,10 +1,6 @@
 ---
 group: configuration-guide
-subgroup: 09_Varnish
 title: Install Varnish
-menu_title: Install Varnish
-menu_order: 5
-menu_node:
 functional_areas:
   - Configuration
   - System
@@ -13,14 +9,14 @@ functional_areas:
 
 Installing the Varnish software is beyond the scope of this guide. For more information about installing Varnish, see:
 
-*	[installation wiki](http://wiki.mikejung.biz/Varnish){: target="_blank"}
-*	[Varnish installation guides](https://www.varnish-cache.org/docs){: target="_blank"}
-*	[How to install Varnish (Tecmint)](http://www.tecmint.com/install-varnish-cache-web-accelerator){: target="_blank"}
+*	[installation wiki](http://wiki.mikejung.biz/Varnish)
+*	[Varnish installation guides](https://www.varnish-cache.org/docs)
+*	[How to install Varnish (Tecmint)](http://www.tecmint.com/install-varnish-cache-web-accelerator)
 
-{: .bs-callout .bs-callout-info }
+{:.bs-callout .bs-callout-info}
 This topic is written for Varnish on CentOS and Apache 2.2. If you're setting up Varnish in a different environment, some commands are likely different. Consult the preceding documentation for more information.
 
-## Confirm your Varnish version   {#config-varnish-version}
+## Confirm your Varnish version {#config-varnish-version}
 
 Enter the following command to display the version of Varnish you're running:
 

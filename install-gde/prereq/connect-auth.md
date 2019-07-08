@@ -17,7 +17,7 @@ functional_areas:
 
 *	Use your authentication keys to:
 
-	*	[Get the {{site.data.var.ce}} or {{site.data.var.ee}} metapackage (integrators, packagers)]({{ page.baseurl }}/install-gde/prereq/integrator_install.html)
+	*	[Get the {{site.data.var.ce}} or {{site.data.var.ee}} metapackage (integrators, packagers)]({{ page.baseurl }}/install-gde/composer.html)
 	*	[Clone the Magento 2 GitHub]({{ page.baseurl }}/install-gde/prereq/dev_install.html) (contributing developers only)
 	*	[Start the Component Manager]({{ page.baseurl }}/comp-mgr/module-man/compman-checklist.html)
-	*	[ Upgrade Magento]({{ page.baseurl }}/comp-mgr/upgrader/upgrade-checklist.html)
+	*	[Upgrade Magento]({{ page.baseurl }}/comp-mgr/upgrader/upgrade-checklist.html)

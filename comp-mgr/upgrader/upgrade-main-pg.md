@@ -9,7 +9,7 @@ functional_areas:
   - Upgrade
 ---
 
-## System upgrade options   {#upgrade-access}
+## System upgrade options {#upgrade-access}
 
 To choose which components to upgrade:
 
@@ -57,7 +57,7 @@ To choose which components to upgrade:
 	</tbody>
 	</table>
 
-## Upgrade components   {#upgr-comps}
+## Upgrade components {#upgr-comps}
 
 To upgrade components:
 
@@ -65,7 +65,7 @@ To upgrade components:
 
 	For example, to upgrade to the latest version, click the one with **(latest)** in the name as the following figure shows.
 
-	<img src="{{ site.baseurl }}/common/images/upgr_step1_core-ver.png" alt="Select the version of Magento core components to which to upgrade">
+	![Select the version of Magento core components to which to upgrade]({{ site.baseurl }}/common/images/upgr_step1_core-ver.png)
 
 2.	For each third-party component:
 
@@ -73,12 +73,12 @@ To upgrade components:
 
 		A sample follows.
 
-		<img src="{{ site.baseurl }}/common/images/upgr_comp_yes.png" alt="Upgrade this component">
+		![Upgrade this component]({{ site.baseurl }}/common/images/upgr_comp_yes.png)
 
 	*	If you *do not* want to upgrade it, set **Upgrade** to **No**.
 
 		A sample follows.
 
-		<img src="{{ site.baseurl }}/common/images/upgr_comp_no.png" alt="Do not upgrade this component">
+		![Do not upgrade this component]({{ site.baseurl }}/common/images/upgr_comp_no.png)
 
 3.	Click **Next** and continue with [Step 2. Readiness check]({{ page.baseurl }}/comp-mgr/upgrader/upgrade-readiness.html)

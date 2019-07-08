@@ -10,13 +10,13 @@ functional_areas:
   - Configuration
 ---
 
-Magento Commerce (Cloud) has a protective blocking feature that, under certain circumstances, restricts access to websites with security vulnerabilities. We use this partial blocking method to prevent exploitation of known security vulnerabilities.
+{{site.data.var.ece}} has a protective blocking feature that, under certain circumstances, restricts access to websites with security vulnerabilities. We use this partial blocking method to prevent exploitation of known security vulnerabilities.
 
 Outdated software often contains exploits we protect against by partially blocking access to these sites.
 
 ## How the protective block works
 
-Magento Commerce maintains a database of signatures of known security vulnerabilities in open-source software that are commonly deployed on our infrastructure. The security check analyzes only known vulnerabilities in open-source projects; it cannot examine customizations you write.
+{{site.data.var.ee}} maintains a database of signatures of known security vulnerabilities in open-source software that are commonly deployed on our infrastructure. The security check analyzes only known vulnerabilities in open-source projects; it cannot examine customizations you write.
 
 We analyze the code of your application:
 
@@ -33,7 +33,7 @@ We run two types of blocks:
 
 *	For production websites, we run a "partial block" that allows the site to stay mostly online.
 
-	Depending on the nature of the vulnerability, parts of a request, such as a query string, cookies or any additional headers, might be removed from GET requests. All other requests may be blocked entirely&mdash;this could apply to logging in, form submission, or product {% glossarytooltip 278c3ce0-cd4c-4ffc-a098-695d94d73bde %}checkout{% endglossarytooltip %}.
+	Depending on the nature of the vulnerability, parts of a request, such as a query string, cookies or any additional headers, might be removed from GET requests. All other requests may be blocked entirely&mdash;this could apply to logging in, form submission, or product [checkout](https://glossary.magento.com/checkout).
 
 Unblocking is automated upon resolution of the security risk. The block is removed soon after you apply a security upgrade that removes the vulnerability.
 

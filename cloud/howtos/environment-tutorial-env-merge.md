@@ -1,10 +1,6 @@
 ---
 group:
-subgroup:
 title: Merge and delete an environment (tutorial)
-menu_title: Merge and delete an environment (tutorial)
-menu_order:
-menu_node:
 functional_areas:
   - Cloud
   - Configuration
@@ -18,8 +14,8 @@ You can then optionally delete the environment.
 
 This tutorial shows how to create a sample file and merge it. This tutorial assumes you're already working in an environment; if not, see [Get started with an environment]({{ page.baseurl }}/cloud/env/environments-start.html#env-start-comm) to create one.
 
-{: .bs-callout .bs-callout-info }
-You *cannot* merge environment variables because they are not code. You must set the value of environment variables in an environment.
+{:.bs-callout .bs-callout-info}
+You _cannot_ merge environment variables because they are not code. You must set the value of environment variables in an environment.
 
 ### Get started
 
@@ -53,9 +49,9 @@ To merge an environment:
 
 ## Optionally delete the environment {#tut-env-delete}
 
-Before you delete an environment, make sure you don't need it anymore. You cannot recover a deleted environment later.
+You need to verify that you do not need an environment before you delete it. You cannot recover a deleted environment later.
 
-{: .bs-callout .bs-callout-info }
+{:.bs-callout .bs-callout-info}
 You cannot delete the `master` environment of any project.
 
 You must be a [project administrator]({{ page.baseurl }}/cloud/project/user-admin.html#cloud-role-project), [environment administrator]({{ page.baseurl }}/cloud/project/user-admin.html#cloud-role-env), or [account owner]({{ page.baseurl }}/cloud/project/user-admin.html#cloud-role-acct-owner) to perform this task.
@@ -103,8 +99,6 @@ To delete a environment:
 
 Wait for the environment to delete.
 
-{: .bs-callout .bs-callout-info }
+{:.bs-callout .bs-callout-info}
 To activate the environment later, use the `magento-cloud environment:activate` command.
 
-#### Related topic
-[Set Magento environment variables]({{ page.baseurl }}/cloud/env/set-variables.html)

@@ -9,27 +9,27 @@ functional_areas:
   - Upgrade
 ---
 
-## Prerequisites   {#compman-prereq}
+## Prerequisites {#compman-prereq}
 
-Before continuing, complete all tasks discussed in <a href="{{ page.baseurl }}/comp-mgr/prereq/prereq_compman.html">Prerequisites</a>.
+Before continuing, complete all tasks discussed in [Prerequisites]({{ page.baseurl }}/comp-mgr/prereq/prereq_compman.html).
 
-{: .bs-callout .bs-callout-warning }
+{:.bs-callout .bs-callout-warning}
 If you're upgrading to version 2.1, see [Upgrade to Magento version 2.1 (June 22, 2016)]({{ site.baseurl }}/guides/v2.1/release-notes/tech_bull_21-upgrade.html).
 
 ## Optional custom maintenance page
 
-During the time you're upgrading, your {% glossarytooltip 1a70d3ac-6bd9-475a-8937-5f80ca785c14 %}storefront{% endglossarytooltip %} is partially available. Users can see a list of files and so on but cannot shop or check out.
+During the time you're upgrading, your [storefront](https://glossary.magento.com/storefront) is partially available. Users can see a list of files and so on but cannot shop or check out.
 
 To avoid the appearance of a disabled site and to set up a custom maintenance page that displays during the upgrade, see [Maintenance mode options for upgrade]({{ page.baseurl }}/comp-mgr/trouble/cman/maint-mode.html).
 
-## Start System Upgrade from the Magento Admin   {#compman-access}
+## Start System Upgrade from the Magento Admin {#compman-access}
 
 To run System Upgrade:
 
-1.	Log in to the {% glossarytooltip 18b930cf-09cc-47c9-a5e5-905f86c43f81 %}Magento Admin{% endglossarytooltip %} as an administrator.
-2.	Click **System** > Tools > **Web Setup Wizard**.
+1.	Log in to the [Magento Admin](https://glossary.magento.com/magento-admin) as an administrator.
+2.	Click **System** > **Tools** > **Web Setup Wizard**.
 	The following page displays.<br><br>
-	<img src="{{ site.baseurl }}/common/images/cman_upgr_initial.png" width="650px" alt="Specify whether to manage components or upgrade Magento">
+	![Specify whether to manage components or upgrade Magento]({{ site.baseurl }}/common/images/cman_upgr_initial.png)
 3.	Click **System Configuration**.
 4.	If you haven't already done so, enter your [authentication keys]({{ page.baseurl }}/install-gde/prereq/connect-auth.html) in the provided fields.
 
@@ -37,30 +37,30 @@ To run System Upgrade:
 
 	![Authentication keys entered in the Setup Wizard]({{ site.baseurl }}/common/images/compman_auth-keys.png)
 
-  <div class="bs-callout bs-callout-warning" markdown="1">
-  For upgrade or update, you must use the same authentication keys you used to install the Magento software. For example, you *cannot* use {{site.data.var.ce}} authentication keys to update or upgrade Magento EE or vice versa. You also *cannot* use:
+	<div class="bs-callout bs-callout-warning" markdown="1">
+	For upgrade or update, you must use the same authentication keys you used to install the Magento software. For example, you *cannot* use {{site.data.var.ce}} authentication keys to update or upgrade Magento EE or vice versa. You also *cannot* use:
 
-  * Another user's authentication keys
-  * [Shared account](http://docs.magento.com/m2/ce/user_guide/magento/magento-account-share.html){: target="_blank"} authentication keys
-  </div>
+	* Another user's authentication keys
+	* [Shared account](http://docs.magento.com/m2/ce/user_guide/magento/magento-account-share.html){: target="_blank"} authentication keys
+	</div>
 5.	Click **Save Config**.
 3.	Click **System Upgrade**.
 
 	Magento begins searching for core module updates immediately. To also search for component updates, click **Yes**. A sample follows:
 
-	<img src="{{ site.baseurl }}/common/images/upgr_initial-pg.png" width="650px" alt="Magento begins searching for upgrades right away">
+	![Magento begins searching for upgrades right away]({{ site.baseurl }}/common/images/upgr_initial-pg.png)
 
 	The page displays similar to the following when we find components to upgrade.<br><br>
-	<img src="{{ site.baseurl }}/common/images/upgr_stuff-2-upgrade.png" width="650px" alt="Magento finds software to upgrade"><br><br>
-4. 	Continue with <a href="{{ page.baseurl }}/comp-mgr/upgrader/upgrade-main-pg.html">Step 1. Select versions to upgrade</a>.
+	![Magento finds software to upgrade]({{ site.baseurl }}/common/images/upgr_stuff-2-upgrade.png)<br><br>
+4. 	Continue with [Step 1. Select versions to upgrade]({{ page.baseurl }}/comp-mgr/upgrader/upgrade-main-pg.html).
 
 #### Error
 
-The following error can indicate one of several issues, including that you haven't entered your <a href="{{ page.baseurl }}/comp-mgr/prereq/prereq_auth-token.html">authentication keys</a> in the Magento Admin:
+The following error can indicate one of several issues, including that you haven't entered your [authentication keys]({{ page.baseurl }}/comp-mgr/prereq/prereq_auth-token.html) in the Magento Admin:
 
-![]({{ site.baseurl }}/common/images/upgr-sorry.png){: width="600px"}
+![]({{ site.baseurl }}/common/images/upgr-sorry.png)
 
-For suggested solutions to other causes indicated by this message, see <a href="{{ page.baseurl }}/comp-mgr/trouble/cman/were-sorry.html">troubleshooting</a>.
+For suggested solutions to other causes indicated by this message, see [troubleshooting]({{ page.baseurl }}/comp-mgr/trouble/cman/were-sorry.html).
 
 #### Sample data
 

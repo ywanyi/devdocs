@@ -1,12 +1,6 @@
 ---
 group: installation-guide
-subgroup: Getting Started
 title: What operating system is my server running?
-menu_title: What operating system is my server running?
-menu_node:
-menu_order: 103
-level3_menu_node: level3child
-level3_subgroup: basics
 functional_areas:
   - Install
   - System

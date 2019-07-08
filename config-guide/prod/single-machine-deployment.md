@@ -1,10 +1,6 @@
 ---
 group: configuration-guide
-subgroup: 999_prod
 title: Single machine deployment
-menu_title: Single machine deployment
-menu_node:
-menu_order: 500
 functional_areas:
   - Configuration
   - Deploy
@@ -16,17 +12,15 @@ This topic provides instructions for deploying updates to Magento on a productio
 
 This process applies to technical users responsible for stores running on a single machine with some themes and locales installed.
 
-For less technical users, i.e. business users, we recommend using the [System Upgrade][9] feature in the {% glossarytooltip 29ddb393-ca22-4df9-a8d4-0024d75739b1 %}Admin{% endglossarytooltip %}.
+For less technical users, i.e. business users, we recommend using the [System Upgrade][9] feature in the [Admin](https://glossary.magento.com/admin).
 
 ## Assumptions
 
 * You installed Magento using [Composer][8] or a [compressed archive][7].
 * You are directly applying updates to the server.
 
-<div class="bs-callout bs-callout-warning" markdown="1">
-This guide does not apply if you used `git clone` to install Magento.
-Contributing developers should use [this guide][6] to update their Magento installation.
-</div>
+{:.bs-callout .bs-callout-warning}
+This guide does not apply if you used `git clone` to install Magento. Contributing developers should use [this guide][6] to update their Magento installation.
 
 ## Deployment steps
 
@@ -38,7 +32,7 @@ Contributing developers should use [this guide][6] to update their Magento insta
 
 3. Enable maintenance mode using the command:
 
-        php bin/magento maintenance:enable
+        bin/magento maintenance:enable
 
 4. Apply updates to Magento or its components using the following command pattern:
 
@@ -57,21 +51,21 @@ Contributing developers should use [this guide][6] to update their Magento insta
 
         composer update
 
-6. Update the {% glossarytooltip 66b924b4-8097-4aea-93d9-05a81e6cc00c %}database schema{% endglossarytooltip %} and data:
+6. Update the [database schema](https://glossary.magento.com/database-schema) and data:
 
-        php bin/magento setup:upgrade
+        bin/magento setup:upgrade
 
 7. Compile the code:
 
-        php bin/magento setup:di:compile
+        bin/magento setup:di:compile
 
 8. Deploy static content:
 
-        php bin/magento setup:static-content:deploy
+        bin/magento setup:static-content:deploy
 
 9. Exit maintenance mode:
 
-        php bin/magento maintenance:disable
+        bin/magento maintenance:disable
 
 ## Alternative deployment strategies
 
@@ -95,7 +89,7 @@ In Magento 2.2, a near-zero downtime deployment model will be available for a va
 [5]: {{ page.baseurl }}/config-guide/bootstrap/magento-modes.html#production-mode
 [6]: {{ page.baseurl }}/install-gde/install/cli/dev_options.html
 [7]: {{ page.baseurl }}/install-gde/prereq/zip_install.html
-[8]: {{ page.baseurl }}/install-gde/prereq/integrator_install.html
+[8]: {{ page.baseurl }}/install-gde/composer.html
 [9]: {{ page.baseurl }}/comp-mgr/upgrader/upgrade-start.html
 [10]: {{ page.baseurl }}/install-gde/prereq/file-sys-perms-over.html#magento-file-system-owner
 [11]: {{ site.baseurl }}/community/resources/resources.html#installdeploy

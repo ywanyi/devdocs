@@ -17,6 +17,5 @@ functional_areas:
 {% include install/web/install-web_1-readiness.md %}
 
 #### Next step
-
 [Step 2. Add a database]({{ page.baseurl }}/install-gde/install/web/install-web_2-db.html)
 

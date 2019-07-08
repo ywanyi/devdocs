@@ -7,9 +7,9 @@ The Functional Testing Framework (FTF) provides a reporting tool, which logs fai
 
 The following image demonstrates example of a general flow.  
 
-[![]({{ site.baseurl }}/common/images/ftf/ftf-reporting-diagram.png)]({{ site.baseurl }}/common/images/ftf/ftf-reporting-diagram.png){: target="_blank"}
+![Reporting mechanism diagram]({{ site.baseurl }}/common/images/ftf/ftf-reporting-diagram.png){:target="_blank"}
 
-The {% glossarytooltip c57aef7c-97b4-4b2b-a999-8001accef1fe %}event{% endglossarytooltip %} manager is a core component which:
+The [event](https://glossary.magento.com/event) manager is a core component which:
 
 - dispatches events
 - gets a list of observers
@@ -32,7 +32,7 @@ In `<magento_2_root_dir>/dev/tests/functional/phpunit.xml`, you can set a preset
 
 Set a preset, which is a list of dispatched [events][event] and an [observers][observer] to handle them:
 
-```xml 
+```xml
 <php>
     <env name="events_preset" value="<preset_name>" />
 </php>
@@ -44,7 +44,7 @@ Replace `<preset_name>` with a name of preset that you want to use.
 
 Set the value of `<env name="log_directory">` to the directory in which to store your reports.
 
-```xml 
+```xml
 <php>
     <env name="log_directory" value="<your_directory_path>" />
 </php>
@@ -58,7 +58,7 @@ An event preset specifies observers and dispatched events handled by them. `<mag
 
 **Format of a preset**:
 
-```xml 
+```xml
 <preset name="...">
     <observer class="Magento\Mtf\System\Observer\...">
         <tag name="..." />
@@ -72,7 +72,7 @@ An event preset specifies observers and dispatched events handled by them. `<mag
 
 **Example**:
 
-```xml 
+```xml
 <preset name="custom">
     <observer class="Magento\Mtf\System\Observer\SourceCode">
         <tag name="exception" />
@@ -96,7 +96,7 @@ Initially, event presets are defined in the FTF in `<magento_2_root_dir>/dev/tes
 
 ### Observers  {#observers}
 
-An observer is a {% glossarytooltip bf703ab1-ca4b-48f9-b2b7-16a81fd46e02 %}PHP{% endglossarytooltip %} class which defines actions under Magento instance, browser, test run, and so on.
+An observer is a [PHP](https://glossary.magento.com/php) class which defines actions under Magento instance, browser, test run, and so on.
 
 The list of ready-to-use observers is the following:
 
@@ -118,7 +118,7 @@ A tag contains name of an event. When you want to process any event by a particu
 
 In terms of XML, it is represented as an element `<tag />` in `events.xml`. `<tag />` is a child element of an `<observer>` element. See the following example:
 
-```xml 
+```xml
 <observer class="Magento\Mtf\System\Observer\ClientError">
     <tag name="page_changed" />
     <tag name="exception" />
@@ -146,7 +146,7 @@ As you can see, a tag contains one required attribute `name`, where a name of ev
 
 A method that is used to dispatch events is defined in [`\Magento\Mtf\System\Event\EventManagerInterface`][EventManagerInterface]. The FTF uses its default implementation `\Magento\Mtf\System\Event\EventManager::dispatchEvent()`.
 
-``` php?start_inline=1
+```php
 $this->eventManager->dispatchEvent(['your_event_tag'], [$your_input_parameters]);
 ```
 
@@ -157,7 +157,7 @@ It has two arguments:
 
 Example of use:
 
-```php 
+```php
 <?php
 
 if (!strpos($response, 'data-ui-id="messages-message-success"')) {
@@ -178,7 +178,7 @@ The following examples explain how to use the reporting tool on practice.
 
 The following example shows how to add a `custom` preset.
 
-**Task**: Create a preset that logs only a web page {% glossarytooltip a2aff425-07dd-4bd6-9671-29b7edefa871 %}HTML{% endglossarytooltip %} code and its screenshot when a test run is failed.
+**Task**: Create a preset that logs only a web page [HTML](https://glossary.magento.com/html) code and its screenshot when a test run is failed.
 
 **Reports**:
 
@@ -201,7 +201,7 @@ Step 2. Open `<magento_2_root_dir>/dev/tests/functional/etc/events.xml`.
 
 Step 3. Add a preset with required observers and tags.
 
-```xml 
+```xml
 <preset name="custom">
     <observer class="Magento\Mtf\System\Observer\SourceCode">
         <tag name="failure" />
@@ -233,10 +233,9 @@ The following example shows how to edit the `base` preset.
   - `click_after`
   - `set_value`
 
-<div class="bs-callout bs-callout-warning" markdown="1">
-    
-The `base` preset is stored in the FTF `<magento2>/dev/tests/functional/vendor/magento/mtf/etc/events.xml`. To add or change any setting, edit `<magento2>/dev/tests/functional/etc/events.xml`, which is merged with the one in the FTF.
-</div>
+{: .bs-callout .bs-callout-warning }
+The `base` preset is stored in the FTF `<magento2>/dev/tests/functional/vendor/magento/mtf/etc/events.xml`.
+To add or change any setting, edit `<magento2>/dev/tests/functional/etc/events.xml`, which is merged with the one in the FTF.
 
 **Solution**:
 
@@ -244,7 +243,7 @@ Step 1. [Dispatch][dispatch] the events `click_before`, `click_after` and `set_v
 
 Step 2. In the `base` preset, add required observer and event tags.
 
-```xml 
+```xml
 <preset name="base">
     ...
     <observer class="Magento\Mtf\System\Observer\Screenshot">
@@ -286,10 +285,10 @@ The following example shows how to use a custom observer in the example with the
 
 Step 1. Create an observer class `\Magento\Mtf\System\Observer\WebapiResponse` that stores incoming events in JSON files.
 
-```php 
+```php
 <?php
 /**
- * Copyright © 2016 Magento. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -298,7 +297,7 @@ namespace Magento\Mtf\System\Observer;
 use Magento\Mtf\System\Event\Event;
 
 /**
- * Observer for obtaining response of web API handler.
+ * Observer for obtaining response of webAPI  handler.
  */
 class WebapiResponse extends AbstractObserver
 {
@@ -326,7 +325,7 @@ class WebapiResponse extends AbstractObserver
 
 Step 2. [Dispatch][dispatch] an event `webapi_failed` in the `\Magento\Tax\Test\Handler\TaxRule\WebApi::persist()` [handler] for failed responses.
 
-``` php?start_inline=1
+```php
 
 public function persist(FixtureInterface $fixture = null)
 {
@@ -345,7 +344,7 @@ Step 3. Add the observer and the tag to the `base` preset in `events.xml`.
 
 In `<magento_2_root_dir>/dev/tests/functional/etc/events.xml`, add to a preset `<preset name="base">` an observer `<observer class="Magento\Mtf\System\Observer\WebapiResponse">` with a tag `<tag name="webapi_failed" />`:
 
-```xml 
+```xml
 <preset name="base">
 ...
     <observer class="Magento\Mtf\System\Observer\WebapiResponse">
@@ -357,29 +356,29 @@ In `<magento_2_root_dir>/dev/tests/functional/etc/events.xml`, add to a preset `
 
 <!-- LINK DEFINITIONS -->
 
-<!-- GitHub links -->
+<!-- Github links -->
 [`BrowserInterface`]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/Client/BrowserInterface.php
-[ClientError]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Observer/ClientError.php
-[CurlResponse]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Observer/CurlResponse.php
 [`events.xml` on GitHub]: https://github.com/magento/mtf/blob/develop/etc/events.xml
 [`EventState`]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Event/State.php
-[Log]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Observer/Log.php
+[`ObserverInterface`]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Event/ObserverInterface.php
+[ClientError]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Observer/ClientError.php
+[CurlResponse]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Observer/CurlResponse.php
 [EventManager]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Event/EventManager.php
 [EventManagerInterface]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Event/EventManagerInterface.php
-[`ObserverInterface`]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Event/ObserverInterface.php
+[Log]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Observer/Log.php
 [PageUrl]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Observer/PageUrl.php
 [Screenshot]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Observer/Screenshot.php
 [SourceCode]: https://github.com/magento/mtf/blob/develop/Magento/Mtf/System/Observer/SourceCode.php
 
 <!-- Devdocs links -->
 [add custom observer]: #add-custom-observer
-[edit preset]: #edit-preset
-[create preset]: #create-preset
 [configuration]: #configuration
+[create preset]: #create-preset
 [dispatch]: #dispatch-event
-[event]: {{ page.baseurl }}/extension-dev-guide/events-and-observers.html#events
+[edit preset]: #edit-preset
 [event manager]: #event-manger
 [event preset]: #event-presets
+[event]: {{ page.baseurl }}/extension-dev-guide/events-and-observers.html#events
 [handler]: {{ page.baseurl }}/mtf/mtf_entities/mtf_handler.html
 [observer]: #observers
 [preset]: #event-presets

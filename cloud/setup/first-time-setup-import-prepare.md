@@ -1,11 +1,13 @@
 ---
 group: cloud-guide
 title: Prepare your existing Magento Commerce install
+redirect_from:
+  - /guides/v2.1/cloud/access-acct/first-time-setup_import-prepare.html
+  - /guides/v2.2/cloud/access-acct/first-time-setup_import-prepare.html
+  - /guides/v2.3/cloud/access-acct/first-time-setup_import-prepare.html
 functional_areas:
   - Cloud
   - Setup
-redirect_from:
-  - /guides/v2.0/cloud/access-acct/first-time-setup_import-prepare.html
 ---
 
 You need to prepare your existing {{site.data.var.ee}} implementation to import it into a new {{site.data.var.ece}} project. This includes updating and adding files, transferring media files, and migrating data.
@@ -32,7 +34,7 @@ To import {{site.data.var.ee}} code to a {{site.data.var.ece}} project, you must
 
 Add these files to your {{site.data.var.ee}} code:
 
-1.  In the [{{site.data.var.ece}} GitHub repository](https://github.com/magento/magento-cloud){:target="_blank"}, select the branch corresponding to the {{site.data.var.ee}} version you currently have.
+1.  In the [{{site.data.var.ece}} GitHub repository](https://github.com/magento/magento-cloud), select the branch corresponding to the {{site.data.var.ee}} version you currently have.
 
     The following figure shows an example of selecting the `2.1.4` branch.
 
@@ -58,17 +60,17 @@ Add these files to your {{site.data.var.ee}} code:
 
     For example, to create `<Magento Commerce install dir>/.magento.app.yaml` from the 2.1.4 branch:
 
-    1.  In the  {{site.data.var.ece}} GitHub, click [**.magento.app.yaml**](https://github.com/magento/magento-cloud/blob/2.1.4/.magento.app.yaml){:target="_blank"}.
+    1.  In the  {{site.data.var.ece}} GitHub, click [**.magento.app.yaml**](https://github.com/magento/magento-cloud/blob/2.1.4/.magento.app.yaml).
     2.  In the upper right, click **Raw**, as the following figure shows.
 
         ![View the raw version of the file]({{ site.baseurl }}/common/images/cloud_cloud-git_raw.png){:width="600px"}
     3.  In your {{site.data.var.ee}} project, open a text editor in the {{site.data.var.ee}} installation directory (for example, `/var/www/html/magento2`).
     4.  Paste the raw contents of `.magento.app.yaml` from GitHub into the text editor.
-    5.  Make sure the file is named `.magento.app.yaml` when you save the file.
+    5.  Save the file using the name: `.magento.app.yaml`
     6.  Repeat these tasks for the other files.
 
-        * Make sure to create `magento-vars.php` in the Magento root directory.
-        * Make sure to create `routes.yaml` and `services.yaml` in the `.magento` subdirectory.
+        * Create `magento-vars.php` in the Magento root directory.
+        * Create `routes.yaml` and `services.yaml` in the `.magento` subdirectory.
 
 When you push your code, all services are configured into the associated environment per active branch of code. These files affect all Starter environments and all Pro Integration environments. To update these settings in Pro Staging and Production, you need to enter a ticket.
 
@@ -81,7 +83,7 @@ You must have an authentication key to access the {{site.data.var.ee}} repositor
 
 #### To create a new `auth.json` file:
 
-First, verify if you have an `auth.json` file, located in your Magento root directory. You can also [get a sample `auth.json`]({{site.mage2bloburl}}2.2-develop/auth.json.sample){:target="_blank"}.
+First, verify if you have an `auth.json` file, located in your Magento root directory. You can also [get a sample `auth.json`]({{ site.mage2bloburl }}/2.2/auth.json.sample).
 
 1.  Using a text editor, create an `auth.json` file and save it in your Magento root directory.
 
@@ -134,7 +136,7 @@ This method is best to prevent accidental exposure of credentials, such as pushi
 
 ## Edit `composer.json` {#composer-json}
 
-Before you push code to the {{site.data.var.ece}} Git repository, modify your `composer.json` for Cloud. You can also [view a sample `composer.json`](https://raw.githubusercontent.com/magento/magento-cloud/master/composer.json){:target="_blank"}.
+Before you push code to the {{site.data.var.ece}} Git repository, modify your `composer.json` for Cloud. You can also [view a sample `composer.json`](https://raw.githubusercontent.com/magento/magento-cloud/master/composer.json).
 
 To edit `composer.json`:
 
@@ -192,7 +194,7 @@ Use the command [`magento setup:backup --media`]({{ page.baseurl }}/install-gde/
 
 ## Copy the encryption key {#encryption-key}
 
-To decrypt the encrypted data from your imported database, copy your encryption from your existing `env.php` file. Every environment in Integration, Staging, and Production has an `env.php` of sensitive data and environment variables. The file contains a nested PHP array storing configuration data.
+To decrypt the encrypted data from your imported database, copy your encryption key from your existing `env.php` file. Every environment in Integration, Staging, and Production has an `env.php` of sensitive data and environment variables. The file contains a nested PHP array storing configuration data.
 
 1.  Open `<Magento install dir>/app/etc/env.php` in a text editor.
 2.  Search for the value of `key` in the `crypt` array.
@@ -204,7 +206,7 @@ You must paste the encryption key into your {{site.data.var.ece}} `env.php` file
 
 Create a database dump and transfer the data from an existing database. You will import this data to your {{site.data.var.ece}} database.
 
-The following command example compresses the dump so it doesn't significantly interfere with traffic from in live site. The dump file is named `db.sql.gz`. You may want to include the date in the file name if you do multiple dumps over time. Because the database dump can be large, we recommend you create it in a directory not tracked by Git.
+The following example compresses the dump so that it does not significantly interfere with traffic from a live site. The dump file is named `db.sql.gz`. You may want to include the date in the file name if you do multiple dumps over time. Because the database dump can be large, we recommend you create it in a directory not tracked by Git.
 
 1. In your existing environment, create a database dump.
 
@@ -221,4 +223,4 @@ The following command example compresses the dump so it doesn't significantly in
 To find `<cloud SSH URL>`, see [Find the information you need for your import]({{ page.baseurl }}/cloud/setup/first-time-setup-import-first-steps.html#db-creds).
 
 #### Next step
-[Import Magento Commerce into {{site.data.var.ece}}]({{ page.baseurl }}/cloud/setup/first-time-setup-import-import.html)
+[Import {{site.data.var.ee}} into {{site.data.var.ece}}]({{ page.baseurl }}/cloud/setup/first-time-setup-import-import.html)

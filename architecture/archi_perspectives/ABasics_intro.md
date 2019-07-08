@@ -1,10 +1,7 @@
 ---
 group: architecture-guide
-subgroup: Architectural Basics
 title: Architectural basics overview
 menu_title: Architectural basics
-menu_node: parent
-menu_order: 1
 ---
 
 Magento incorporates the core architectural principles of object-oriented, PHP-based applications. Comprehensive discussions of these general principles exist both on-line and in printed form.
@@ -17,3 +14,13 @@ The following discussion focuses on how these topics apply directly to Magento:
 * Modularity
 * Event-driven architecture
 * Security
+
+## Related topics
+
+[Architectural diagrams]({{page.baseurl}}/architecture/archi_perspectives/arch_diagrams.html)
+
+[Technology stack]({{page.baseurl}}/architecture/tech-stack.html)
+
+[Stack basics]({{page.baseurl}}/architecture/tech-stack.html)
+
+[Versioning]({{page.baseurl}}/extension-dev-guide/versioning/)

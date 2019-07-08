@@ -4,7 +4,7 @@ title: Constraint
 ---
 
 The Functional Testing Framework (FTF) constraint performs assertions after a test flow. A test flow is a set of test steps without assertions.
-Each constraint name must be globally unique in Magento application and must be placed in the {% glossarytooltip c1e4242b-1f1a-44c3-9d72-1d5b1435e142 %}module{% endglossarytooltip %} to which it belongs. Constraints run automatically after test flow has finished.
+Each constraint name must be globally unique in Magento application and must be placed in the [module](https://glossary.magento.com/module) to which it belongs. Constraints run automatically after test flow has finished.
 
 ![Constraints and test flow]({{ site.baseurl }}/common/images/ftf/mtf_constraint_flow.png)
 
@@ -18,7 +18,7 @@ A module in functional tests (`<magento2_root_dir>/dev/tests/app/Magento/`) stor
 
 ### Constraint class {#mtf_constraint_assert}
 
-The constraint {% glossarytooltip bf703ab1-ca4b-48f9-b2b7-16a81fd46e02 %}PHP{% endglossarytooltip %} class must:
+The constraint [PHP](https://glossary.magento.com/php) class must:
 
 * Have unique name created using the following template `Assert{MagentoEntityName}{verification|action|place}`. For example:
 
@@ -45,13 +45,16 @@ Let's see the following images for the `CreateSimpleProductEntityTest` test and 
 
 ![]({{ site.baseurl }}/common/images/ftf/mtf_constraint_arguments_green.png){: width="800"}
 
+
 <span style="color: #21610B; font-weight:bold">Green arrows</span> show that `product` value is transferred to the test and the constraint.
 
 ![]({{ site.baseurl }}/common/images/ftf/mtf_constraint_arguments_orange.png){: width="800"}
 
+
 <span style="color: #FF8000; font-weight:bold">Orange arrows</span> show that `category` variable is transferred to the test directly, overwritten by `testCreate()` method and only then transferred to constraint.
 
 ![]({{ site.baseurl }}/common/images/ftf/mtf_constraint_arguments_blue.png){: width="800"}
+
 
 <span style="color: #0000FF; font-weight:bold">Blue arrow</span> shows that `price` value is transferred to the constraint only.
 
@@ -67,17 +70,13 @@ Constraints are performed in order they listed in the data set. However, you can
 <constraint name="Magento\Catalog\Test\Constraint\AssertCategoryPage" prev="Magento\Catalog\Test\Constraint\AssertCategoryForm" />
 ```
 
-<div class="bs-callout bs-callout-warning" markdown="1">
-    
-Constraint failure causes interruption of constraints execution within variation, and a test continues to perform from the next variation.
-</div>
+{: .bs-callout .bs-callout-warning }
+     Constraint failure causes interruption of constraints execution within variation, and a test continues to perform from the next variation.
 
 A test can contain constraints from different modules.
 
-<div class="bs-callout bs-callout-warning" markdown="1">
-  
+{:.bs-callout .bs-callout-warning}
 Be careful when you use constraints from another module. A module that is referred by constraint can be disabled, that fails in the test execution. It is safe to use constraints of different modules in one test case if that modules have hard dependencies.   
-</div>
 
 The following example shows the `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/Widget/Test/TestCase/DeleteWidgetEntityTest.xml` [data set][] with two constraints. 
 
@@ -132,7 +131,7 @@ To assign severity tags do the following:
 For example, `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/CatalogRule/Test/etc/di.xml`:
 
 ```xml
-{%remote_markdown https://raw.githubusercontent.com/magento/magento2/2.0/dev/tests/functional/tests/app/Magento/CatalogRule/Test/etc/di.xml %}
+{%remote_markdown https://raw.githubusercontent.com/magento/magento2/2.1/dev/tests/functional/tests/app/Magento/CatalogRule/Test/etc/di.xml %}
 ```
 
 ## How to create constraint {#mtf_constraint_create}
@@ -150,7 +149,7 @@ Step 2. What name should constraint have?
 
 Step 3. Create `<magento2_root_dir>/dev/tests/functional/tests/app/Magento/Widget/Test/Constraint/AssertWidgetInGrid.php` with [required structure](#mtf_constraint_assert)
 
-```php 
+```php
 
 <?php
 
@@ -190,7 +189,7 @@ Step 4. Implement assertion in `processAssert()`
 
 **Assertion logic**: Take title of the widget from the widget [fixture][], open the page with a grid, check if the grid has our title.
 
-```php 
+```php
 
 <?php
 
