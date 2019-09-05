@@ -4,8 +4,42 @@ description: |
   We exclude from this list proofreading, spelling checks, and all minor updates.
 link: /whats-new.html
 thread: /whatsnew-feed.xml
-updated: Mon Aug 26 22:12:19 2019
+updated: Thu Sep 5 10:29:31 2019
 entries:
+- description: Added the [Reference a CMS block](https://devdocs.magento.com/guides/v2.3/frontend-dev-guide/layouts/xml-manage.html#ref_cms_block)
+    section to the 'Common Layout Customization Tasks' topic.
+  versions: 2.2.x, 2.3.x
+  type: Major update
+  date: September 3, 2019
+  link: https://github.com/magento/devdocs/pull/5307
+- description: Added information about how to use the REST API to [issue refunds](http://devdocs.magento.com/guides/v2.2/rest/modules/sales/refunds.html).
+  versions: 2.2.x, 2.3.x
+  type: New topic
+  date: August 30, 2019
+  link: https://github.com/magento/devdocs/pull/5231
+- description: Added a new topic about the [Multiselect widget](https://devdocs.magento.com/guides/v2.3/javascript-dev-guide/widgets/widget-multiselect.html).
+  versions: 2.2.x, 2.3.x
+  type: New topic
+  date: August 27, 2019
+  link: https://github.com/magento/devdocs/pull/5207
+- description: Updated the [XSS Prevention Strategy](https://devdocs.magento.com/guides/v2.3/extension-dev-guide/xss-protection.html)
+    topic to correct invalid use cases for PHTML escaping and provide guidance on
+    XSS prevention in other areas.
+  versions: 2.2.x, 2.3.x
+  type: Major update
+  date: August 27, 2019
+  link: https://github.com/magento/devdocs/pull/5143
+- description: Added best practices for [configuring the migration tool](https://devdocs.magento.com/guides/v2.3/migration/migration-tool-configure.html).
+  versions: 2.2.x, 2.3.x
+  type: Major update
+  date: August 27, 2019
+  link: https://github.com/magento/devdocs/pull/5184
+- description: Added a [Plugin method naming convention](https://devdocs.magento.com/guides/v2.3/extension-dev-guide/plugins.html)
+    section to _Plugins (Interceptors)_ topic.
+  versions: 2.2.x, 2.3.x
+  type: Major update
+  date: August 27, 2019
+  link: https://github.com/magento/devdocs/pull/5200
 - description: Added new code examples to the [JavaScript Mixins](https://devdocs.magento.com/guides/v2.3/javascript-dev-guide/javascript/js_mixins.html)
     topic.
   versions: 2.2.x, 2.3.x
