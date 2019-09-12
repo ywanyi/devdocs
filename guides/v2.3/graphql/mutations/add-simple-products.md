@@ -158,7 +158,7 @@ The `AddSimpleProductsToCartInput` object must contain the following attributes:
 Attribute |  Data Type | Description
 --- | --- | ---
 `cart_id` | String! | The unique ID that identifies the customer's cart
-`cart_items` | [SimpleProductCartItemInput!](#SimpleProductCartItemInput) | Contains the cart item IDs and quantity of each item
+`cart_items` | [SimpleProductCartItemInput](#SimpleProductCartItemInput)! | Contains the cart item IDs and quantity of each item
 
 ### CartItemInput object {#CartItemInputSimple}
 
@@ -177,7 +177,7 @@ The `CustomizableOptionInput` object must contain the following attributes:
 The `SimpleProductCartItemInput` object must contain the following attributes:
 
 `customizable_options` |[[CustomizableOptionInputSimple]](#CustomizableOptionInputSimple) | An array that defines customizable options for the product
-`data` | [CartItemInput!](#CartItemInputSimple) | An object containing the `sku` and `quantity` of the product.
+`data` | [CartItemInput](#CartItemInputSimple)! | An object containing the `sku` and `quantity` of the product.
 
 ## Output attributes
 

@@ -91,7 +91,7 @@ The `AddVirtualProductsToCartInput` object must contain the following attributes
 Attribute |  Data Type | Description
 --- | --- | ---
 `cart_id` | String! | The unique ID that identifies the customer's cart
-`cart_items` | [VirtualProductCartItemInput!](#VirtualProductCartItemInput) | Contains the cart item IDs and quantity of each item
+`cart_items` | [VirtualProductCartItemInput](#VirtualProductCartItemInput)! | Contains the cart item IDs and quantity of each item
 
 ### CartItemInput object {#CartItemInputVirtual}
 
