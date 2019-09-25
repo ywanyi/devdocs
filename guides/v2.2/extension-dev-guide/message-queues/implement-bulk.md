@@ -1,12 +1,6 @@
 ---
 group: php-developer-guide
-subgroup: 99_Module Development
 title: Example bulk operations implementation
-menu_title: Example bulk operations implementation
-menu_order: 29
-ee_only: True
-level3_menu_node: level3child
-level3_subgroup: mq
 functional_areas:
   - Services
 ---

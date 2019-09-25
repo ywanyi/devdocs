@@ -1,12 +1,6 @@
 ---
 group: installation-guide
-subgroup: Getting Started
 title: What is a docroot?
-menu_title: What is a docroot?
-menu_node:
-menu_order: 200
-level3_menu_node: level3child
-level3_subgroup: basics
 functional_areas:
   - Install
   - System

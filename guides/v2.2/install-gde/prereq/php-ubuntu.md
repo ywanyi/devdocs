@@ -1,11 +1,6 @@
 ---
 group: installation-guide
-subgroup: Prerequisites
 title: PHP 7.0 or 7.1 &mdash;Ubuntu
-menu_title: PHP 7.0 or 7.1&mdash;Ubuntu
-menu_order: 23
-level3_menu_node: level3child
-level3_subgroup: php
 functional_areas:
   - Install
   - System

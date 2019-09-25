@@ -1,12 +1,6 @@
 ---
 group: installation-guide
-subgroup: Getting Started
 title: What's the difference between a module and a component?
-menu_title: What's the difference between a module and a component?
-menu_node:
-menu_order: 115
-level3_menu_node: level3child
-level3_subgroup: basics
 functional_areas:
   - Install
   - System

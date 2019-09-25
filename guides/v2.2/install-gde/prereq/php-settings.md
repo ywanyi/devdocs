@@ -1,11 +1,6 @@
 ---
 group: installation-guide
-subgroup: Prerequisites
 title: Required PHP settings
-menu_title: Required PHP settings
-menu_order: 24
-level3_menu_node: level3child
-level3_subgroup: php
 functional_areas:
   - Install
   - System

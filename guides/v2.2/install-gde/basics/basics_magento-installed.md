@@ -1,12 +1,6 @@
 ---
 group: installation-guide
-subgroup: Getting Started
 title: Is the Magento software installed already?
-menu_title: Is the Magento software installed already?
-menu_node:
-menu_order: 101
-level3_menu_node: level3child
-level3_subgroup: basics
 functional_areas:
   - Install
   - System
