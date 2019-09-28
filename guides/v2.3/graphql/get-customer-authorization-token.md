@@ -11,7 +11,7 @@ The following example shows how to retrieve a customer's authorization token:
 
 **Request**
 
-```text
+```graphql
 mutation {
   generateCustomerToken(email: "customer@example.com", password: "password") {
     token
