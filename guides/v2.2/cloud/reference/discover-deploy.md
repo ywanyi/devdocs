@@ -8,19 +8,19 @@ functional_areas:
   - Deploy
 ---
 
-Every time you push code from your local workstation to the remote environment or merge code to a base environment branch, such as a merge from the Integration environment to the Staging environment, this activates the build and deploy scripts. These scripts generate new Magento code and provision configured services to the remote environment.
+The {{ site.data.var.ece }} build and deploy scripts activate each time you push code from your local workstation to the remote environment or merge code to an environment branch, such as merging from an Integration environment to the Staging environment. These scripts generate new Magento code and provision configured services on the remote environment.
 
-The build and deploy process is slightly different for each plan:
+The build and deploy process for Starter and Pro plans have slight differences:
 
--  **Starter plans**—For the Integration environment, every active branch build and deploys to a full environment for access and testing. Fully test your code after merging to the `staging` branch. To go live, push `staging` to `master` to deploy to Production. You have full access to all branches through the Project Web Interface and the CLI commands.
--  **Pro plans**—For the Integration environment, every _active_ branch builds and deploys to a full environment for access and testing. You must merge your code to the `integration` branch before you can merge to the Staging environment and then the Production environment. You can only merge to Staging and Production using CLI commands with SSH or using the Project Web Interface.
+-  **Starter plans**—For the Integration environment, every active branch builds and deploys to a full environment for access and testing. Fully test your code after merging to the `staging` branch. To go live, push `staging` to `master` to deploy to Production. You can access all branches through the Project Web Interface and the CLI commands.
+-  **Pro plans**—For the Integration environment, every _active_ branch builds and deploys to a full environment for access and testing. You must merge code to the `integration` branch before you can merge to the Staging environment. Finally, you must merge from Staging to the Production environment. You can only merge to Staging and Production using CLI commands with SSH or using the Project Web Interface.
 
 {:.bs-callout .bs-callout-info}
-Verify the code for your site and stores is in the {{site.data.var.ece}} branch. If you point, or include hooks, to code in other branches, such as a private branch, you may encounter problems with the build and deploy process. For example, if you include a theme from a private repo in your branch, the theme will not build with the Magento code.
+Verify that all code for your site and stores is in the {{site.data.var.ece}} branch. If you point, or include hooks, to code in other branches, such as a private branch, you may encounter problems with the build and deploy process. For example, if you include a theme from a private repo in your branch, the theme will not build with the Magento code.
 
 ## Track the process {#track}
 
-You can track build and deploy actions in real-time using the terminal or the Project Web Interface. The status displays in-progress, pending, success, or failed. You can view the logs in the interface.
+You can track build and deploy actions in real-time using the terminal or the Project Web Interface. During the build and deploy process, the status displays `in-progress`, `pending`, `success`, or `failed`. You can view the build and deployn logs fromn the Project Web interface.
 
 If you are using external GitHub repositories, the log of the operations does not display in the GitHub session. You can still follow activity in their interface and in the {{site.data.var.ece}} Project Web Interface.
 
