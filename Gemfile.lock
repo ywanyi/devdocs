@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/magento-devdocs/devdocs-theme.git
-  revision: 5e99a84dd5692d3ee4c1985b9f48824eeede8cfd
+  revision: 7b120e3b23b8f224d69da384c131f3eb4c87d484
+  branch: yb_waffle-menu
   specs:
     devdocs (5)
       jekyll (>= 3.3)
