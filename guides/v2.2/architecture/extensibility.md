@@ -4,7 +4,7 @@ title: Extensibility and modularity
 menu_title: Extensibility and modularity
 ---
 
-## Overview
+## 概况
 
 Product *extensibility* describes how easy it is to expand a product's feature set. An extensible product has been designed from its earliest  stages for customization and enhancement. Extensible products are designed for ease in expanding your installation's feature set, enriching current features, and integrating with third-party software.
 

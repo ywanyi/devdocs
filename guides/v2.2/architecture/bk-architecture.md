@@ -6,8 +6,9 @@ menu_title: Get Started
 menu_node: parent
 ---
 
-The Architecture Guide provides a high-level introduction and view of the Magento product.
+《体系结构指南》提供了Magento产品的高级介绍和视图。
 
-The Magento platform and components are explained from the perspective of several audiences: merchants, web store developers (frontend developers), [extension](https://glossary.magento.com/extension) developers, system admins, installers, and integrators.
+从多个受众的角度解释了Magento平台和组件：商家，网络商店开发人员（前端开发人员），[扩展](https://glossary.magento.com/extension)开发人员，系统管理员，安装人员和集成商。
 
-More detailed information about building online stores, using the Magento APIs, installing, configuring, and extending the platform is included in other books in our [Magento library]({{site.baseurl}}/index.html).
+ [Magento library]({{site.baseurl}}/index.html).中的其他书籍中提供了有关使用Magento API建立在线商店，安装，配置和扩展平台的更多详细信息。
+

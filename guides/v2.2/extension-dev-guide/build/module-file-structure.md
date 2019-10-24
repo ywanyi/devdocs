@@ -6,17 +6,17 @@ menu_title: Create your component file structure
 menu_order: 3000
 ---
 
-In this section, we go over the different file structures for the component types. The Magento application looks for the files that make up a component *including configuration files* in particular places inside the component file structure. Follow the predefined file structures for the component type you are developing to ensure that it works as expected.
+在本节中，我们将介绍组件类型的不同文件结构。 Magento应用程序将查找组成组件的文件，包括配置文件，尤其是在组件文件结构内的特定位置。 请遵循要开发的组件类型的预定义文件结构，以确保它可以按预期工作。
 
 {% include php-dev/component-root.md %}
 
-### Module file structure
+### 模块文件结构
 
 A typical file structure for a Magento 2 [module](https://glossary.magento.com/module) can look like the following:
 
 ![Module File Structure]({{ site.baseurl }}/common/images/pdg-config-file-structure.png){:width="300px"}
 
-#### Common directories
+#### 常用目录
 {:.no_toc}
 Following are some common module directories:
 

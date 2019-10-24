@@ -6,7 +6,7 @@ menu_title: Adapters
 menu_order: 1000
 ---
 
-## Overview
+## 概况
 
 Adapter classes follow the [adapter pattern](https://en.wikipedia.org/wiki/Adapter_pattern){:target="_blank"} and wrap around classes from third-party libraries.
 These classes allow you to use functionality from third-party libraries in your code by converting the third-party class interfaces into an interface that is expected by your native code.

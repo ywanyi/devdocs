@@ -4,25 +4,25 @@ title: Module overview
 menu_title: Module overview
 ---
 
-## What is a Magento module? {#arch-modules-overview}
+## 什么是Magento模块? {#arch-modules-overview}
 
-A *module* is a logical group -- that is, a directory containing blocks, controllers, helpers, models -- that are related to a specific business feature. In keeping with Magento's commitment to optimal modularity, a [module](https://glossary.magento.com/module) encapsulates one feature and has minimal dependencies on other modules.
+“模块”是一个逻辑组，即包含与特定业务功能相关的块，控制器，助手，模型的目录。 为了遵循Magento对最佳模块化的承诺，[模块](https://glossary.magento.com/module)封装了一个功能，并且对其他模块的依赖性最小。
 
-Modules and themes are the units of customization in Magento. Modules provide business features, with supporting logic,  while themes strongly influence user experience and [storefront](https://glossary.magento.com/storefront) appearance. Both components have a life cycle that allows them to be installed, deleted, and disabled. From the perspective of both merchants and [extension](https://glossary.magento.com/extension) developers, modules are the central unit of Magento organization.
+模块和主题是Magento中的自定义单位。 模块提供业务功能以及支持逻辑，而主题则强烈影响用户体验和[店面](https://glossary.magento.com/storefront)外观。 这两个组件都有生命周期，可以安装，删除和禁用它们。 从商人和[扩展](https://glossary.magento.com/extension)开发人员的角度来看，模块都是Magento组织的核心单位。
 
-The Magento Framework provides a set of core logic: [PHP](https://glossary.magento.com/php) code, libraries, and the basic functions that are inherited by the modules and other components.
+Magento框架提供了一组核心逻辑：[PHP](https://glossary.magento.com/php)代码，库以及由模块和其他组件继承的基本功能。
 
-## Purpose of a module
+## 模块的目的
 
-The purpose of a module is to provide specific product features by implementing new functionality or extending the functionality of other modules. Each module is designed to function independently, so the inclusion or exclusion of a particular module does not typically affect the functionality of other modules.
+模块的目的是通过实现新功能或扩展其他模块的功能来提供特定的产品功能。 每个模块都设计为独立运行，因此包含或排除特定模块通常不会影响其他模块的功能。
 
-## Module components
+## 模块组件
 
-A module is a directory that contains the PHP and [XML](https://glossary.magento.com/xml) files (blocks, controllers, helpers, models) that are related to a specific business feature, such as Shipping. Specifically, a Magento module is composed of these software components: [themes]({{page.baseurl}}/frontend-dev-guide/themes/theme-overview.html), [libraries]({{page.baseurl}}/architecture/archi_perspectives/third-party-libs.html), and [language packages]({{page.baseurl}}/frontend-dev-guide/translations/xlate.html#m2devgde-xlate-languagepack).
+一个模块是包含PHP和[XML](https://glossary.magento.com/xml)文件，这些文件涉及到一个特定的业务功能(块，控制器，助手，型号)，如航运目录。具体而言，Magento的模块由这些软件组件：[主题]({{page.baseurl}}/前端-DEV-引导/主题/主题overview.html)，[库]({{page.baseurl}}/architecture/archi_perspectives/third-party-libs.html)和[语言包]({{page.baseurl}}/前端-DEV-引导/翻译/ xlate.html＃m2devgde-XLATE-languagepack)。
 
-## Module locations
+## 模块位置
 
-Modules typically live in the `vendor` directory of a Magento installation, in a directory with the following PSR-0 compliant format: `vendor/<vendor>/<type>-<module-name>`, where `<type>` can be one of the following values:
+模块通常位于Magento安装的`vendor`目录中，该目录具有以下PSR-0兼容格式：`vendor/<vendor>/<type>-<module-name>`，其中`<type>` 可以是以下值之一：
 
 -  **`module`** - for modules (`module-customer-import-export`)
 -  **`theme`** - for frontend and admin themes (`theme-frontend-luma` or `theme-adminhtml-backend`)
@@ -34,7 +34,7 @@ If you are creating a new module for distribution, create the `app/code/<vendor>
 
 Inside this folder, you will find all the code related to this module, including the `etc/module.xml` file, which contains the name and version of the module, as well as any dependencies.
 
-### Module location conventions {#m2arch-module-conventions-location}
+### 模块位置约定 {#m2arch-module-conventions-location}
 
 The following table shows the *recommended* location within the Magento file system for specific components.
 
@@ -44,12 +44,12 @@ We refer to a component's root directory as the top-level directory in which you
 
 |Entity|Location|
 |---|---|
-|Code base of your custom module|`/app/code/<Vendor>/<Module>`|
-|Custom theme files (storefront)|`/app/design/frontend/<Vendor>/<theme>`|
-|Custom theme files (modules)|`<Module>/<theme>`|
-|If you want to use a library|`/lib/<Vendor_Library>`|
+|自定义模块基本代码|`/app/code/<Vendor>/<Module>`|
+|自定义主题文件 (storefront)|`/app/design/frontend/<Vendor>/<theme>`|
+|自定义主题文件 (modules)|`<Module>/<theme>`|
+|如果你想使用一个类库|`/lib/<Vendor_Library>`|
 
-## Working with modules
+## 使用模块
 
 Magento developers, administrators, and anyone building a Magento website will want to review all relevant topics surrounding their particular goals and use cases.
 
